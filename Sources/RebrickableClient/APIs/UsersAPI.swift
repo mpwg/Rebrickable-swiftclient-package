@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Users API
+
 open class UsersAPI {
     /**
      Get a list of all the Parts in all the user's Part Lists as well as the Parts inside Sets in the user's Set Lists.
@@ -20,9 +22,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersAllpartsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil, partCatId: Double? = nil, colorId: Double? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersAllpartsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, partNum: partNum, partCatId: partCatId, colorId: colorId, apiConfiguration: apiConfiguration).execute().body
+    open class func usersAllpartsList(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil,
+        partCatId: Double? = nil, colorId: Double? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersAllpartsListWithRequestBuilder(
+            userToken: userToken, page: page, pageSize: pageSize, partNum: partNum,
+            partCatId: partCatId, colorId: colorId, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -38,30 +46,59 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersAllpartsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil, partCatId: Double? = nil, colorId: Double? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersAllpartsListWithRequestBuilder(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil,
+        partCatId: Double? = nil, colorId: Double? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/allparts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "part_num": (wrappedValue: partNum?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "part_cat_id": (wrappedValue: partCatId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "color_id": (wrappedValue: colorId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "page_size": (
+                wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "part_num": (
+                wrappedValue: partNum?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "part_cat_id": (
+                wrappedValue: partCatId?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "color_id": (
+                wrappedValue: colorId?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -73,9 +110,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersBadgesList(page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersBadgesListWithRequestBuilder(page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+    open class func usersBadgesList(
+        page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersBadgesListWithRequestBuilder(
+            page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -88,25 +129,44 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersBadgesListWithRequestBuilder(page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersBadgesListWithRequestBuilder(
+        page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         let localVariablePath = "/api/v3/users/badges/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "page_size": (
+                wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -117,9 +177,14 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersBadgesRead(id: Int, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersBadgesReadWithRequestBuilder(id: id, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersBadgesRead(
+        id: Int, ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersBadgesReadWithRequestBuilder(
+            id: id, ordering: ordering, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -131,26 +196,42 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersBadgesReadWithRequestBuilder(id: Int, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersBadgesReadWithRequestBuilder(
+        id: Int, ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/badges/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
-        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let idPostEscape =
+            idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{id}", with: idPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -161,9 +242,14 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersBuildRead(userToken: String, setNum: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersBuildReadWithRequestBuilder(userToken: userToken, setNum: setNum, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersBuildRead(
+        userToken: String, setNum: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersBuildReadWithRequestBuilder(
+            userToken: userToken, setNum: setNum, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -175,14 +261,24 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersBuildReadWithRequestBuilder(userToken: String, setNum: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersBuildReadWithRequestBuilder(
+        userToken: String, setNum: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/build/{set_num}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil)
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
@@ -192,9 +288,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -206,9 +308,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersLostPartsCreate(userToken: String, invPartId: Int, lostQuantity: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersLostPartsCreateWithRequestBuilder(userToken: userToken, invPartId: invPartId, lostQuantity: lostQuantity, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersLostPartsCreate(
+        userToken: String, invPartId: Int, lostQuantity: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersLostPartsCreateWithRequestBuilder(
+            userToken: userToken, invPartId: invPartId, lostQuantity: lostQuantity,
+            apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -221,14 +329,23 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersLostPartsCreateWithRequestBuilder(userToken: String, invPartId: Int, lostQuantity: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersLostPartsCreateWithRequestBuilder(
+        userToken: String, invPartId: Int, lostQuantity: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/lost_parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
-            "lost_quantity": lostQuantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "lost_quantity": lostQuantity?.asParameter(
+                codableHelper: apiConfiguration.codableHelper,
+            ),
             "inv_part_id": invPartId.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
@@ -243,9 +360,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "POST",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -257,9 +380,14 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersLostPartsDelete(id: String, userToken: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersLostPartsDeleteWithRequestBuilder(id: id, userToken: userToken, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersLostPartsDelete(
+        id: String, userToken: String, ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersLostPartsDeleteWithRequestBuilder(
+            id: id, userToken: userToken, ordering: ordering, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -272,29 +400,48 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersLostPartsDeleteWithRequestBuilder(id: String, userToken: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersLostPartsDeleteWithRequestBuilder(
+        id: String, userToken: String, ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/lost_parts/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
-        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let idPostEscape =
+            idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{id}", with: idPostEscape, options: .literal, range: nil,
+        )
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "DELETE",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -307,9 +454,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersLostPartsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersLostPartsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersLostPartsList(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersLostPartsListWithRequestBuilder(
+            userToken: userToken, page: page, pageSize: pageSize, ordering: ordering,
+            apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -323,28 +476,50 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersLostPartsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersLostPartsListWithRequestBuilder(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/lost_parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "page_size": (
+                wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -359,9 +534,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersMinifigsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, figSetNum: String? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersMinifigsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, figSetNum: figSetNum, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersMinifigsList(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil, figSetNum: String? = nil,
+        ordering: String? = nil, search: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersMinifigsListWithRequestBuilder(
+            userToken: userToken, page: page, pageSize: pageSize, figSetNum: figSetNum,
+            ordering: ordering, search: search, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -377,30 +559,59 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersMinifigsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, figSetNum: String? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersMinifigsListWithRequestBuilder(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil, figSetNum: String? = nil,
+        ordering: String? = nil, search: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/minifigs/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "fig_set_num": (wrappedValue: figSetNum?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "page_size": (
+                wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "fig_set_num": (
+                wrappedValue: figSetNum?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "search": (
+                wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -413,9 +624,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersPartlistsCreate(userToken: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersPartlistsCreateWithRequestBuilder(userToken: userToken, name: name, isBuildable: isBuildable, numParts: numParts, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersPartlistsCreate(
+        userToken: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersPartlistsCreateWithRequestBuilder(
+            userToken: userToken, name: name, isBuildable: isBuildable, numParts: numParts,
+            apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -429,11 +646,18 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsCreateWithRequestBuilder(userToken: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersPartlistsCreateWithRequestBuilder(
+        userToken: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
@@ -452,9 +676,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "POST",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -465,9 +695,14 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersPartlistsDelete(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersPartlistsDeleteWithRequestBuilder(userToken: userToken, listId: listId, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersPartlistsDelete(
+        userToken: String, listId: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersPartlistsDeleteWithRequestBuilder(
+            userToken: userToken, listId: listId, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -479,14 +714,24 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsDeleteWithRequestBuilder(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersPartlistsDeleteWithRequestBuilder(
+        userToken: String, listId: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
@@ -496,9 +741,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "DELETE",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -510,9 +761,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersPartlistsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersPartlistsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersPartlistsList(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersPartlistsListWithRequestBuilder(
+            userToken: userToken, page: page, pageSize: pageSize,
+            apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -525,27 +782,46 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersPartlistsListWithRequestBuilder(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "page_size": (
+                wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -559,9 +835,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersPartlistsPartialUpdate(userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil, numParts: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersPartlistsPartialUpdateWithRequestBuilder(userToken: userToken, listId: listId, isBuildable: isBuildable, name: name, numParts: numParts, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersPartlistsPartialUpdate(
+        userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil,
+        numParts: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersPartlistsPartialUpdateWithRequestBuilder(
+            userToken: userToken, listId: listId, isBuildable: isBuildable, name: name,
+            numParts: numParts, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -576,14 +859,25 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsPartialUpdateWithRequestBuilder(userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil, numParts: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersPartlistsPartialUpdateWithRequestBuilder(
+        userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil,
+        numParts: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
@@ -602,9 +896,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "PATCH",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -618,9 +918,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersPartlistsPartsCreate(userToken: String, listId: String, partNum: String, quantity: Int, colorId: Int, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersPartlistsPartsCreateWithRequestBuilder(userToken: userToken, listId: listId, partNum: partNum, quantity: quantity, colorId: colorId, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersPartlistsPartsCreate(
+        userToken: String, listId: String, partNum: String, quantity: Int, colorId: Int,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersPartlistsPartsCreateWithRequestBuilder(
+            userToken: userToken, listId: listId, partNum: partNum, quantity: quantity,
+            colorId: colorId, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -635,14 +941,24 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsPartsCreateWithRequestBuilder(userToken: String, listId: String, partNum: String, quantity: Int, colorId: Int, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersPartlistsPartsCreateWithRequestBuilder(
+        userToken: String, listId: String, partNum: String, quantity: Int, colorId: Int,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "part_num": partNum.asParameter(codableHelper: apiConfiguration.codableHelper),
@@ -661,9 +977,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "POST",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -677,9 +999,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersPartlistsPartsDelete(colorId: String, partNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersPartlistsPartsDeleteWithRequestBuilder(colorId: colorId, partNum: partNum, userToken: userToken, listId: listId, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersPartlistsPartsDelete(
+        colorId: String, partNum: String, userToken: String, listId: String,
+        ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersPartlistsPartsDeleteWithRequestBuilder(
+            colorId: colorId, partNum: partNum, userToken: userToken, listId: listId,
+            ordering: ordering, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -694,35 +1023,62 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsPartsDeleteWithRequestBuilder(colorId: String, partNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
-        var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
+    open class func usersPartlistsPartsDeleteWithRequestBuilder(
+        colorId: String, partNum: String, userToken: String, listId: String,
+        ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
+        var localVariablePath =
+            "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
-        let colorIdPostEscape = colorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{color_id}", with: colorIdPostEscape, options: .literal, range: nil)
+        let colorIdPostEscape =
+            colorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{color_id}", with: colorIdPostEscape, options: .literal, range: nil,
+        )
         let partNumPreEscape = "\(APIHelper.mapValueToPathItem(partNum))"
-        let partNumPostEscape = partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{part_num}", with: partNumPostEscape, options: .literal, range: nil)
+        let partNumPostEscape =
+            partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{part_num}", with: partNumPostEscape, options: .literal, range: nil,
+        )
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "DELETE",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -736,9 +1092,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersPartlistsPartsList(userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersPartlistsPartsListWithRequestBuilder(userToken: userToken, listId: listId, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersPartlistsPartsList(
+        userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil,
+        ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersPartlistsPartsListWithRequestBuilder(
+            userToken: userToken, listId: listId, page: page, pageSize: pageSize,
+            ordering: ordering, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -753,31 +1116,57 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsPartsListWithRequestBuilder(userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersPartlistsPartsListWithRequestBuilder(
+        userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil,
+        ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "page_size": (
+                wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -791,9 +1180,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersPartlistsPartsRead(colorId: String, partNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersPartlistsPartsReadWithRequestBuilder(colorId: colorId, partNum: partNum, userToken: userToken, listId: listId, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersPartlistsPartsRead(
+        colorId: String, partNum: String, userToken: String, listId: String,
+        ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersPartlistsPartsReadWithRequestBuilder(
+            colorId: colorId, partNum: partNum, userToken: userToken, listId: listId,
+            ordering: ordering, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -808,35 +1204,62 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsPartsReadWithRequestBuilder(colorId: String, partNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
-        var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
+    open class func usersPartlistsPartsReadWithRequestBuilder(
+        colorId: String, partNum: String, userToken: String, listId: String,
+        ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
+        var localVariablePath =
+            "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
-        let colorIdPostEscape = colorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{color_id}", with: colorIdPostEscape, options: .literal, range: nil)
+        let colorIdPostEscape =
+            colorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{color_id}", with: colorIdPostEscape, options: .literal, range: nil,
+        )
         let partNumPreEscape = "\(APIHelper.mapValueToPathItem(partNum))"
-        let partNumPostEscape = partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{part_num}", with: partNumPostEscape, options: .literal, range: nil)
+        let partNumPostEscape =
+            partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{part_num}", with: partNumPostEscape, options: .literal, range: nil,
+        )
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -851,9 +1274,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersPartlistsPartsUpdate(colorId: String, partNum: String, userToken: String, listId: String, quantity: Int, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersPartlistsPartsUpdateWithRequestBuilder(colorId: colorId, partNum: partNum, userToken: userToken, listId: listId, quantity: quantity, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersPartlistsPartsUpdate(
+        colorId: String, partNum: String, userToken: String, listId: String, quantity: Int,
+        ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersPartlistsPartsUpdateWithRequestBuilder(
+            colorId: colorId, partNum: partNum, userToken: userToken, listId: listId,
+            quantity: quantity, ordering: ordering, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -869,20 +1299,38 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsPartsUpdateWithRequestBuilder(colorId: String, partNum: String, userToken: String, listId: String, quantity: Int, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
-        var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
+    open class func usersPartlistsPartsUpdateWithRequestBuilder(
+        colorId: String, partNum: String, userToken: String, listId: String, quantity: Int,
+        ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
+        var localVariablePath =
+            "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
-        let colorIdPostEscape = colorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{color_id}", with: colorIdPostEscape, options: .literal, range: nil)
+        let colorIdPostEscape =
+            colorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{color_id}", with: colorIdPostEscape, options: .literal, range: nil,
+        )
         let partNumPreEscape = "\(APIHelper.mapValueToPathItem(partNum))"
-        let partNumPostEscape = partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{part_num}", with: partNumPostEscape, options: .literal, range: nil)
+        let partNumPostEscape =
+            partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{part_num}", with: partNumPostEscape, options: .literal, range: nil,
+        )
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "quantity": quantity.asParameter(codableHelper: apiConfiguration.codableHelper)
@@ -893,7 +1341,10 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -902,9 +1353,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "PUT",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -915,9 +1372,14 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersPartlistsRead(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersPartlistsReadWithRequestBuilder(userToken: userToken, listId: listId, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersPartlistsRead(
+        userToken: String, listId: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersPartlistsReadWithRequestBuilder(
+            userToken: userToken, listId: listId, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -929,14 +1391,24 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsReadWithRequestBuilder(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersPartlistsReadWithRequestBuilder(
+        userToken: String, listId: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
@@ -946,9 +1418,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -962,9 +1440,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersPartlistsUpdate(userToken: String, listId: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersPartlistsUpdateWithRequestBuilder(userToken: userToken, listId: listId, name: name, isBuildable: isBuildable, numParts: numParts, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersPartlistsUpdate(
+        userToken: String, listId: String, name: String, isBuildable: Bool? = nil,
+        numParts: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersPartlistsUpdateWithRequestBuilder(
+            userToken: userToken, listId: listId, name: name, isBuildable: isBuildable,
+            numParts: numParts, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -979,14 +1464,25 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsUpdateWithRequestBuilder(userToken: String, listId: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersPartlistsUpdateWithRequestBuilder(
+        userToken: String, listId: String, name: String, isBuildable: Bool? = nil,
+        numParts: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
@@ -1005,9 +1501,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "PUT",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1024,9 +1526,18 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersPartsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil, partCatId: Double? = nil, colorId: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersPartsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, partNum: partNum, partCatId: partCatId, colorId: colorId, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersPartsList(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil,
+        partCatId: Double? = nil, colorId: Double? = nil, ordering: String? = nil,
+        search: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersPartsListWithRequestBuilder(
+            userToken: userToken, page: page, pageSize: pageSize, partNum: partNum,
+            partCatId: partCatId, colorId: colorId, ordering: ordering, search: search,
+            apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1044,32 +1555,68 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil, partCatId: Double? = nil, colorId: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersPartsListWithRequestBuilder(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil,
+        partCatId: Double? = nil, colorId: Double? = nil, ordering: String? = nil,
+        search: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "part_num": (wrappedValue: partNum?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "part_cat_id": (wrappedValue: partCatId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "color_id": (wrappedValue: colorId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "page_size": (
+                wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "part_num": (
+                wrappedValue: partNum?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "part_cat_id": (
+                wrappedValue: partCatId?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "color_id": (
+                wrappedValue: colorId?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "search": (
+                wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1079,9 +1626,14 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersProfileRead(userToken: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersProfileReadWithRequestBuilder(userToken: userToken, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersProfileRead(
+        userToken: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersProfileReadWithRequestBuilder(
+            userToken: userToken, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1092,11 +1644,18 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersProfileReadWithRequestBuilder(userToken: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersProfileReadWithRequestBuilder(
+        userToken: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/profile/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
@@ -1106,9 +1665,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1121,9 +1686,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetlistsCreate(userToken: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetlistsCreateWithRequestBuilder(userToken: userToken, name: name, isBuildable: isBuildable, numSets: numSets, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetlistsCreate(
+        userToken: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetlistsCreateWithRequestBuilder(
+            userToken: userToken, name: name, isBuildable: isBuildable, numSets: numSets,
+            apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1137,11 +1708,18 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsCreateWithRequestBuilder(userToken: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetlistsCreateWithRequestBuilder(
+        userToken: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
@@ -1160,9 +1738,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "POST",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1173,9 +1757,14 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetlistsDelete(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetlistsDeleteWithRequestBuilder(userToken: userToken, listId: listId, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetlistsDelete(
+        userToken: String, listId: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetlistsDeleteWithRequestBuilder(
+            userToken: userToken, listId: listId, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1187,14 +1776,24 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsDeleteWithRequestBuilder(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetlistsDeleteWithRequestBuilder(
+        userToken: String, listId: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
@@ -1204,9 +1803,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "DELETE",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1218,9 +1823,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetlistsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetlistsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetlistsList(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetlistsListWithRequestBuilder(
+            userToken: userToken, page: page, pageSize: pageSize,
+            apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1233,27 +1844,46 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetlistsListWithRequestBuilder(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "page_size": (
+                wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1267,9 +1897,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetlistsPartialUpdate(userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil, numSets: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetlistsPartialUpdateWithRequestBuilder(userToken: userToken, listId: listId, isBuildable: isBuildable, name: name, numSets: numSets, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetlistsPartialUpdate(
+        userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil,
+        numSets: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetlistsPartialUpdateWithRequestBuilder(
+            userToken: userToken, listId: listId, isBuildable: isBuildable, name: name,
+            numSets: numSets, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1284,14 +1921,25 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsPartialUpdateWithRequestBuilder(userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil, numSets: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetlistsPartialUpdateWithRequestBuilder(
+        userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil,
+        numSets: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
@@ -1310,9 +1958,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "PATCH",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1323,9 +1977,14 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetlistsRead(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetlistsReadWithRequestBuilder(userToken: userToken, listId: listId, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetlistsRead(
+        userToken: String, listId: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetlistsReadWithRequestBuilder(
+            userToken: userToken, listId: listId, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1337,14 +1996,24 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsReadWithRequestBuilder(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetlistsReadWithRequestBuilder(
+        userToken: String, listId: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
@@ -1354,9 +2023,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1370,9 +2045,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetlistsSetsCreate(userToken: String, listId: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetlistsSetsCreateWithRequestBuilder(userToken: userToken, listId: listId, setNum: setNum, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetlistsSetsCreate(
+        userToken: String, listId: String, setNum: String, quantity: Int? = nil,
+        includeSpares: Bool? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetlistsSetsCreateWithRequestBuilder(
+            userToken: userToken, listId: listId, setNum: setNum, quantity: quantity,
+            includeSpares: includeSpares, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1387,19 +2069,32 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsSetsCreateWithRequestBuilder(userToken: String, listId: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetlistsSetsCreateWithRequestBuilder(
+        userToken: String, listId: String, setNum: String, quantity: Int? = nil,
+        includeSpares: Bool? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "set_num": setNum.asParameter(codableHelper: apiConfiguration.codableHelper),
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "include_spares": includeSpares?.asParameter(
+                codableHelper: apiConfiguration.codableHelper,
+            )
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1413,9 +2108,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "POST",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1428,9 +2129,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetlistsSetsDelete(setNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetlistsSetsDeleteWithRequestBuilder(setNum: setNum, userToken: userToken, listId: listId, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetlistsSetsDelete(
+        setNum: String, userToken: String, listId: String, ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetlistsSetsDeleteWithRequestBuilder(
+            setNum: setNum, userToken: userToken, listId: listId, ordering: ordering,
+            apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1444,32 +2151,54 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsSetsDeleteWithRequestBuilder(setNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetlistsSetsDeleteWithRequestBuilder(
+        setNum: String, userToken: String, listId: String, ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil)
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil,
+        )
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "DELETE",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1483,9 +2212,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetlistsSetsList(userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetlistsSetsListWithRequestBuilder(userToken: userToken, listId: listId, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetlistsSetsList(
+        userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil,
+        ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetlistsSetsListWithRequestBuilder(
+            userToken: userToken, listId: listId, page: page, pageSize: pageSize,
+            ordering: ordering, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1500,31 +2236,57 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsSetsListWithRequestBuilder(userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetlistsSetsListWithRequestBuilder(
+        userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil,
+        ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "page_size": (
+                wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1539,9 +2301,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetlistsSetsPartialUpdate(setNum: String, userToken: String, listId: String, ordering: String? = nil, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetlistsSetsPartialUpdateWithRequestBuilder(setNum: setNum, userToken: userToken, listId: listId, ordering: ordering, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetlistsSetsPartialUpdate(
+        setNum: String, userToken: String, listId: String, ordering: String? = nil,
+        quantity: Int? = nil, includeSpares: Bool? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetlistsSetsPartialUpdateWithRequestBuilder(
+            setNum: setNum, userToken: userToken, listId: listId, ordering: ordering,
+            quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1557,21 +2326,37 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsSetsPartialUpdateWithRequestBuilder(setNum: String, userToken: String, listId: String, ordering: String? = nil, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetlistsSetsPartialUpdateWithRequestBuilder(
+        setNum: String, userToken: String, listId: String, ordering: String? = nil,
+        quantity: Int? = nil, includeSpares: Bool? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil)
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil,
+        )
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "include_spares": includeSpares?.asParameter(
+                codableHelper: apiConfiguration.codableHelper,
+            )
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1579,7 +2364,10 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -1588,9 +2376,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "PATCH",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1603,9 +2397,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetlistsSetsRead(setNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetlistsSetsReadWithRequestBuilder(setNum: setNum, userToken: userToken, listId: listId, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetlistsSetsRead(
+        setNum: String, userToken: String, listId: String, ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetlistsSetsReadWithRequestBuilder(
+            setNum: setNum, userToken: userToken, listId: listId, ordering: ordering,
+            apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1619,32 +2419,54 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsSetsReadWithRequestBuilder(setNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetlistsSetsReadWithRequestBuilder(
+        setNum: String, userToken: String, listId: String, ordering: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil)
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil,
+        )
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1659,9 +2481,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetlistsSetsUpdate(setNum: String, userToken: String, listId: String, ordering: String? = nil, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetlistsSetsUpdateWithRequestBuilder(setNum: setNum, userToken: userToken, listId: listId, ordering: ordering, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetlistsSetsUpdate(
+        setNum: String, userToken: String, listId: String, ordering: String? = nil,
+        quantity: Int? = nil, includeSpares: Bool? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetlistsSetsUpdateWithRequestBuilder(
+            setNum: setNum, userToken: userToken, listId: listId, ordering: ordering,
+            quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1677,21 +2506,37 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsSetsUpdateWithRequestBuilder(setNum: String, userToken: String, listId: String, ordering: String? = nil, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetlistsSetsUpdateWithRequestBuilder(
+        setNum: String, userToken: String, listId: String, ordering: String? = nil,
+        quantity: Int? = nil, includeSpares: Bool? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil)
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil,
+        )
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "include_spares": includeSpares?.asParameter(
+                codableHelper: apiConfiguration.codableHelper,
+            )
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1699,7 +2544,10 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -1708,9 +2556,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "PUT",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1724,9 +2578,16 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetlistsUpdate(userToken: String, listId: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetlistsUpdateWithRequestBuilder(userToken: userToken, listId: listId, name: name, isBuildable: isBuildable, numSets: numSets, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetlistsUpdate(
+        userToken: String, listId: String, name: String, isBuildable: Bool? = nil,
+        numSets: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetlistsUpdateWithRequestBuilder(
+            userToken: userToken, listId: listId, name: name, isBuildable: isBuildable,
+            numSets: numSets, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1741,14 +2602,25 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsUpdateWithRequestBuilder(userToken: String, listId: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetlistsUpdateWithRequestBuilder(
+        userToken: String, listId: String, name: String, isBuildable: Bool? = nil,
+        numSets: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let listIdPreEscape = "\(APIHelper.mapValueToPathItem(listId))"
-        let listIdPostEscape = listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
+        let listIdPostEscape =
+            listIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
@@ -1767,9 +2639,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "PUT",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1782,9 +2660,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetsCreate(userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetsCreateWithRequestBuilder(userToken: userToken, setNum: setNum, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetsCreate(
+        userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetsCreateWithRequestBuilder(
+            userToken: userToken, setNum: setNum, quantity: quantity, includeSpares: includeSpares,
+            apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1798,16 +2682,25 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetsCreateWithRequestBuilder(userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetsCreateWithRequestBuilder(
+        userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/sets/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "set_num": setNum.asParameter(codableHelper: apiConfiguration.codableHelper),
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "include_spares": includeSpares?.asParameter(
+                codableHelper: apiConfiguration.codableHelper,
+            )
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1821,9 +2714,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "POST",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1842,9 +2741,18 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetsDelete(userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetsDeleteWithRequestBuilder(userToken: userToken, setNum: setNum, setNum2: setNum2, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetsDelete(
+        userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil,
+        minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil,
+        maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetsDeleteWithRequestBuilder(
+            userToken: userToken, setNum: setNum, setNum2: setNum2, themeId: themeId,
+            minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts,
+            ordering: ordering, search: search, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1864,36 +2772,78 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetsDeleteWithRequestBuilder(userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetsDeleteWithRequestBuilder(
+        userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil,
+        minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil,
+        maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/sets/{set_num}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil)
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "set_num": (wrappedValue: setNum2?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "theme_id": (wrappedValue: themeId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "min_year": (wrappedValue: minYear?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "max_year": (wrappedValue: maxYear?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "min_parts": (wrappedValue: minParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "max_parts": (wrappedValue: maxParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "set_num": (
+                wrappedValue: setNum2?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "theme_id": (
+                wrappedValue: themeId?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "min_year": (
+                wrappedValue: minYear?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "max_year": (
+                wrappedValue: maxYear?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "min_parts": (
+                wrappedValue: minParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "max_parts": (
+                wrappedValue: maxParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "search": (
+                wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "DELETE",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1913,9 +2863,19 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, setNum: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, setNum: setNum, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetsList(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil, setNum: String? = nil,
+        themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil,
+        minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil,
+        search: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetsListWithRequestBuilder(
+            userToken: userToken, page: page, pageSize: pageSize, setNum: setNum, themeId: themeId,
+            minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts,
+            ordering: ordering, search: search, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -1936,35 +2896,81 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, setNum: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetsListWithRequestBuilder(
+        userToken: String, page: Int? = nil, pageSize: Int? = nil, setNum: String? = nil,
+        themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil,
+        minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil,
+        search: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/sets/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "set_num": (wrappedValue: setNum?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "theme_id": (wrappedValue: themeId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "min_year": (wrappedValue: minYear?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "max_year": (wrappedValue: maxYear?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "min_parts": (wrappedValue: minParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "max_parts": (wrappedValue: maxParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "page_size": (
+                wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "set_num": (
+                wrappedValue: setNum?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "theme_id": (
+                wrappedValue: themeId?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "min_year": (
+                wrappedValue: minYear?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "max_year": (
+                wrappedValue: maxYear?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "min_parts": (
+                wrappedValue: minParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "max_parts": (
+                wrappedValue: maxParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "search": (
+                wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -1983,9 +2989,18 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetsRead(userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetsReadWithRequestBuilder(userToken: userToken, setNum: setNum, setNum2: setNum2, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetsRead(
+        userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil,
+        minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil,
+        maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetsReadWithRequestBuilder(
+            userToken: userToken, setNum: setNum, setNum2: setNum2, themeId: themeId,
+            minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts,
+            ordering: ordering, search: search, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -2005,36 +3020,78 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetsReadWithRequestBuilder(userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetsReadWithRequestBuilder(
+        userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil,
+        minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil,
+        maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/sets/{set_num}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil)
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "set_num": (wrappedValue: setNum2?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "theme_id": (wrappedValue: themeId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "min_year": (wrappedValue: minYear?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "max_year": (wrappedValue: maxYear?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "min_parts": (wrappedValue: minParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "max_parts": (wrappedValue: maxParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "set_num": (
+                wrappedValue: setNum2?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "theme_id": (
+                wrappedValue: themeId?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "min_year": (
+                wrappedValue: minYear?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "max_year": (
+                wrappedValue: maxYear?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "min_parts": (
+                wrappedValue: minParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "max_parts": (
+                wrappedValue: maxParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "search": (
+                wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "GET",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -2047,9 +3104,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetsSyncCreate(userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetsSyncCreateWithRequestBuilder(userToken: userToken, setNum: setNum, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetsSyncCreate(
+        userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetsSyncCreateWithRequestBuilder(
+            userToken: userToken, setNum: setNum, quantity: quantity, includeSpares: includeSpares,
+            apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -2063,15 +3126,24 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetsSyncCreateWithRequestBuilder(userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetsSyncCreateWithRequestBuilder(
+        userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/sets/sync/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "include_spares": includeSpares?.asParameter(
+                codableHelper: apiConfiguration.codableHelper,
+            ),
             "set_num": setNum.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
@@ -2086,9 +3158,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "POST",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -2108,9 +3186,20 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersSetsUpdate(userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, quantity: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersSetsUpdateWithRequestBuilder(userToken: userToken, setNum: setNum, setNum2: setNum2, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, quantity: quantity, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersSetsUpdate(
+        userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil,
+        minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil,
+        maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
+        quantity: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersSetsUpdateWithRequestBuilder(
+            userToken: userToken, setNum: setNum, setNum2: setNum2, themeId: themeId,
+            minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts,
+            ordering: ordering, search: search, quantity: quantity,
+            apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -2131,14 +3220,27 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetsUpdateWithRequestBuilder(userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, quantity: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersSetsUpdateWithRequestBuilder(
+        userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil,
+        minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil,
+        maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
+        quantity: Int? = nil,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/sets/{set_num}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
-        let userTokenPostEscape = userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil)
+        let userTokenPostEscape =
+            userTokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{user_token}", with: userTokenPostEscape, options: .literal, range: nil,
+        )
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil)
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(
+            of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil,
+        )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper)
@@ -2149,14 +3251,38 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "set_num": (wrappedValue: setNum2?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "theme_id": (wrappedValue: themeId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "min_year": (wrappedValue: minYear?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "max_year": (wrappedValue: maxYear?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "min_parts": (wrappedValue: minParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "max_parts": (wrappedValue: maxParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
+            "set_num": (
+                wrappedValue: setNum2?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "theme_id": (
+                wrappedValue: themeId?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "min_year": (
+                wrappedValue: minYear?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "max_year": (
+                wrappedValue: maxYear?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "min_parts": (
+                wrappedValue: minParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "max_parts": (
+                wrappedValue: maxParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "ordering": (
+                wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
+            "search": (
+                wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -2165,9 +3291,15 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "PUT",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 
     /**
@@ -2178,9 +3310,14 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func usersTokenCreate(username: String, password: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        try await usersTokenCreateWithRequestBuilder(username: username, password: password, apiConfiguration: apiConfiguration).execute().body
+
+    open class func usersTokenCreate(
+        username: String, password: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) async throws(ErrorResponse) {
+        try await usersTokenCreateWithRequestBuilder(
+            username: username, password: password, apiConfiguration: apiConfiguration,
+        ).execute().body
     }
 
     /**
@@ -2192,7 +3329,11 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersTokenCreateWithRequestBuilder(username: String, password: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func usersTokenCreateWithRequestBuilder(
+        username: String, password: String,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    )
+        -> RequestBuilder<Void> {
         let localVariablePath = "/api/v3/users/_token/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
@@ -2211,8 +3352,14 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(
+            method: "POST",
+            URLString: (localVariableUrlComponents?.string ?? localVariableURLString),
+            parameters: localVariableParameters, headers: localVariableHeaderParameters,
+            requiresAuthentication: false, apiConfiguration: apiConfiguration,
+        )
     }
 }

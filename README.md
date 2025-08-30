@@ -3,7 +3,6 @@
 [![Swift 6.1.2](https://img.shields.io/badge/Swift-6.1-blue.svg)](https://swift.org)
 [![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20macOS-lightgrey.svg)](https://developer.apple.com)
 
-
 # Swift6 API client for Rebrickabke
 
 A Simple swift client for [Rebrickable](https://rebrickable.com) [API V3](https://rebrickable.com/api/v3/docs/?key=ac58a63d3a4048d83f2551ca4d465aff)
