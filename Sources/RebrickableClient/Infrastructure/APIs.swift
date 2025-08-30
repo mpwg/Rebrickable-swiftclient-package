@@ -5,8 +5,9 @@
 //
 
 import Foundation
+
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+    import FoundationNetworking
 #endif
 
 open class OpenAPIClientAPIConfiguration: @unchecked Sendable {
@@ -31,7 +32,7 @@ open class OpenAPIClientAPIConfiguration: @unchecked Sendable {
         requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory(),
         apiResponseQueue: DispatchQueue = .main,
         codableHelper: CodableHelper = CodableHelper(),
-        successfulStatusCodeRange: Range<Int> = 200 ..< 300,
+        successfulStatusCodeRange: Range<Int> = 200..<300,
         interceptor: OpenAPIInterceptor = DefaultOpenAPIInterceptor(),
     ) {
         self.basePath = basePath
@@ -86,7 +87,10 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
     }
 
     @discardableResult
-    open func execute(completion _: @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void)
+    open func execute(
+        completion _:
+            @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void
+    )
         -> RequestTask
     {
         requestTask
@@ -137,9 +141,4 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
     open func addCredential() {
         credential = apiConfiguration.credential
     }
-}
-
-public protocol RequestBuilderFactory {
-    func getNonDecodableBuilder<T>() -> RequestBuilder<T>.Type
-    func getBuilder<T: Decodable>() -> RequestBuilder<T>.Type
 }

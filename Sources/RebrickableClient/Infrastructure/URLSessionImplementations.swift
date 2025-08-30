@@ -5,36 +5,15 @@
 //
 
 import Foundation
+
 #if !os(macOS)
-import MobileCoreServices
+    import MobileCoreServices
 #endif
 #if canImport(UniformTypeIdentifiers)
-import UniformTypeIdentifiers
+    import UniformTypeIdentifiers
 #endif
 
-// Protocol defined for a session data task. This allows mocking out the URLSessionProtocol below since
-// you may not want to create or return a real URLSessionDataTask.
-public protocol URLSessionDataTaskProtocol {
-    func resume()
-
-    var taskIdentifier: Int { get }
-
-    var progress: Progress { get }
-
-    func cancel()
-}
-
-// Protocol allowing implementations to alter what is returned or to test their implementations.
-public protocol URLSessionProtocol: Sendable {
-    // Task which performs the network fetch. Expected to be from URLSession.dataTask(with:completionHandler:) such that
-    // a network request
-    // is sent off when `.resume()` is called.
-    func dataTaskFromProtocol(
-        with request: URLRequest,
-        completionHandler: @escaping @Sendable (Data?, URLResponse?, (any Error)?) -> Void,
-    )
-        -> URLSessionDataTaskProtocol
-}
+// Protocols defined in `Infrastructure/Protocols`.
 
 extension URLSession: URLSessionProtocol {
     // Passthrough to URLSession.dataTask(with:completionHandler) since URLSessionDataTask conforms to
@@ -65,7 +44,8 @@ public class URLSessionRequestBuilderFactory: RequestBuilderFactory {
 
 private class URLSessionRequestBuilderConfiguration: @unchecked Sendable {
     private init() {
-        defaultURLSession = URLSession(configuration: .default, delegate: sessionDelegate, delegateQueue: nil)
+        defaultURLSession = URLSession(
+            configuration: .default, delegate: sessionDelegate, delegateQueue: nil)
     }
 
     static let shared = URLSessionRequestBuilderConfiguration()
@@ -110,7 +90,7 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
     /**
      May be overridden by a subclass if you want to control the Content-Type
      that is given to an uploaded form part.
-
+    
      Return nil to use the default behavior (inferring the Content-Type from
      the file extension).  Return the desired Content-Type otherwise.
      */
@@ -149,7 +129,8 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
 
     @discardableResult
     override open func execute(
-        completion: @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>)
+        completion:
+            @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>)
             -> Void,
     )
         -> RequestTask
@@ -172,10 +153,13 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
             if contentType.hasPrefix("application/") && contentType.contains("json") {
                 encoding = JSONDataEncoding()
             } else if contentType.hasPrefix("multipart/form-data") {
-                encoding = FormDataEncoding(contentTypeForFormPart: contentTypeForFormPart(fileURL:))
+                encoding = FormDataEncoding(
+                    contentTypeForFormPart: contentTypeForFormPart(fileURL:))
             } else if contentType.hasPrefix("application/x-www-form-urlencoded") {
                 encoding = FormURLEncoding()
-            } else if contentType.hasPrefix("application/octet-stream") || contentType.hasPrefix("image/") {
+            } else if contentType.hasPrefix("application/octet-stream")
+                || contentType.hasPrefix("image/")
+            {
                 encoding = OctetStreamEncoding()
             } else {
                 fatalError("Unsupported Media Type - \(contentType)")
@@ -191,10 +175,12 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
             )
 
             apiConfiguration.interceptor
-                .intercept(urlRequest: request, urlSession: urlSession, requestBuilder: self) { result in
+                .intercept(urlRequest: request, urlSession: urlSession, requestBuilder: self) {
+                    result in
                     switch result {
                     case .success(let modifiedRequest):
-                        let dataTask = urlSession.dataTaskFromProtocol(with: modifiedRequest) { data, response, error in
+                        let dataTask = urlSession.dataTaskFromProtocol(with: modifiedRequest) {
+                            data, response, error in
                             self.cleanupRequest()
 
                             if let error {
@@ -223,7 +209,10 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
                                 return
                             }
 
-                            guard self.apiConfiguration.successfulStatusCodeRange.contains(httpResponse.statusCode) else {
+                            guard
+                                self.apiConfiguration.successfulStatusCodeRange.contains(
+                                    httpResponse.statusCode)
+                            else {
                                 self.retryRequest(
                                     urlRequest: modifiedRequest,
                                     urlSession: urlSession,
@@ -247,7 +236,9 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
 
                         self.onProgressReady?(dataTask.progress)
 
-                        URLSessionRequestBuilderConfiguration.shared.credentialStore[dataTask.taskIdentifier] = self
+                        URLSessionRequestBuilderConfiguration.shared.credentialStore[
+                            dataTask.taskIdentifier] =
+                            self
                             .credential
 
                         self.requestTask.set(task: dataTask)
@@ -282,7 +273,8 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
         data: Data?,
         response: URLResponse?,
         error: Error,
-        completion: @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
+        completion:
+            @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
     ) {
         apiConfiguration.interceptor.retry(
             urlRequest: urlRequest,
@@ -377,7 +369,9 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
     }
 }
 
-open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBuilder<T>, @unchecked Sendable {
+open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBuilder<T>,
+    @unchecked Sendable
+{
     override fileprivate func processRequestResponse(
         urlRequest: URLRequest,
         data: Data?,
@@ -389,7 +383,8 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
         case is String.Type:
             let body = data.flatMap { String(data: $0, encoding: .utf8) } ?? ""
 
-            completion(.success(Response<T>(response: httpResponse, body: body as! T, bodyData: data)))
+            completion(
+                .success(Response<T>(response: httpResponse, body: body as! T, bodyData: data)))
 
         case is URL.Type:
             do {
@@ -402,17 +397,17 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
                 }
 
                 let fileManager = FileManager.default
-                let cachesDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+                let cachesDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[
+                    0]
                 let requestURL = try getURL(from: urlRequest)
 
                 var requestPath = try getPath(from: requestURL)
 
-                if
-                    let headerFileName = getFileName(
-                        fromContentDisposition: httpResponse
-                            .allHeaderFields["Content-Disposition"] as? String,
-                    )
-                {
+                if let headerFileName = getFileName(
+                    fromContentDisposition:
+                        httpResponse
+                        .allHeaderFields["Content-Disposition"] as? String,
+                ) {
                     requestPath = requestPath.appending("/\(headerFileName)")
                 } else {
                     requestPath = requestPath.appending("/tmp.OpenAPIClient.\(UUID().uuidString)")
@@ -428,10 +423,13 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
                 )
                 try data.write(to: filePath, options: .atomic)
 
-                completion(.success(Response(response: httpResponse, body: filePath as! T, bodyData: data)))
+                completion(
+                    .success(Response(response: httpResponse, body: filePath as! T, bodyData: data))
+                )
 
             } catch let requestParserError as DownloadException {
-                completion(.failure(ErrorResponse.error(400, data, httpResponse, requestParserError)))
+                completion(
+                    .failure(ErrorResponse.error(400, data, httpResponse, requestParserError)))
             } catch {
                 completion(.failure(ErrorResponse.error(400, data, httpResponse, error)))
             }
@@ -445,18 +443,22 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
         default:
             guard let unwrappedData = data, !unwrappedData.isEmpty else {
                 if let expressibleByNilLiteralType = T.self as? ExpressibleByNilLiteral.Type {
-                    completion(.success(Response(
-                        response: httpResponse,
-                        body: expressibleByNilLiteralType.init(nilLiteral: ()) as! T,
-                        bodyData: data,
-                    )))
+                    completion(
+                        .success(
+                            Response(
+                                response: httpResponse,
+                                body: expressibleByNilLiteralType.init(nilLiteral: ()) as! T,
+                                bodyData: data,
+                            )))
                 } else {
-                    completion(.failure(ErrorResponse.error(
-                        httpResponse.statusCode,
-                        nil,
-                        httpResponse,
-                        DecodableRequestBuilderError.emptyDataResponse,
-                    )))
+                    completion(
+                        .failure(
+                            ErrorResponse.error(
+                                httpResponse.statusCode,
+                                nil,
+                                httpResponse,
+                                DecodableRequestBuilderError.emptyDataResponse,
+                            )))
                 }
                 return
             }
@@ -465,9 +467,15 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
 
             switch decodeResult {
             case .success(let decodableObj):
-                completion(.success(Response(response: httpResponse, body: decodableObj, bodyData: unwrappedData)))
+                completion(
+                    .success(
+                        Response(
+                            response: httpResponse, body: decodableObj, bodyData: unwrappedData)))
             case .failure(let error):
-                completion(.failure(ErrorResponse.error(httpResponse.statusCode, unwrappedData, httpResponse, error)))
+                completion(
+                    .failure(
+                        ErrorResponse.error(
+                            httpResponse.statusCode, unwrappedData, httpResponse, error)))
             }
         }
     }
@@ -487,8 +495,11 @@ private final class SessionDelegate: NSObject, URLSessionTaskDelegate {
         if challenge.previousFailureCount > 0 {
             disposition = .rejectProtectionSpace
         } else {
-            credential = URLSessionRequestBuilderConfiguration.shared.credentialStore[task.taskIdentifier] ?? session
-                .configuration.urlCredentialStorage?.defaultCredential(for: challenge.protectionSpace)
+            credential =
+                URLSessionRequestBuilderConfiguration.shared.credentialStore[task.taskIdentifier]
+                ?? session
+                .configuration.urlCredentialStorage?.defaultCredential(
+                    for: challenge.protectionSpace)
 
             if credential != nil {
                 disposition = .useCredential
@@ -511,12 +522,11 @@ public enum HTTPMethod: String {
     case connect = "CONNECT"
 }
 
-public protocol ParameterEncoding {
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
-}
+// ParameterEncoding protocol moved to `Infrastructure/Protocols/ParameterEncoding.swift`
 
 private class URLEncoding: ParameterEncoding {
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest {
+    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
+    {
         var urlRequest = request
 
         guard let parameters else { return urlRequest }
@@ -525,7 +535,9 @@ private class URLEncoding: ParameterEncoding {
             throw DownloadException.requestMissingURL
         }
 
-        if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false), !parameters.isEmpty {
+        if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
+            !parameters.isEmpty
+        {
             urlComponents.queryItems = APIHelper.mapValuesToQueryItems(parameters)
             urlRequest.url = urlComponents.url
         }
@@ -541,7 +553,8 @@ private class FormDataEncoding: ParameterEncoding {
         self.contentTypeForFormPart = contentTypeForFormPart
     }
 
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest {
+    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
+    {
         var urlRequest = request
 
         guard let parameters, !parameters.isEmpty else {
@@ -550,7 +563,8 @@ private class FormDataEncoding: ParameterEncoding {
 
         let boundary = "Boundary-\(UUID().uuidString)"
 
-        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue(
+            "multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
         for (key, value) in parameters {
             for value in value as? Array ?? [value] {
@@ -643,7 +657,8 @@ private class FormDataEncoding: ParameterEncoding {
         body.append("--\(boundary)\r\n")
 
         // Value headers.
-        body.append("Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(fileName)\"\r\n")
+        body.append(
+            "Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(fileName)\"\r\n")
         body.append("Content-Type: \(mimetype)\r\n")
 
         // Separate headers and body.
@@ -696,20 +711,20 @@ private class FormDataEncoding: ParameterEncoding {
 
         if #available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *) {
             #if canImport(UniformTypeIdentifiers)
-            if let utType = UTType(filenameExtension: pathExtension) {
-                return utType.preferredMIMEType ?? "application/octet-stream"
-            }
+                if let utType = UTType(filenameExtension: pathExtension) {
+                    return utType.preferredMIMEType ?? "application/octet-stream"
+                }
             #else
-            return "application/octet-stream"
+                return "application/octet-stream"
             #endif
         } else {
-            if
-                let uti = UTTypeCreatePreferredIdentifierForTag(
-                    kUTTagClassFilenameExtension,
-                    pathExtension as NSString,
-                    nil,
-                )?.takeRetainedValue(),
-                let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue()
+            if let uti = UTTypeCreatePreferredIdentifierForTag(
+                kUTTagClassFilenameExtension,
+                pathExtension as NSString,
+                nil,
+            )?.takeRetainedValue(),
+                let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?
+                    .takeRetainedValue()
             {
                 return mimetype as String
             }
@@ -720,7 +735,8 @@ private class FormDataEncoding: ParameterEncoding {
 }
 
 private class FormURLEncoding: ParameterEncoding {
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest {
+    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
+    {
         var urlRequest = request
 
         var requestBodyComponents = URLComponents()
@@ -732,14 +748,17 @@ private class FormURLEncoding: ParameterEncoding {
         /// percent-encoded"
         let percentEncodedQueryItems = queryItems?.compactMap { queryItem in
             URLQueryItem(
-                name: queryItem.name.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? queryItem.name,
-                value: queryItem.value?.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? queryItem.value,
+                name: queryItem.name.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
+                    ?? queryItem.name,
+                value: queryItem.value?.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
+                    ?? queryItem.value,
             )
         }
         requestBodyComponents.queryItems = percentEncodedQueryItems
 
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
-            urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+            urlRequest.setValue(
+                "application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         }
 
         /// We can't use `requestBodyComponents.percentEncodedQuery` since this does NOT percent encode the `+` sign
@@ -751,7 +770,8 @@ private class FormURLEncoding: ParameterEncoding {
 }
 
 private class OctetStreamEncoding: ParameterEncoding {
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest {
+    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
+    {
         var urlRequest = request
 
         guard let body = parameters?["body"] else { return urlRequest }
@@ -773,7 +793,7 @@ private class OctetStreamEncoding: ParameterEncoding {
     }
 }
 
-private extension Data {
+extension Data {
     /// Append string to Data
     ///
     /// Rather than littering my code with calls to `dataUsingEncoding` to convert strings to Data, and then add that
@@ -781,44 +801,22 @@ private extension Data {
     ///
     /// - parameter string:       The string to be added to the `Data`.
 
-    mutating func append(_ string: String) {
+    fileprivate mutating func append(_ string: String) {
         if let data = string.data(using: .utf8) {
             append(data)
         }
     }
 }
 
-private extension Data? {
-    var orEmpty: Data {
+extension Data? {
+    fileprivate var orEmpty: Data {
         self ?? Data()
     }
 }
 
 extension JSONDataEncoding: ParameterEncoding {}
 
-public enum OpenAPIInterceptorRetry {
-    case retry
-    case dontRetry
-}
-
-public protocol OpenAPIInterceptor {
-    func intercept(
-        urlRequest: URLRequest,
-        urlSession: URLSessionProtocol,
-        requestBuilder: RequestBuilder<some Any>,
-        completion: @escaping (Result<URLRequest, Error>) -> Void,
-    )
-
-    func retry(
-        urlRequest: URLRequest,
-        urlSession: URLSessionProtocol,
-        requestBuilder: RequestBuilder<some Any>,
-        data: Data?,
-        response: URLResponse?,
-        error: Error,
-        completion: @escaping (OpenAPIInterceptorRetry) -> Void,
-    )
-}
+// OpenAPIInterceptor protocol moved to `Infrastructure/Protocols/OpenAPIInterceptor.swift`
 
 public class DefaultOpenAPIInterceptor: OpenAPIInterceptor {
     public init() {}
