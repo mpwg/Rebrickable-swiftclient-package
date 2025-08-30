@@ -32,7 +32,8 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
         method: HTTPMethod,
         encoding: ParameterEncoding,
         headers _: [String: String],
-    ) throws -> URLRequest {
+    ) throws
+        -> URLRequest {
         guard let url = URL(string: URLString) else {
             throw DownloadException.requestMissingURL
         }
@@ -52,8 +53,9 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
     @discardableResult
     override open func execute(
         completion:
-            @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
-    ) -> RequestTask {
+        @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
+    )
+        -> RequestTask {
         let urlSession = createURLSession()
 
         guard let xMethod = HTTPMethod(rawValue: method) else {
@@ -73,12 +75,13 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
                 encoding = JSONDataEncoding()
             } else if contentType.hasPrefix("multipart/form-data") {
                 encoding = FormDataEncoding(
-                    contentTypeForFormPart: contentTypeForFormPart(fileURL:))
+                    contentTypeForFormPart: contentTypeForFormPart(fileURL:),
+                )
             } else if contentType.hasPrefix("application/x-www-form-urlencoded") {
                 encoding = FormURLEncoding()
-            } else if contentType.hasPrefix("application/octet-stream")
-                || contentType.hasPrefix("image/")
-            {
+            } else if
+                contentType.hasPrefix("application/octet-stream")
+                || contentType.hasPrefix("image/") {
                 encoding = OctetStreamEncoding()
             } else {
                 fatalError("Unsupported Media Type - \(contentType)")
@@ -87,10 +90,11 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
 
         do {
             let request = try createURLRequest(
-                urlSession: urlSession, method: xMethod, encoding: encoding, headers: headers)
+                urlSession: urlSession, method: xMethod, encoding: encoding, headers: headers,
+            )
 
             apiConfiguration.interceptor.intercept(
-                urlRequest: request, urlSession: urlSession, requestBuilder: self
+                urlRequest: request, urlSession: urlSession, requestBuilder: self,
             ) { result in
                 switch result {
                 case .success(let modifiedRequest):
@@ -101,7 +105,7 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
                         if let error {
                             self.retryRequest(
                                 urlRequest: modifiedRequest, urlSession: urlSession, statusCode: -1,
-                                data: data, response: response, error: error, completion: completion
+                                data: data, response: response, error: error, completion: completion,
                             )
                             return
                         }
@@ -111,32 +115,36 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
                                 urlRequest: modifiedRequest, urlSession: urlSession, statusCode: -2,
                                 data: data, response: response,
                                 error: DecodableRequestBuilderError.nilHTTPResponse,
-                                completion: completion)
+                                completion: completion,
+                            )
                             return
                         }
 
                         guard
                             self.apiConfiguration.successfulStatusCodeRange.contains(
-                                httpResponse.statusCode)
-                        else {
+                                httpResponse.statusCode,
+                            ) else {
                             self.retryRequest(
                                 urlRequest: modifiedRequest, urlSession: urlSession,
                                 statusCode: httpResponse.statusCode, data: data,
                                 response: httpResponse,
                                 error: DecodableRequestBuilderError.unsuccessfulHTTPStatusCode,
-                                completion: completion)
+                                completion: completion,
+                            )
                             return
                         }
 
                         self.processRequestResponse(
                             urlRequest: request, data: data, httpResponse: httpResponse,
-                            error: error, completion: completion)
+                            error: error, completion: completion,
+                        )
                     }
 
                     self.onProgressReady?(dataTask.progress)
 
                     URLSessionRequestBuilderConfiguration.shared.credentialStore[
-                        dataTask.taskIdentifier] = self.credential
+                        dataTask.taskIdentifier,
+                    ] = self.credential
 
                     self.requestTask.set(task: dataTask)
 
@@ -171,11 +179,11 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
         response: URLResponse?,
         error: Error,
         completion:
-            @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
+        @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
     ) {
         apiConfiguration.interceptor.retry(
             urlRequest: urlRequest, urlSession: urlSession, requestBuilder: self, data: data,
-            response: response, error: error
+            response: response, error: error,
         ) { retry in
             switch retry {
             case .retry:
@@ -190,7 +198,7 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
 
     fileprivate func processRequestResponse(
         urlRequest _: URLRequest, data: Data?, httpResponse: HTTPURLResponse, error _: Error?,
-        completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void
+        completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
     ) {
         switch T.self {
         case is Void.Type:
@@ -224,7 +232,7 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
 
             filename = contentItem
             return filename?.replacingCharacters(in: range, with: "").replacingOccurrences(
-                of: "\"", with: ""
+                of: "\"", with: "",
             ).trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
@@ -250,8 +258,7 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
 // MARK: - URLSession Decodable Request Builder
 
 open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBuilder<T>,
-    @unchecked Sendable
-{
+    @unchecked Sendable {
     override fileprivate func processRequestResponse(
         urlRequest: URLRequest,
         data: Data?,
@@ -263,7 +270,8 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
         case is String.Type:
             let body = data.flatMap { String(data: $0, encoding: .utf8) } ?? ""
             completion(
-                .success(Response<T>(response: httpResponse, body: body as! T, bodyData: data)))
+                .success(Response<T>(response: httpResponse, body: body as! T, bodyData: data)),
+            )
 
         case is URL.Type:
             do {
@@ -272,15 +280,17 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
 
                 let fileManager = FileManager.default
                 let cachesDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[
-                    0]
+                    0,
+                ]
                 let requestURL = try getURL(from: urlRequest)
 
                 var requestPath = try getPath(from: requestURL)
 
-                if let headerFileName = getFileName(
-                    fromContentDisposition: httpResponse.allHeaderFields["Content-Disposition"]
-                        as? String)
-                {
+                if
+                    let headerFileName = getFileName(
+                        fromContentDisposition: httpResponse.allHeaderFields["Content-Disposition"]
+                            as? String,
+                    ) {
                     requestPath = requestPath.appending("/\(headerFileName)")
                 } else {
                     requestPath = requestPath.appending("/tmp.OpenAPIClient.\(UUID().uuidString)")
@@ -290,15 +300,17 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
                 let directoryPath = filePath.deletingLastPathComponent().path
 
                 try fileManager.createDirectory(
-                    atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
+                    atPath: directoryPath, withIntermediateDirectories: true, attributes: nil,
+                )
                 try data.write(to: filePath, options: .atomic)
 
                 completion(
-                    .success(Response(response: httpResponse, body: filePath as! T, bodyData: data))
+                    .success(Response(response: httpResponse, body: filePath as! T, bodyData: data)),
                 )
             } catch let requestParserError as DownloadException {
                 completion(
-                    .failure(ErrorResponse.error(400, data, httpResponse, requestParserError)))
+                    .failure(ErrorResponse.error(400, data, httpResponse, requestParserError)),
+                )
             } catch {
                 completion(.failure(ErrorResponse.error(400, data, httpResponse, error)))
             }
@@ -317,13 +329,19 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
                             Response(
                                 response: httpResponse,
                                 body: expressibleByNilLiteralType.init(nilLiteral: ()) as! T,
-                                bodyData: data)))
+                                bodyData: data,
+                            ),
+                        ),
+                    )
                 } else {
                     completion(
                         .failure(
                             ErrorResponse.error(
                                 httpResponse.statusCode, nil, httpResponse,
-                                DecodableRequestBuilderError.emptyDataResponse)))
+                                DecodableRequestBuilderError.emptyDataResponse,
+                            ),
+                        ),
+                    )
                 }
                 return
             }
@@ -335,12 +353,18 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
                 completion(
                     .success(
                         Response(
-                            response: httpResponse, body: decodableObj, bodyData: unwrappedData)))
+                            response: httpResponse, body: decodableObj, bodyData: unwrappedData,
+                        ),
+                    ),
+                )
             case .failure(let error):
                 completion(
                     .failure(
                         ErrorResponse.error(
-                            httpResponse.statusCode, unwrappedData, httpResponse, error)))
+                            httpResponse.statusCode, unwrappedData, httpResponse, error,
+                        ),
+                    ),
+                )
             }
         }
     }

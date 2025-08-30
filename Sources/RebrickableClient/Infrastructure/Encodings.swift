@@ -1,10 +1,10 @@
 import Foundation
 
 #if !os(macOS)
-    import MobileCoreServices
+import MobileCoreServices
 #endif
 #if canImport(UniformTypeIdentifiers)
-    import UniformTypeIdentifiers
+import UniformTypeIdentifiers
 #endif
 
 public enum HTTPMethod: String {
@@ -24,17 +24,16 @@ public enum HTTPMethod: String {
 // ParameterEncoding protocol moved to `Infrastructure/Protocols/ParameterEncoding.swift`
 
 class URLEncoding: ParameterEncoding {
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
-    {
+    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest {
         var urlRequest = request
 
         guard let parameters else { return urlRequest }
 
         guard let url = urlRequest.url else { throw DownloadException.requestMissingURL }
 
-        if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
-            !parameters.isEmpty
-        {
+        if
+            var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
+            !parameters.isEmpty {
             urlComponents.queryItems = APIHelper.mapValuesToQueryItems(parameters)
             urlRequest.url = urlComponents.url
         }
@@ -50,8 +49,7 @@ class FormDataEncoding: ParameterEncoding {
         self.contentTypeForFormPart = contentTypeForFormPart
     }
 
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
-    {
+    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest {
         var urlRequest = request
 
         guard let parameters, !parameters.isEmpty else { return urlRequest }
@@ -59,31 +57,37 @@ class FormDataEncoding: ParameterEncoding {
         let boundary = "Boundary-\(UUID().uuidString)"
 
         urlRequest.setValue(
-            "multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            "multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type",
+        )
 
         for (key, value) in parameters {
             for value in value as? Array ?? [value] {
                 switch value {
                 case let fileURL as URL:
                     urlRequest = try configureFileUploadRequest(
-                        urlRequest: urlRequest, boundary: boundary, name: key, fileURL: fileURL)
+                        urlRequest: urlRequest, boundary: boundary, name: key, fileURL: fileURL,
+                    )
                 case let string as String:
                     if let data = string.data(using: .utf8) {
                         urlRequest = configureDataUploadRequest(
-                            urlRequest: urlRequest, boundary: boundary, name: key, data: data)
+                            urlRequest: urlRequest, boundary: boundary, name: key, data: data,
+                        )
                     }
                 case let number as NSNumber:
                     if let data = number.stringValue.data(using: .utf8) {
                         urlRequest = configureDataUploadRequest(
-                            urlRequest: urlRequest, boundary: boundary, name: key, data: data)
+                            urlRequest: urlRequest, boundary: boundary, name: key, data: data,
+                        )
                     }
                 case let data as Data:
                     urlRequest = configureDataUploadRequest(
-                        urlRequest: urlRequest, boundary: boundary, name: key, data: data)
+                        urlRequest: urlRequest, boundary: boundary, name: key, data: data,
+                    )
                 case let uuid as UUID:
                     if let data = uuid.uuidString.data(using: .utf8) {
                         urlRequest = configureDataUploadRequest(
-                            urlRequest: urlRequest, boundary: boundary, name: key, data: data)
+                            urlRequest: urlRequest, boundary: boundary, name: key, data: data,
+                        )
                     }
                 default:
                     fatalError("Unprocessable value \(value) with key \(key)")
@@ -101,8 +105,9 @@ class FormDataEncoding: ParameterEncoding {
     }
 
     private func configureFileUploadRequest(
-        urlRequest: URLRequest, boundary: String, name: String, fileURL: URL
-    ) throws -> URLRequest {
+        urlRequest: URLRequest, boundary: String, name: String, fileURL: URL,
+    ) throws
+        -> URLRequest {
         var urlRequest = urlRequest
 
         var body = urlRequest.httpBody.orEmpty
@@ -117,7 +122,8 @@ class FormDataEncoding: ParameterEncoding {
 
         body.append("--\(boundary)\r\n")
         body.append(
-            "Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(fileName)\"\r\n")
+            "Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(fileName)\"\r\n",
+        )
         body.append("Content-Type: \(mimetype)\r\n")
         body.append("\r\n")
         body.append(fileData)
@@ -128,8 +134,9 @@ class FormDataEncoding: ParameterEncoding {
     }
 
     private func configureDataUploadRequest(
-        urlRequest: URLRequest, boundary: String, name: String, data: Data
-    ) -> URLRequest {
+        urlRequest: URLRequest, boundary: String, name: String, data: Data,
+    )
+        -> URLRequest {
         var urlRequest = urlRequest
 
         var body = urlRequest.httpBody.orEmpty
@@ -151,18 +158,19 @@ class FormDataEncoding: ParameterEncoding {
 
         if #available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *) {
             #if canImport(UniformTypeIdentifiers)
-                if let utType = UTType(filenameExtension: pathExtension) {
-                    return utType.preferredMIMEType ?? "application/octet-stream"
-                }
+            if let utType = UTType(filenameExtension: pathExtension) {
+                return utType.preferredMIMEType ?? "application/octet-stream"
+            }
             #else
-                return "application/octet-stream"
+            return "application/octet-stream"
             #endif
         } else {
-            if let uti = UTTypeCreatePreferredIdentifierForTag(
-                kUTTagClassFilenameExtension, pathExtension as NSString, nil)?.takeRetainedValue(),
+            if
+                let uti = UTTypeCreatePreferredIdentifierForTag(
+                    kUTTagClassFilenameExtension, pathExtension as NSString, nil,
+                )?.takeRetainedValue(),
                 let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?
-                    .takeRetainedValue()
-            {
+                    .takeRetainedValue() {
                 return mimetype as String
             }
             return "application/octet-stream"
@@ -172,8 +180,7 @@ class FormDataEncoding: ParameterEncoding {
 }
 
 class FormURLEncoding: ParameterEncoding {
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
-    {
+    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest {
         var urlRequest = request
 
         var requestBodyComponents = URLComponents()
@@ -191,7 +198,8 @@ class FormURLEncoding: ParameterEncoding {
 
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
             urlRequest.setValue(
-                "application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+                "application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type",
+            )
         }
 
         urlRequest.httpBody = requestBodyComponents.query?.data(using: .utf8)
@@ -201,8 +209,7 @@ class FormURLEncoding: ParameterEncoding {
 }
 
 class OctetStreamEncoding: ParameterEncoding {
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
-    {
+    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest {
         var urlRequest = request
 
         guard let body = parameters?["body"] else { return urlRequest }
@@ -224,14 +231,14 @@ class OctetStreamEncoding: ParameterEncoding {
     }
 }
 
-extension Data {
-    fileprivate mutating func append(_ string: String) {
+private extension Data {
+    mutating func append(_ string: String) {
         if let data = string.data(using: .utf8) { append(data) }
     }
 }
 
-extension Data? {
-    fileprivate var orEmpty: Data { self ?? Data() }
+private extension Data? {
+    var orEmpty: Data { self ?? Data() }
 }
 
 extension JSONDataEncoding: ParameterEncoding {}

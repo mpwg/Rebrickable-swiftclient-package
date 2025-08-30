@@ -1,11 +1,12 @@
 import Foundation
 
 #if canImport(FoundationNetworking)
-    import FoundationNetworking
+import FoundationNetworking
 #endif
 
 open class OpenAPIClientAPIConfiguration: @unchecked Sendable {
     // MARK: - OpenAPI Client Configuration
+
     public var basePath: String
     public var customHeaders: [String: String]
     public var credential: URLCredential?
@@ -24,7 +25,7 @@ open class OpenAPIClientAPIConfiguration: @unchecked Sendable {
         requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory(),
         apiResponseQueue: DispatchQueue = .main,
         codableHelper: CodableHelper = CodableHelper(),
-        successfulStatusCodeRange: Range<Int> = 200..<300,
+        successfulStatusCodeRange: Range<Int> = 200 ..< 300,
         interceptor: OpenAPIInterceptor = DefaultOpenAPIInterceptor(),
     ) {
         self.basePath = basePath

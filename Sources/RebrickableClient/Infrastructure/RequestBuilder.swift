@@ -1,7 +1,7 @@
 import Foundation
 
 #if canImport(FoundationNetworking)
-    import FoundationNetworking
+import FoundationNetworking
 #endif
 
 open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
@@ -47,10 +47,9 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
     @discardableResult
     open func execute(
         completion _:
-            @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void
+        @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
     )
-        -> RequestTask
-    {
+        -> RequestTask {
         requestTask
     }
 

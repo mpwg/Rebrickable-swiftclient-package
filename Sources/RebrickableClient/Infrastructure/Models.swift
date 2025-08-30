@@ -7,10 +7,11 @@
 import Foundation
 
 #if canImport(FoundationNetworking)
-    import FoundationNetworking
+import FoundationNetworking
 #endif
 
 // Protocols moved to `Infrastructure/Protocols`
+
 // MARK: - Models
 
 /// A flexible type that can be encoded (`.encodeNull` or `.encodeValue`)
@@ -91,7 +92,8 @@ public struct Response<T> {
             }
         }
         self.init(
-            statusCode: response.statusCode, header: responseHeader, body: body, bodyData: bodyData)
+            statusCode: response.statusCode, header: responseHeader, body: body, bodyData: bodyData,
+        )
     }
 }
 

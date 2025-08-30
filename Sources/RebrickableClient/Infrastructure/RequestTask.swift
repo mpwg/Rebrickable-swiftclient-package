@@ -1,11 +1,12 @@
 import Foundation
 
 #if canImport(FoundationNetworking)
-    import FoundationNetworking
+import FoundationNetworking
 #endif
 
 public final class RequestTask: @unchecked Sendable {
     // MARK: - Request Task
+
     private let lock = NSRecursiveLock()
     private var task: URLSessionDataTaskProtocol?
 

@@ -5,7 +5,8 @@ import Foundation
 class URLSessionRequestBuilderConfiguration: @unchecked Sendable {
     private init() {
         defaultURLSession = URLSession(
-            configuration: .default, delegate: sessionDelegate, delegateQueue: nil)
+            configuration: .default, delegate: sessionDelegate, delegateQueue: nil,
+        )
     }
 
     static let shared = URLSessionRequestBuilderConfiguration()
@@ -19,6 +20,7 @@ class URLSessionRequestBuilderConfiguration: @unchecked Sendable {
     // Store current URLCredential for every URLSessionTask
     var credentialStore = SynchronizedDictionary<Int, URLCredential>()
 }
+
 // MARK: - Session Delegate
 
 final class SessionDelegate: NSObject, URLSessionTaskDelegate {
@@ -37,9 +39,10 @@ final class SessionDelegate: NSObject, URLSessionTaskDelegate {
         } else {
             credential =
                 URLSessionRequestBuilderConfiguration.shared.credentialStore[task.taskIdentifier]
-                ?? session
-                .configuration.urlCredentialStorage?.defaultCredential(
-                    for: challenge.protectionSpace)
+                    ?? session
+                    .configuration.urlCredentialStorage?.defaultCredential(
+                        for: challenge.protectionSpace,
+                    )
 
             if credential != nil {
                 disposition = .useCredential
