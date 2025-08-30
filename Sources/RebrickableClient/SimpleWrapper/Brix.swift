@@ -1,6 +1,6 @@
-public class Brix {
+open class Brix {
     // Class implementation goes here
-    public var ApiKey: String = ""
+    var ApiKey: String = ""
 
     private let config = OpenAPIClientAPIConfiguration.shared
 
@@ -9,4 +9,13 @@ public class Brix {
         config.customHeaders["Authorization"] = "key \(apiKey)"
     }
 
+    public func GetColors() async {
+    do {
+        // Implementation for getting colors goes here
+        let result = try await LegoAPI.legoColorsList(
+            page: 1, pageSize: 20, ordering: nil, apiConfiguration: config)
+        print(result)
+    } catch {
+        print("Error fetching colors: \(error)")
+    }
 }
