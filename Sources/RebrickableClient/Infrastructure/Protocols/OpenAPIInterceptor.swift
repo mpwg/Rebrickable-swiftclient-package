@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - OpenAPI Interceptor Protocol
+
 public enum OpenAPIInterceptorRetry {
     case retry
     case dontRetry

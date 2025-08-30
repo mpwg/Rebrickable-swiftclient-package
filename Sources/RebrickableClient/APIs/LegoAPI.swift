@@ -7,10 +7,12 @@
 
 import Foundation
 
+// MARK: - Lego API
+
 open class LegoAPI {
     /**
      Get a list of all Colors.
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
@@ -55,7 +57,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -70,7 +75,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -85,7 +91,7 @@ open class LegoAPI {
 
     /**
      Get details about a specific Color.
-
+    
      - parameter id: (path) A unique value identifying this color.
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -96,8 +102,10 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
-        try await legoColorsReadWithRequestBuilder(id: id, ordering: ordering, apiConfiguration: apiConfiguration)
-            .execute().body
+        try await legoColorsReadWithRequestBuilder(
+            id: id, ordering: ordering, apiConfiguration: apiConfiguration
+        )
+        .execute().body
     }
 
     /**
@@ -118,7 +126,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/colors/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
-        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let idPostEscape =
+            idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{id}",
             with: idPostEscape,
@@ -133,14 +142,15 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            ),
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -155,7 +165,7 @@ open class LegoAPI {
 
     /**
      Get details about a specific Element ID.
-
+    
      - parameter elementId: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -164,7 +174,9 @@ open class LegoAPI {
         elementId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
-        try await legoElementsReadWithRequestBuilder(elementId: elementId, apiConfiguration: apiConfiguration).execute()
+        try await legoElementsReadWithRequestBuilder(
+            elementId: elementId, apiConfiguration: apiConfiguration
+        ).execute()
             .body
     }
 
@@ -184,7 +196,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/elements/{element_id}/"
         let elementIdPreEscape = "\(APIHelper.mapValueToPathItem(elementId))"
-        let elementIdPostEscape = elementIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let elementIdPostEscape =
+            elementIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{element_id}",
             with: elementIdPostEscape,
@@ -200,7 +213,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -215,7 +229,7 @@ open class LegoAPI {
 
     /**
      Get a list of Minifigs.
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter minParts: (query)  (optional)
@@ -285,7 +299,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -320,7 +337,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -335,7 +353,7 @@ open class LegoAPI {
 
     /**
      Get a list of all Inventory Parts in this Minifig.
-
+    
      - parameter setNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -376,7 +394,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/minifigs/{set_num}/parts/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{set_num}",
             with: setNumPostEscape,
@@ -388,7 +407,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -399,7 +421,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -414,7 +437,7 @@ open class LegoAPI {
 
     /**
      Get details for a specific Minifig.
-
+    
      - parameter setNum: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -423,7 +446,9 @@ open class LegoAPI {
         setNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
-        try await legoMinifigsReadWithRequestBuilder(setNum: setNum, apiConfiguration: apiConfiguration).execute().body
+        try await legoMinifigsReadWithRequestBuilder(
+            setNum: setNum, apiConfiguration: apiConfiguration
+        ).execute().body
     }
 
     /**
@@ -442,7 +467,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/minifigs/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{set_num}",
             with: setNumPostEscape,
@@ -458,7 +484,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -473,7 +500,7 @@ open class LegoAPI {
 
     /**
      Get a list of Sets a Minifig has appeared in.
-
+    
      - parameter setNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -519,7 +546,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/minifigs/{set_num}/sets/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{set_num}",
             with: setNumPostEscape,
@@ -531,7 +559,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -546,7 +577,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -561,7 +593,7 @@ open class LegoAPI {
 
     /**
      Get a list of all Part Categories.
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
@@ -606,7 +638,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -621,7 +656,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -636,7 +672,7 @@ open class LegoAPI {
 
     /**
      Get details about a specific Part Category.
-
+    
      - parameter id: (path) A unique integer value identifying this part category.
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -672,7 +708,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/part_categories/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
-        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let idPostEscape =
+            idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{id}",
             with: idPostEscape,
@@ -687,14 +724,15 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            ),
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -709,7 +747,7 @@ open class LegoAPI {
 
     /**
      Get a list of all Colors a Part has appeared in.
-
+    
      - parameter partNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -755,7 +793,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/parts/{part_num}/colors/"
         let partNumPreEscape = "\(APIHelper.mapValueToPathItem(partNum))"
-        let partNumPostEscape = partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let partNumPostEscape =
+            partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{part_num}",
             with: partNumPostEscape,
@@ -767,7 +806,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -782,7 +824,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -797,7 +840,7 @@ open class LegoAPI {
 
     /**
      Get details about a specific Part/Color combination.
-
+    
      - parameter colorId: (path)
      - parameter partNum: (path)
      - parameter apiConfiguration: The configuration for the http request.
@@ -833,7 +876,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/parts/{part_num}/colors/{color_id}/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
-        let colorIdPostEscape = colorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let colorIdPostEscape =
+            colorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{color_id}",
             with: colorIdPostEscape,
@@ -841,7 +885,8 @@ open class LegoAPI {
             range: nil,
         )
         let partNumPreEscape = "\(APIHelper.mapValueToPathItem(partNum))"
-        let partNumPostEscape = partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let partNumPostEscape =
+            partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{part_num}",
             with: partNumPostEscape,
@@ -857,7 +902,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -872,7 +918,7 @@ open class LegoAPI {
 
     /**
      Get a list of all Sets the Part/Color combination has appeard in.
-
+    
      - parameter colorId: (path)
      - parameter partNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
@@ -924,7 +970,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/parts/{part_num}/colors/{color_id}/sets/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
-        let colorIdPostEscape = colorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let colorIdPostEscape =
+            colorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{color_id}",
             with: colorIdPostEscape,
@@ -932,7 +979,8 @@ open class LegoAPI {
             range: nil,
         )
         let partNumPreEscape = "\(APIHelper.mapValueToPathItem(partNum))"
-        let partNumPostEscape = partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let partNumPostEscape =
+            partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{part_num}",
             with: partNumPostEscape,
@@ -944,7 +992,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -959,7 +1010,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -974,7 +1026,7 @@ open class LegoAPI {
 
     /**
      Get a list of Parts.
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter partNum: (query)  (optional)
@@ -1065,7 +1117,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -1087,11 +1142,13 @@ open class LegoAPI {
                 isExplode: false
             ),
             "bricklink_id": (
-                wrappedValue: bricklinkId?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                wrappedValue: bricklinkId?.asParameter(
+                    codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
             ),
             "brickowl_id": (
-                wrappedValue: brickowlId?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                wrappedValue: brickowlId?.asParameter(
+                    codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
             ),
             "lego_id": (
@@ -1116,7 +1173,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -1131,7 +1189,7 @@ open class LegoAPI {
 
     /**
      Get details about a specific Part.
-
+    
      - parameter partNum: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -1141,7 +1199,9 @@ open class LegoAPI {
         partNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
-        try await legoPartsReadWithRequestBuilder(partNum: partNum, apiConfiguration: apiConfiguration).execute().body
+        try await legoPartsReadWithRequestBuilder(
+            partNum: partNum, apiConfiguration: apiConfiguration
+        ).execute().body
     }
 
     /**
@@ -1160,7 +1220,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/parts/{part_num}/"
         let partNumPreEscape = "\(APIHelper.mapValueToPathItem(partNum))"
-        let partNumPostEscape = partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let partNumPostEscape =
+            partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{part_num}",
             with: partNumPostEscape,
@@ -1176,7 +1237,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -1191,7 +1253,7 @@ open class LegoAPI {
 
     /**
      Get a list of MOCs which are Alternate Builds of a specific Set - i.e. all parts in the MOC can
-
+    
      - parameter setNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -1238,7 +1300,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/alternates/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{set_num}",
             with: setNumPostEscape,
@@ -1250,7 +1313,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -1265,7 +1331,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -1280,7 +1347,7 @@ open class LegoAPI {
 
     /**
      Get a list of Sets, optionally filtered by any of the below parameters.
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter themeId: (query)  (optional)
@@ -1356,7 +1423,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -1395,7 +1465,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -1410,7 +1481,7 @@ open class LegoAPI {
 
     /**
      Get a list of all Inventory Minifigs in this Set.
-
+    
      - parameter setNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -1452,7 +1523,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/minifigs/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{set_num}",
             with: setNumPostEscape,
@@ -1464,7 +1536,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -1475,7 +1550,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -1490,7 +1566,7 @@ open class LegoAPI {
 
     /**
      Get a list of all Inventory Parts in this Set.
-
+    
      - parameter setNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -1532,7 +1608,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/parts/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{set_num}",
             with: setNumPostEscape,
@@ -1544,7 +1621,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -1555,7 +1635,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -1570,7 +1651,7 @@ open class LegoAPI {
 
     /**
      Get details for a specific Set.
-
+    
      - parameter setNum: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -1580,7 +1661,8 @@ open class LegoAPI {
         setNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
-        try await legoSetsReadWithRequestBuilder(setNum: setNum, apiConfiguration: apiConfiguration).execute().body
+        try await legoSetsReadWithRequestBuilder(setNum: setNum, apiConfiguration: apiConfiguration)
+            .execute().body
     }
 
     /**
@@ -1599,7 +1681,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{set_num}",
             with: setNumPostEscape,
@@ -1615,7 +1698,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -1630,7 +1714,7 @@ open class LegoAPI {
 
     /**
      Get a list of all Inventory Sets in this Set.
-
+    
      - parameter setNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -1672,7 +1756,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/sets/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
-        let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let setNumPostEscape =
+            setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{set_num}",
             with: setNumPostEscape,
@@ -1684,7 +1769,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -1695,7 +1783,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -1710,7 +1799,7 @@ open class LegoAPI {
 
     /**
      Return all Themes
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
@@ -1756,7 +1845,10 @@ open class LegoAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page": (
+                wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper),
+                isExplode: false
+            ),
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
@@ -1771,7 +1863,8 @@ open class LegoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(
@@ -1786,7 +1879,7 @@ open class LegoAPI {
 
     /**
      Return details for a specific Theme
-
+    
      - parameter id: (path) A unique integer value identifying this theme.
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -1798,8 +1891,10 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
-        try await legoThemesReadWithRequestBuilder(id: id, ordering: ordering, apiConfiguration: apiConfiguration)
-            .execute().body
+        try await legoThemesReadWithRequestBuilder(
+            id: id, ordering: ordering, apiConfiguration: apiConfiguration
+        )
+        .execute().body
     }
 
     /**
@@ -1820,7 +1915,8 @@ open class LegoAPI {
     {
         var localVariablePath = "/api/v3/lego/themes/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
-        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        let idPostEscape =
+            idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(
             of: "{id}",
             with: idPostEscape,
@@ -1835,14 +1931,15 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            ),
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration
+            .requestBuilderFactory
             .getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(

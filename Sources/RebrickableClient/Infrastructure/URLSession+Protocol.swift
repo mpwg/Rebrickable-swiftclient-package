@@ -3,6 +3,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
+// MARK: - URLSession Protocol conformances
 
 extension URLSession: URLSessionProtocol {
     public func dataTaskFromProtocol(
@@ -14,3 +15,5 @@ extension URLSession: URLSessionProtocol {
 }
 
 extension URLSessionDataTask: URLSessionDataTaskProtocol {}
+
+// MARK: - URLSessionDataTask helpers

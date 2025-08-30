@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - URLSession Request Builders
+
 open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
     public required init(
         method: String,
@@ -244,6 +246,8 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
         return url
     }
 }
+
+// MARK: - URLSession Decodable Request Builder
 
 open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBuilder<T>,
     @unchecked Sendable

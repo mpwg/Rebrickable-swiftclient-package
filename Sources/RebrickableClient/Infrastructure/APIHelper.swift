@@ -6,6 +6,8 @@
 
 import Foundation
 
+// MARK: - API Helper
+
 public enum APIHelper {
     public static func rejectNil(_ source: [String: (any Sendable)?]) -> [String: any Sendable]? {
         let destination = source.reduce(into: [String: any Sendable]()) { result, item in
@@ -23,7 +25,8 @@ public enum APIHelper {
     public static func rejectNilHeaders(_ source: [String: (any Sendable)?]) -> [String: String] {
         source.reduce(into: [String: String]()) { result, item in
             if let collection = item.value as? [Any?] {
-                result[item.key] = collection
+                result[item.key] =
+                    collection
                     .compactMap { value in convertAnyToString(value) }
                     .joined(separator: ",")
             } else if let value: Any = item.value {
@@ -32,7 +35,9 @@ public enum APIHelper {
         }
     }
 
-    public static func convertBoolToString(_ source: [String: any Sendable]?) -> [String: any Sendable]? {
+    public static func convertBoolToString(_ source: [String: any Sendable]?) -> [String:
+        any Sendable]?
+    {
         guard let source else {
             return nil
         }
@@ -58,7 +63,8 @@ public enum APIHelper {
 
     public static func mapValueToPathItem(_ source: Any) -> Any {
         if let collection = source as? [Any?] {
-            return collection
+            return
+                collection
                 .compactMap { value in convertAnyToString(value) }
                 .joined(separator: ",")
         } else if let value = source as? any RawRepresentable {
@@ -71,16 +77,22 @@ public enum APIHelper {
     ///
     /// explode attribute is respected: collection values might be either joined or split up into separate key value
     /// pairs
-    public static func mapValuesToQueryItems(_ source: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)])
+    public static func mapValuesToQueryItems(
+        _ source: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]
+    )
         -> [URLQueryItem]?
     {
         let destination = source.filter { $0.value.wrappedValue != nil }
             .reduce(into: [URLQueryItem]()) { result, item in
                 if let collection = item.value.wrappedValue as? [Any?] {
-                    let collectionValues: [String] = collection.compactMap { value in convertAnyToString(value) }
+                    let collectionValues: [String] = collection.compactMap { value in
+                        convertAnyToString(value)
+                    }
 
                     if !item.value.isExplode {
-                        result.append(URLQueryItem(name: item.key, value: collectionValues.joined(separator: ",")))
+                        result.append(
+                            URLQueryItem(
+                                name: item.key, value: collectionValues.joined(separator: ",")))
                     } else {
                         for value in collectionValues {
                             result.append(URLQueryItem(name: item.key, value: value))
@@ -101,8 +113,10 @@ public enum APIHelper {
     /// maps all values from source to query parameters
     ///
     /// collection values are always exploded
-    public static func mapValuesToQueryItems(_ source: [String: (any Sendable)?]) -> [URLQueryItem]? {
-        let destination = source.filter { $0.value != nil }.reduce(into: [URLQueryItem]()) { result, item in
+    public static func mapValuesToQueryItems(_ source: [String: (any Sendable)?]) -> [URLQueryItem]?
+    {
+        let destination = source.filter { $0.value != nil }.reduce(into: [URLQueryItem]()) {
+            result, item in
             if let collection = item.value as? [Any?] {
                 collection
                     .compactMap { value in convertAnyToString(value) }

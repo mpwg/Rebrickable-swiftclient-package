@@ -36,6 +36,8 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
         addCredential()
     }
 
+    // MARK: - Initialization
+
     open func addHeaders(_ aHeaders: [String: String]) {
         for (header, value) in aHeaders {
             headers[header] = value
@@ -51,6 +53,8 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
     {
         requestTask
     }
+
+    // MARK: - Execution
 
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     @discardableResult
@@ -93,6 +97,8 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
         }
         return self
     }
+
+    // MARK: - Mutators
 
     open func addCredential() {
         credential = apiConfiguration.credential

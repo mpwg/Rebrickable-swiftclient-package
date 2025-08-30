@@ -8,6 +8,7 @@
 import Foundation
 
 open class CodableHelper: @unchecked Sendable {
+    // MARK: - Codable Helper
     public init() {}
 
     private var customDateFormatter: DateFormatter?
@@ -43,7 +44,8 @@ open class CodableHelper: @unchecked Sendable {
         set { customJSONEncoder = newValue }
     }
 
-    open func decode<T>(_ type: T.Type, from data: Data) -> Swift.Result<T, Error> where T: Decodable {
+    open func decode<T>(_ type: T.Type, from data: Data) -> Swift.Result<T, Error>
+    where T: Decodable {
         Swift.Result { try jsonDecoder.decode(type, from: data) }
     }
 

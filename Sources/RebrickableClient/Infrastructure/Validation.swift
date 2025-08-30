@@ -6,6 +6,8 @@
 
 import Foundation
 
+// MARK: - Validation Utilities
+
 public struct StringRule: Sendable {
     public var minLength: Int?
     public var maxLength: Int?

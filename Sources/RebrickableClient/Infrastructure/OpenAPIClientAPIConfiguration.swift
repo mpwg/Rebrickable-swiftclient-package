@@ -5,6 +5,7 @@ import Foundation
 #endif
 
 open class OpenAPIClientAPIConfiguration: @unchecked Sendable {
+    // MARK: - OpenAPI Client Configuration
     public var basePath: String
     public var customHeaders: [String: String]
     public var credential: URLCredential?

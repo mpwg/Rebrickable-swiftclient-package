@@ -19,6 +19,8 @@ public enum HTTPMethod: String {
     case connect = "CONNECT"
 }
 
+// MARK: - Parameter Encodings
+
 // ParameterEncoding protocol moved to `Infrastructure/Protocols/ParameterEncoding.swift`
 
 class URLEncoding: ParameterEncoding {
@@ -233,3 +235,5 @@ extension Data? {
 }
 
 extension JSONDataEncoding: ParameterEncoding {}
+
+// MARK: - Encodings helpers

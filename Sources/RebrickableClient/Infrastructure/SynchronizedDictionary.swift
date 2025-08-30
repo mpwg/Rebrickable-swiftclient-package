@@ -6,6 +6,8 @@
 
 import Foundation
 
+// MARK: - Synchronized Dictionary
+
 struct SynchronizedDictionary<K: Hashable, V>: @unchecked Sendable {
     private var dictionary = [K: V]()
     private let lock = NSRecursiveLock()

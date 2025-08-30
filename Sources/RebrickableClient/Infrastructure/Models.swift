@@ -11,6 +11,7 @@ import Foundation
 #endif
 
 // Protocols moved to `Infrastructure/Protocols`
+// MARK: - Models
 
 /// A flexible type that can be encoded (`.encodeNull` or `.encodeValue`)
 /// or not encoded (`.encodeNothing`). Intended for request payloads.
@@ -49,6 +50,8 @@ extension NullEncodable: Codable where Wrapped: Codable {
 public enum ErrorResponse: Error {
     case error(Int, Data?, URLResponse?, Error)
 }
+
+// MARK: - Errors & Response
 
 public enum DownloadException: Error {
     case responseDataMissing

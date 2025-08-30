@@ -5,9 +5,11 @@
 //
 
 import Foundation
+
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+    import FoundationNetworking
 #endif
+// MARK: - ParameterConvertible Conformances
 
 extension Bool: ParameterConvertible {
     func asParameter(codableHelper _: CodableHelper) -> any Sendable { self }
@@ -52,8 +54,10 @@ extension UUID: ParameterConvertible {
 extension RawRepresentable where RawValue: ParameterConvertible, RawValue: Sendable {
     func asParameter(codableHelper _: CodableHelper) -> any Sendable { rawValue }
 }
+// MARK: - Helpers
 
-private func encodeIfPossible(_ object: some Sendable, codableHelper: CodableHelper) -> any Sendable {
+private func encodeIfPossible(_ object: some Sendable, codableHelper: CodableHelper) -> any Sendable
+{
     if let encodableObject = object as? ParameterConvertible {
         encodableObject.asParameter(codableHelper: codableHelper)
     } else {
@@ -104,6 +108,8 @@ extension ParameterConvertible where Self: Encodable {
     }
 }
 
+// MARK: - CodingKey retroactive conformance
+
 extension String: @retroactive CodingKey {
     public var stringValue: String {
         self
@@ -122,31 +128,33 @@ extension String: @retroactive CodingKey {
     }
 }
 
-public extension KeyedEncodingContainerProtocol {
-    mutating func encodeArray(_ values: [some Encodable], forKey key: Self.Key) throws {
+extension KeyedEncodingContainerProtocol {
+    public mutating func encodeArray(_ values: [some Encodable], forKey key: Self.Key) throws {
         var arrayContainer = nestedUnkeyedContainer(forKey: key)
         try arrayContainer.encode(contentsOf: values)
     }
 
-    mutating func encodeArrayIfPresent(_ values: [some Encodable]?, forKey key: Self.Key) throws {
+    public mutating func encodeArrayIfPresent(_ values: [some Encodable]?, forKey key: Self.Key)
+        throws
+    {
         if let values {
             try encodeArray(values, forKey: key)
         }
     }
 
-    mutating func encodeMap(_ pairs: [Self.Key: some Encodable]) throws {
+    public mutating func encodeMap(_ pairs: [Self.Key: some Encodable]) throws {
         for (key, value) in pairs {
             try encode(value, forKey: key)
         }
     }
 
-    mutating func encodeMapIfPresent(_ pairs: [Self.Key: some Encodable]?) throws {
+    public mutating func encodeMapIfPresent(_ pairs: [Self.Key: some Encodable]?) throws {
         if let pairs {
             try encodeMap(pairs)
         }
     }
 
-    mutating func encode(_ value: Decimal, forKey key: Self.Key) throws {
+    public mutating func encode(_ value: Decimal, forKey key: Self.Key) throws {
         let decimalNumber = NSDecimalNumber(decimal: value)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -155,15 +163,17 @@ public extension KeyedEncodingContainerProtocol {
         try encode(formattedString, forKey: key)
     }
 
-    mutating func encodeIfPresent(_ value: Decimal?, forKey key: Self.Key) throws {
+    public mutating func encodeIfPresent(_ value: Decimal?, forKey key: Self.Key) throws {
         if let value {
             try encode(value, forKey: key)
         }
     }
 }
 
-public extension KeyedDecodingContainerProtocol {
-    func decodeArray<T>(_: T.Type, forKey key: Self.Key) throws -> [T] where T: Decodable {
+// MARK: - Keyed Encoding helpers
+
+extension KeyedDecodingContainerProtocol {
+    public func decodeArray<T>(_: T.Type, forKey key: Self.Key) throws -> [T] where T: Decodable {
         var tmpArray = [T]()
 
         var nestedContainer = try nestedUnkeyedContainer(forKey: key)
@@ -175,7 +185,8 @@ public extension KeyedDecodingContainerProtocol {
         return tmpArray
     }
 
-    func decodeArrayIfPresent<T>(_: T.Type, forKey key: Self.Key) throws -> [T]? where T: Decodable {
+    public func decodeArrayIfPresent<T>(_: T.Type, forKey key: Self.Key) throws -> [T]?
+    where T: Decodable {
         var tmpArray: [T]?
 
         if contains(key) {
@@ -185,7 +196,8 @@ public extension KeyedDecodingContainerProtocol {
         return tmpArray
     }
 
-    func decodeMap<T>(_: T.Type, excludedKeys: Set<Self.Key>) throws -> [Self.Key: T] where T: Decodable {
+    public func decodeMap<T>(_: T.Type, excludedKeys: Set<Self.Key>) throws -> [Self.Key: T]
+    where T: Decodable {
         var map: [Self.Key: T] = [:]
 
         for key in allKeys {
@@ -198,7 +210,7 @@ public extension KeyedDecodingContainerProtocol {
         return map
     }
 
-    func decode(_ type: Decimal.Type, forKey key: Self.Key) throws -> Decimal {
+    public func decode(_ type: Decimal.Type, forKey key: Self.Key) throws -> Decimal {
         let stringValue = try decode(String.self, forKey: key)
         guard let decimalValue = Decimal(string: stringValue) else {
             let context = DecodingError.Context(
@@ -211,7 +223,7 @@ public extension KeyedDecodingContainerProtocol {
         return decimalValue
     }
 
-    func decodeIfPresent(_ type: Decimal.Type, forKey key: Self.Key) throws -> Decimal? {
+    public func decodeIfPresent(_ type: Decimal.Type, forKey key: Self.Key) throws -> Decimal? {
         guard let stringValue = try decodeIfPresent(String.self, forKey: key) else {
             return nil
         }
@@ -226,3 +238,5 @@ public extension KeyedDecodingContainerProtocol {
         return decimalValue
     }
 }
+
+// MARK: - Keyed Decoding helpers

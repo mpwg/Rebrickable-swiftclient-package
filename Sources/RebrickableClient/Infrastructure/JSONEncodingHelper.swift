@@ -29,4 +29,6 @@ open class JSONEncodingHelper {
 
         return params
     }
+    // MARK: - JSON Encoding Helper
+
 }

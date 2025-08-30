@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - URLSession Data Task Protocol
+
 public protocol URLSessionDataTaskProtocol {
     func resume()
 

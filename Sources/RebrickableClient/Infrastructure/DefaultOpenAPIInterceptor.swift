@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - Default OpenAPI Interceptor
+
 public class DefaultOpenAPIInterceptor: OpenAPIInterceptor {
     public init() {}
 

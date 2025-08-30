@@ -7,10 +7,12 @@
 
 import Foundation
 
+// MARK: - Users API
+
 open class UsersAPI {
     /**
      Get a list of all the Parts in all the user's Part Lists as well as the Parts inside Sets in the user's Set Lists.
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -102,7 +104,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the available Badges
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
@@ -171,7 +173,7 @@ open class UsersAPI {
 
     /**
      Get details about a specific Badge
-
+    
      - parameter id: (path) A unique integer value identifying this badge.
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -217,7 +219,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            ),
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -237,7 +239,7 @@ open class UsersAPI {
 
     /**
      Find out how many parts the user needs to build the specified Set.
-
+    
      - parameter userToken: (path)
      - parameter setNum: (path)
      - parameter apiConfiguration: The configuration for the http request.
@@ -303,7 +305,7 @@ open class UsersAPI {
 
     /**
      Add one or more Lost Parts to the user.
-
+    
      - parameter userToken: (path)
      - parameter invPartId: (form)
      - parameter lostQuantity: (form)  (optional)
@@ -358,7 +360,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -376,7 +378,7 @@ open class UsersAPI {
 
     /**
      Remove the Lost Part from the user.
-
+    
      - parameter id: (path)
      - parameter userToken: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
@@ -430,7 +432,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            ),
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -450,7 +452,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the Lost Parts from the user's LEGO collection.
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -529,7 +531,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the Minifigs in all the user's Sets. Note that this is a read-only list as Minifigs are
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -622,7 +624,7 @@ open class UsersAPI {
 
     /**
      Add a new Part List.
-
+    
      - parameter userToken: (path)
      - parameter name: (form)
      - parameter isBuildable: (form)  (optional)
@@ -678,7 +680,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -696,7 +698,7 @@ open class UsersAPI {
 
     /**
      Delete a Part List and all it's Parts.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
@@ -762,7 +764,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the user's Part Lists.
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -775,7 +777,8 @@ open class UsersAPI {
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
         try await usersPartlistsListWithRequestBuilder(
-            userToken: userToken, page: page, pageSize: pageSize, apiConfiguration: apiConfiguration,
+            userToken: userToken, page: page, pageSize: pageSize,
+            apiConfiguration: apiConfiguration,
         ).execute().body
     }
 
@@ -834,7 +837,7 @@ open class UsersAPI {
 
     /**
      Update an existing Part List's details.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter isBuildable: (form)  (optional)
@@ -900,7 +903,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -918,7 +921,7 @@ open class UsersAPI {
 
     /**
      Add one or more Parts to the Part List.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter partNum: (form)
@@ -982,7 +985,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1000,7 +1003,7 @@ open class UsersAPI {
 
     /**
      Delete a Part from the Part List.
-
+    
      - parameter colorId: (path)
      - parameter partNum: (path)
      - parameter userToken: (path)
@@ -1074,7 +1077,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            ),
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1094,7 +1097,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the Parts in a specific Part List.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
@@ -1183,7 +1186,7 @@ open class UsersAPI {
 
     /**
      Get details about a specific Part in the Part List.
-
+    
      - parameter colorId: (path)
      - parameter partNum: (path)
      - parameter userToken: (path)
@@ -1257,7 +1260,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            ),
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1277,7 +1280,7 @@ open class UsersAPI {
 
     /**
      Replace an existing Part's details in the Part List.
-
+    
      - parameter colorId: (path)
      - parameter partNum: (path)
      - parameter userToken: (path)
@@ -1347,7 +1350,7 @@ open class UsersAPI {
         )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
-            "quantity": quantity.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "quantity": quantity.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1358,11 +1361,11 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            ),
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1380,7 +1383,7 @@ open class UsersAPI {
 
     /**
      Get details about a specific Part List.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
@@ -1446,7 +1449,7 @@ open class UsersAPI {
 
     /**
      Replace an existing Part List's details.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter name: (form)
@@ -1512,7 +1515,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1530,7 +1533,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the Parts in all the user's Part Lists.
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -1638,7 +1641,7 @@ open class UsersAPI {
 
     /**
      Get details about a specific user.
-
+    
      - parameter userToken: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -1696,7 +1699,7 @@ open class UsersAPI {
 
     /**
      Add a new Set List.
-
+    
      - parameter userToken: (path)
      - parameter name: (form)
      - parameter isBuildable: (form)  (optional)
@@ -1752,7 +1755,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1770,7 +1773,7 @@ open class UsersAPI {
 
     /**
      Delete a Set List and all it's Sets.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
@@ -1836,7 +1839,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the user's Set Lists.
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -1849,7 +1852,8 @@ open class UsersAPI {
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
         try await usersSetlistsListWithRequestBuilder(
-            userToken: userToken, page: page, pageSize: pageSize, apiConfiguration: apiConfiguration,
+            userToken: userToken, page: page, pageSize: pageSize,
+            apiConfiguration: apiConfiguration,
         ).execute().body
     }
 
@@ -1908,7 +1912,7 @@ open class UsersAPI {
 
     /**
      Update an existing Set List's details.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter isBuildable: (form)  (optional)
@@ -1974,7 +1978,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1992,7 +1996,7 @@ open class UsersAPI {
 
     /**
      Get details about a specific Set List.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
@@ -2058,7 +2062,7 @@ open class UsersAPI {
 
     /**
      Add one or more Sets to the Set List. Existing Sets are unaffected.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter setNum: (form)
@@ -2126,7 +2130,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -2144,7 +2148,7 @@ open class UsersAPI {
 
     /**
      Delete a Set from the Set List.
-
+    
      - parameter setNum: (path)
      - parameter userToken: (path)
      - parameter listId: (path)
@@ -2207,7 +2211,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            ),
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -2227,7 +2231,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the Sets in a specific Set List.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
@@ -2316,7 +2320,7 @@ open class UsersAPI {
 
     /**
      Update an existing Set's details in the Set List.
-
+    
      - parameter setNum: (path)
      - parameter userToken: (path)
      - parameter listId: (path)
@@ -2393,11 +2397,11 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            ),
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -2415,7 +2419,7 @@ open class UsersAPI {
 
     /**
      Get details about a specific Set in the Set List.
-
+    
      - parameter setNum: (path)
      - parameter userToken: (path)
      - parameter listId: (path)
@@ -2478,7 +2482,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            ),
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -2498,7 +2502,7 @@ open class UsersAPI {
 
     /**
      Replace an existing Set's details in the Set List.
-
+    
      - parameter setNum: (path)
      - parameter userToken: (path)
      - parameter listId: (path)
@@ -2575,11 +2579,11 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            ),
+            )
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -2597,7 +2601,7 @@ open class UsersAPI {
 
     /**
      Replace an existing Set List's details.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter name: (form)
@@ -2663,7 +2667,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -2681,7 +2685,7 @@ open class UsersAPI {
 
     /**
      Add one or more Sets to the user's LEGO collection. Existing Sets are unaffected.
-
+    
      - parameter userToken: (path)
      - parameter setNum: (form)
      - parameter quantity: (form)  (optional)
@@ -2739,7 +2743,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -2757,7 +2761,7 @@ open class UsersAPI {
 
     /**
      Delete the Set from all the user's Set Lists.
-
+    
      - parameter userToken: (path)
      - parameter setNum: (path)
      - parameter setNum2: (query)  (optional)
@@ -2879,7 +2883,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the Sets in the user's LEGO collection.
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -3007,7 +3011,7 @@ open class UsersAPI {
 
     /**
      Get details about a specific Set in the user's LEGO collection.
-
+    
      - parameter userToken: (path)
      - parameter setNum: (path)
      - parameter setNum2: (query)  (optional)
@@ -3129,7 +3133,7 @@ open class UsersAPI {
 
     /**
      Synchronise a user's Sets to the POSTed list.
-
+    
      - parameter userToken: (path)
      - parameter setNum: (form)
      - parameter quantity: (form)  (optional)
@@ -3187,7 +3191,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -3205,7 +3209,7 @@ open class UsersAPI {
 
     /**
      Update an existing Set's quantity in all Set Lists. This PUT call is different to others in that it will create
-
+    
      - parameter userToken: (path)
      - parameter setNum: (path)
      - parameter setNum2: (query)  (optional)
@@ -3278,7 +3282,7 @@ open class UsersAPI {
         )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
-            "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -3321,7 +3325,7 @@ open class UsersAPI {
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -3339,7 +3343,7 @@ open class UsersAPI {
 
     /**
      Generate a User Token to be used for authorising user account actions in subsequent calls. Username can be either
-
+    
      - parameter username: (form) Username (or email) of user
      - parameter password: (form) Password of user
      - parameter apiConfiguration: The configuration for the http request.
@@ -3383,7 +3387,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)

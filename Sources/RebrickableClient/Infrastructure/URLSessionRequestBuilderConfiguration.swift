@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - URLSession Request Builder Configuration
+
 class URLSessionRequestBuilderConfiguration: @unchecked Sendable {
     private init() {
         defaultURLSession = URLSession(
@@ -17,6 +19,7 @@ class URLSessionRequestBuilderConfiguration: @unchecked Sendable {
     // Store current URLCredential for every URLSessionTask
     var credentialStore = SynchronizedDictionary<Int, URLCredential>()
 }
+// MARK: - Session Delegate
 
 final class SessionDelegate: NSObject, URLSessionTaskDelegate {
     func urlSession(
