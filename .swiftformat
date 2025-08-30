@@ -1,17 +1,21 @@
 # SwiftFormat Configuration for Rebrickable.framework
 
-# File paths to exclude from formatting
+## File paths to exclude from formatting
+
 --exclude .build,DerivedData,Carthage,Pods,.git,vendor
 
-# Swift version
+## Swift version
+
 --swiftversion 6.1
 
-# Indentation
+## Indentation
+
 --indent 4
 --tabwidth 4
 --smarttabs enabled
 
-# Line wrapping
+## Line wrapping
+
 --maxwidth 120
 --wraparguments before-first
 --wrapparameters before-first
@@ -19,12 +23,14 @@
 --wrapreturntype if-multiline
 --wrapconditions before-first
 
-# Spacing
+## Spacing
+
 --trimwhitespace always
 --insertlines enabled
 --removelines enabled
 
-# Rules to enable
+## Rules to enable
+
 --enable isEmpty
 --enable redundantSelf
 --enable sortImports
@@ -38,11 +44,13 @@
 --enable consecutiveBlankLines
 --enable consecutiveSpaces
 
-# Rules to disable
+## Rules to disable
+
 --disable andOperator # Keep && instead of converting to and
 --disable organizeDeclarations # Can be too aggressive
 
-# Options
+## Options
+
 --self remove # Remove explicit self where not needed
 --importgrouping testable-bottom # Group imports with testable at bottom
 --patternlet inline # Use inline let in pattern matching
