@@ -33,7 +33,7 @@ public enum APIHelper {
     }
 
     public static func convertBoolToString(_ source: [String: any Sendable]?) -> [String: any Sendable]? {
-        guard let source = source else {
+        guard let source else {
             return nil
         }
 
@@ -48,7 +48,7 @@ public enum APIHelper {
     }
 
     public static func convertAnyToString(_ value: Any?) -> String? {
-        guard let value = value else { return nil }
+        guard let value else { return nil }
         if let value = value as? any RawRepresentable {
             return "\(value.rawValue)"
         } else {
@@ -69,24 +69,27 @@ public enum APIHelper {
 
     /// maps all values from source to query parameters
     ///
-    /// explode attribute is respected: collection values might be either joined or split up into separate key value pairs
-    public static func mapValuesToQueryItems(_ source: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]) -> [URLQueryItem]? {
-        let destination = source.filter { $0.value.wrappedValue != nil }.reduce(into: [URLQueryItem]()) { result, item in
-            if let collection = item.value.wrappedValue as? [Any?] {
-                let collectionValues: [String] = collection.compactMap { value in convertAnyToString(value) }
+    /// explode attribute is respected: collection values might be either joined or split up into separate key value
+    /// pairs
+    public static func mapValuesToQueryItems(_ source: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)])
+        -> [URLQueryItem]? {
+        let destination = source.filter { $0.value.wrappedValue != nil }
+            .reduce(into: [URLQueryItem]()) { result, item in
+                if let collection = item.value.wrappedValue as? [Any?] {
+                    let collectionValues: [String] = collection.compactMap { value in convertAnyToString(value) }
 
-                if !item.value.isExplode {
-                    result.append(URLQueryItem(name: item.key, value: collectionValues.joined(separator: ",")))
-                } else {
-                    for value in collectionValues {
-                        result.append(URLQueryItem(name: item.key, value: value))
+                    if !item.value.isExplode {
+                        result.append(URLQueryItem(name: item.key, value: collectionValues.joined(separator: ",")))
+                    } else {
+                        for value in collectionValues {
+                            result.append(URLQueryItem(name: item.key, value: value))
+                        }
                     }
-                }
 
-            } else if let value = item.value.wrappedValue {
-                result.append(URLQueryItem(name: item.key, value: convertAnyToString(value)))
+                } else if let value = item.value.wrappedValue {
+                    result.append(URLQueryItem(name: item.key, value: convertAnyToString(value)))
+                }
             }
-        }
 
         if destination.isEmpty {
             return nil

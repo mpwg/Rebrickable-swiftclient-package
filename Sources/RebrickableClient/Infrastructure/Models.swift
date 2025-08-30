@@ -6,7 +6,7 @@
 
 import Foundation
 #if canImport(FoundationNetworking)
-    import FoundationNetworking
+import FoundationNetworking
 #endif
 
 protocol ParameterConvertible {
@@ -29,7 +29,7 @@ extension CaseIterableDefaultsLast {
         } else {
             throw DecodingError.valueNotFound(
                 Self.Type.self,
-                .init(codingPath: decoder.codingPath, debugDescription: "CaseIterableDefaultsLast")
+                .init(codingPath: decoder.codingPath, debugDescription: "CaseIterableDefaultsLast"),
             )
         }
     }
@@ -64,7 +64,7 @@ extension NullEncodable: Codable where Wrapped: Codable {
         switch self {
         case .encodeNothing: return
         case .encodeNull: try container.encodeNil()
-        case let .encodeValue(wrapped): try container.encode(wrapped)
+        case .encodeValue(let wrapped): try container.encode(wrapped)
         }
     }
 }

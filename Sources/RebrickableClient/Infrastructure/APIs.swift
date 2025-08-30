@@ -6,7 +6,7 @@
 
 import Foundation
 #if canImport(FoundationNetworking)
-    import FoundationNetworking
+import FoundationNetworking
 #endif
 
 open class OpenAPIClientAPIConfiguration: @unchecked Sendable {
@@ -32,7 +32,7 @@ open class OpenAPIClientAPIConfiguration: @unchecked Sendable {
         apiResponseQueue: DispatchQueue = .main,
         codableHelper: CodableHelper = CodableHelper(),
         successfulStatusCodeRange: Range<Int> = 200 ..< 300,
-        interceptor: OpenAPIInterceptor = DefaultOpenAPIInterceptor()
+        interceptor: OpenAPIInterceptor = DefaultOpenAPIInterceptor(),
     ) {
         self.basePath = basePath
         self.customHeaders = customHeaders
@@ -60,7 +60,14 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
     /// Optional block to obtain a reference to the request's progress instance when available.
     public var onProgressReady: ((Progress) -> Void)?
 
-    public required init(method: String, URLString: String, parameters: [String: any Sendable]?, headers: [String: String] = [:], requiresAuthentication: Bool, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) {
+    public required init(
+        method: String,
+        URLString: String,
+        parameters: [String: any Sendable]?,
+        headers: [String: String] = [:],
+        requiresAuthentication: Bool,
+        apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
+    ) {
         self.method = method
         self.URLString = URLString
         self.parameters = parameters
@@ -79,7 +86,8 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
     }
 
     @discardableResult
-    open func execute(completion _: @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> RequestTask {
+    open func execute(completion _: @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void)
+        -> RequestTask {
         requestTask
     }
 
@@ -98,10 +106,10 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
 
                     self.execute { result in
                         switch result {
-                        case let .success(response):
+                        case .success(let response):
                             nonisolated(unsafe) let response = response
                             continuation.resume(returning: response)
-                        case let .failure(error):
+                        case .failure(let error):
                             continuation.resume(throwing: error)
                         }
                     }

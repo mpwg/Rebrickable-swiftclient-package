@@ -46,17 +46,17 @@ public enum JSONValue: Sendable, Codable, Hashable {
         var container = encoder.singleValueContainer()
 
         switch self {
-        case let .string(value):
+        case .string(let value):
             try container.encode(value)
-        case let .int(value):
+        case .int(let value):
             try container.encode(value)
-        case let .double(value):
+        case .double(let value):
             try container.encode(value)
-        case let .bool(value):
+        case .bool(let value):
             try container.encode(value)
-        case let .array(value):
+        case .array(let value):
             try container.encode(value)
-        case let .dictionary(value):
+        case .dictionary(let value):
             try container.encode(value)
         case .null:
             try container.encodeNil()
@@ -89,7 +89,7 @@ public extension JSONValue {
         self = .dictionary(value)
     }
 
-    init<T: Codable>(_ codable: T) throws {
+    init(_ codable: some Codable) throws {
         let encoder = JSONEncoder()
         let encodedData = try encoder.encode(codable)
         let decoder = JSONDecoder()
@@ -138,49 +138,49 @@ public extension JSONValue {
 public extension JSONValue {
     var stringValue: String? {
         switch self {
-        case let .string(value):
-            return value
+        case .string(let value):
+            value
         default:
-            return nil
+            nil
         }
     }
 
     var intValue: Int? {
         switch self {
-        case let .int(value):
-            return value
+        case .int(let value):
+            value
         default:
-            return nil
+            nil
         }
     }
 
     var doubleValue: Double? {
         switch self {
-        case let .double(value):
-            return value
+        case .double(let value):
+            value
         default:
-            return nil
+            nil
         }
     }
 
     var boolValue: Bool? {
         switch self {
-        case let .bool(value):
-            return value
+        case .bool(let value):
+            value
         default:
-            return nil
+            nil
         }
     }
 
     var arrayValue: [JSONValue]? {
-        if case let .array(value) = self {
+        if case .array(let value) = self {
             return value
         }
         return nil
     }
 
     var dictionaryValue: [String: JSONValue]? {
-        if case let .dictionary(value) = self {
+        if case .dictionary(let value) = self {
             return value
         }
         return nil
@@ -193,7 +193,7 @@ public extension JSONValue {
     }
 
     subscript(index: Int) -> JSONValue? {
-        guard case let .array(array) = self, index >= 0, index < array.count else {
+        guard case .array(let array) = self, index >= 0, index < array.count else {
             return nil
         }
         return array[index]

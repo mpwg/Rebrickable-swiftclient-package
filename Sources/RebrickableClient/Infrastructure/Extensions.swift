@@ -6,7 +6,7 @@
 
 import Foundation
 #if canImport(FoundationNetworking)
-    import FoundationNetworking
+import FoundationNetworking
 #endif
 
 extension Bool: ParameterConvertible {
@@ -53,11 +53,11 @@ extension RawRepresentable where RawValue: ParameterConvertible, RawValue: Senda
     func asParameter(codableHelper _: CodableHelper) -> any Sendable { rawValue }
 }
 
-private func encodeIfPossible<T: Sendable>(_ object: T, codableHelper: CodableHelper) -> any Sendable {
+private func encodeIfPossible(_ object: some Sendable, codableHelper: CodableHelper) -> any Sendable {
     if let encodableObject = object as? ParameterConvertible {
-        return encodableObject.asParameter(codableHelper: codableHelper)
+        encodableObject.asParameter(codableHelper: codableHelper)
     } else {
-        return object
+        object
     }
 }
 
@@ -123,25 +123,25 @@ extension String: @retroactive CodingKey {
 }
 
 public extension KeyedEncodingContainerProtocol {
-    mutating func encodeArray<T>(_ values: [T], forKey key: Self.Key) throws where T: Encodable {
+    mutating func encodeArray(_ values: [some Encodable], forKey key: Self.Key) throws {
         var arrayContainer = nestedUnkeyedContainer(forKey: key)
         try arrayContainer.encode(contentsOf: values)
     }
 
-    mutating func encodeArrayIfPresent<T>(_ values: [T]?, forKey key: Self.Key) throws where T: Encodable {
-        if let values = values {
+    mutating func encodeArrayIfPresent(_ values: [some Encodable]?, forKey key: Self.Key) throws {
+        if let values {
             try encodeArray(values, forKey: key)
         }
     }
 
-    mutating func encodeMap<T>(_ pairs: [Self.Key: T]) throws where T: Encodable {
+    mutating func encodeMap(_ pairs: [Self.Key: some Encodable]) throws {
         for (key, value) in pairs {
             try encode(value, forKey: key)
         }
     }
 
-    mutating func encodeMapIfPresent<T>(_ pairs: [Self.Key: T]?) throws where T: Encodable {
-        if let pairs = pairs {
+    mutating func encodeMapIfPresent(_ pairs: [Self.Key: some Encodable]?) throws {
+        if let pairs {
             try encodeMap(pairs)
         }
     }
@@ -156,7 +156,7 @@ public extension KeyedEncodingContainerProtocol {
     }
 
     mutating func encodeIfPresent(_ value: Decimal?, forKey key: Self.Key) throws {
-        if let value = value {
+        if let value {
             try encode(value, forKey: key)
         }
     }
@@ -201,7 +201,10 @@ public extension KeyedDecodingContainerProtocol {
     func decode(_ type: Decimal.Type, forKey key: Self.Key) throws -> Decimal {
         let stringValue = try decode(String.self, forKey: key)
         guard let decimalValue = Decimal(string: stringValue) else {
-            let context = DecodingError.Context(codingPath: [key], debugDescription: "The key \(key) couldn't be converted to a Decimal value")
+            let context = DecodingError.Context(
+                codingPath: [key],
+                debugDescription: "The key \(key) couldn't be converted to a Decimal value",
+            )
             throw DecodingError.typeMismatch(type, context)
         }
 
@@ -213,7 +216,10 @@ public extension KeyedDecodingContainerProtocol {
             return nil
         }
         guard let decimalValue = Decimal(string: stringValue) else {
-            let context = DecodingError.Context(codingPath: [key], debugDescription: "The key \(key) couldn't be converted to a Decimal value")
+            let context = DecodingError.Context(
+                codingPath: [key],
+                debugDescription: "The key \(key) couldn't be converted to a Decimal value",
+            )
             throw DecodingError.typeMismatch(type, context)
         }
 
