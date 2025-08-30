@@ -8,14 +8,14 @@ let package = Package(
         .iOS(.v18),
         .macOS(.v15),
         .tvOS(.v18),
-        .watchOS(.v11)
+        .watchOS(.v11),
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "RebrickableClient",
             targets: ["RebrickableClient"],
-        )
+        ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -28,7 +28,7 @@ let package = Package(
             name: "RebrickableClient",
             dependencies: [],
             path: "Sources/RebrickableClient",
-        )
+        ),
     ],
     swiftLanguageModes: [.v6],
 )

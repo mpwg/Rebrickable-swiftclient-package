@@ -52,8 +52,7 @@
 --empty void # Use Void instead of ()
 --stripunusedargs closure-only # Strip unused closure arguments only
 --acronyms ID,URL,API,HTTP,JSON,XML,PDF
-#--beforemarks 
-#--aftermarks 
+--type-marks
 --linebreaks lf # Use LF line endings
 --elseposition same-line # Keep else on same line as }
 --guardelse same-line # Keep else on same line for guard statements

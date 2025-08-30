@@ -47,7 +47,8 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/lego/colors/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -62,7 +63,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -113,7 +114,8 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/colors/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -131,7 +133,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -178,7 +180,8 @@ open class LegoAPI {
         elementId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/elements/{element_id}/"
         let elementIdPreEscape = "\(APIHelper.mapValueToPathItem(elementId))"
         let elementIdPostEscape = elementIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -274,7 +277,8 @@ open class LegoAPI {
         search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/lego/minifigs/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -309,7 +313,7 @@ open class LegoAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -368,7 +372,8 @@ open class LegoAPI {
         pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/minifigs/{set_num}/parts/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -387,7 +392,7 @@ open class LegoAPI {
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -433,7 +438,8 @@ open class LegoAPI {
         setNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/minifigs/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -509,7 +515,8 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/minifigs/{set_num}/sets/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -532,7 +539,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -591,7 +598,8 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/lego/part_categories/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -606,7 +614,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -660,7 +668,8 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/part_categories/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -678,7 +687,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -742,7 +751,8 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/parts/{part_num}/colors/"
         let partNumPreEscape = "\(APIHelper.mapValueToPathItem(partNum))"
         let partNumPostEscape = partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -765,7 +775,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -819,7 +829,8 @@ open class LegoAPI {
         partNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/parts/{part_num}/colors/{color_id}/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
         let colorIdPostEscape = colorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -909,7 +920,8 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/parts/{part_num}/colors/{color_id}/sets/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
         let colorIdPostEscape = colorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -940,7 +952,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1045,7 +1057,8 @@ open class LegoAPI {
         search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/lego/parts/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -1096,7 +1109,7 @@ open class LegoAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1143,7 +1156,8 @@ open class LegoAPI {
         partNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/parts/{part_num}/"
         let partNumPreEscape = "\(APIHelper.mapValueToPathItem(partNum))"
         let partNumPostEscape = partNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -1220,7 +1234,8 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/alternates/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -1243,7 +1258,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1333,7 +1348,8 @@ open class LegoAPI {
         search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/lego/sets/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -1372,7 +1388,7 @@ open class LegoAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1432,7 +1448,8 @@ open class LegoAPI {
         pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/minifigs/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -1451,7 +1468,7 @@ open class LegoAPI {
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1511,7 +1528,8 @@ open class LegoAPI {
         pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/parts/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -1530,7 +1548,7 @@ open class LegoAPI {
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1577,7 +1595,8 @@ open class LegoAPI {
         setNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -1649,7 +1668,8 @@ open class LegoAPI {
         pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/sets/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape = setNumPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -1668,7 +1688,7 @@ open class LegoAPI {
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1728,7 +1748,8 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/lego/themes/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -1743,7 +1764,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1795,7 +1816,8 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/themes/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -1813,7 +1835,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]

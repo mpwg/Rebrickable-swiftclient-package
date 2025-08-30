@@ -87,7 +87,8 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
 
     @discardableResult
     open func execute(completion _: @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void)
-        -> RequestTask {
+        -> RequestTask
+    {
         requestTask
     }
 

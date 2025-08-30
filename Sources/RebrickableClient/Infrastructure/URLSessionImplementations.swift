@@ -43,7 +43,8 @@ extension URLSession: URLSessionProtocol {
         with request: URLRequest,
         completionHandler: @escaping @Sendable (Data?, URLResponse?, (any Error)?) -> Void,
     )
-        -> URLSessionDataTaskProtocol {
+        -> URLSessionDataTaskProtocol
+    {
         dataTask(with: request, completionHandler: completionHandler)
     }
 }
@@ -127,7 +128,8 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
         encoding: ParameterEncoding,
         headers _: [String: String],
     ) throws
-        -> URLRequest {
+        -> URLRequest
+    {
         guard let url = URL(string: URLString) else {
             throw DownloadException.requestMissingURL
         }
@@ -150,7 +152,8 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
         completion: @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>)
             -> Void,
     )
-        -> RequestTask {
+        -> RequestTask
+    {
         let urlSession = createURLSession()
 
         guard let xMethod = HTTPMethod(rawValue: method) else {
@@ -408,7 +411,8 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
                     let headerFileName = getFileName(
                         fromContentDisposition: httpResponse
                             .allHeaderFields["Content-Disposition"] as? String,
-                    ) {
+                    )
+                {
                     requestPath = requestPath.appending("/\(headerFileName)")
                 } else {
                     requestPath = requestPath.appending("/tmp.OpenAPIClient.\(UUID().uuidString)")
@@ -618,7 +622,8 @@ private class FormDataEncoding: ParameterEncoding {
         name: String,
         fileURL: URL,
     ) throws
-        -> URLRequest {
+        -> URLRequest
+    {
         var urlRequest = urlRequest
 
         var body = urlRequest.httpBody.orEmpty
@@ -658,7 +663,8 @@ private class FormDataEncoding: ParameterEncoding {
         name: String,
         data: Data,
     )
-        -> URLRequest {
+        -> URLRequest
+    {
         var urlRequest = urlRequest
 
         var body = urlRequest.httpBody.orEmpty
@@ -703,7 +709,8 @@ private class FormDataEncoding: ParameterEncoding {
                     pathExtension as NSString,
                     nil,
                 )?.takeRetainedValue(),
-                let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
+                let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue()
+            {
                 return mimetype as String
             }
             return "application/octet-stream"

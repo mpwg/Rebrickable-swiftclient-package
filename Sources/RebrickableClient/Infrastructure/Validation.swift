@@ -55,7 +55,8 @@ public enum Validator {
         _ string: String,
         against rule: StringRule,
     ) throws(ValidationError<StringValidationErrorKind>)
-        -> String {
+        -> String
+    {
         var error = ValidationError<StringValidationErrorKind>(kinds: [])
         if let minLength = rule.minLength, !(minLength <= string.count) {
             error.kinds.insert(.minLength)
@@ -85,7 +86,8 @@ public enum Validator {
         _ numeric: T,
         against rule: NumericRule<T>,
     ) throws(ValidationError<NumericValidationErrorKind>)
-        -> T {
+        -> T
+    {
         var error = ValidationError<NumericValidationErrorKind>(kinds: [])
         if let minimum = rule.minimum {
             if !rule.exclusiveMinimum, minimum > numeric {
@@ -121,7 +123,8 @@ public enum Validator {
         _ numeric: T,
         against rule: NumericRule<T>,
     ) throws(ValidationError<NumericValidationErrorKind>)
-        -> T {
+        -> T
+    {
         var error = ValidationError<NumericValidationErrorKind>(kinds: [])
         if let minimum = rule.minimum {
             if !rule.exclusiveMinimum, minimum > numeric {
@@ -157,7 +160,8 @@ public enum Validator {
         _ array: [AnyHashable],
         against rule: ArrayRule,
     ) throws(ValidationError<ArrayValidationErrorKind>)
-        -> [AnyHashable] {
+        -> [AnyHashable]
+    {
         var error = ValidationError<ArrayValidationErrorKind>(kinds: [])
         if let minItems = rule.minItems, !(minItems <= array.count) {
             error.kinds.insert(.minItems)

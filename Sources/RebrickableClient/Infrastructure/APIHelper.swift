@@ -72,7 +72,8 @@ public enum APIHelper {
     /// explode attribute is respected: collection values might be either joined or split up into separate key value
     /// pairs
     public static func mapValuesToQueryItems(_ source: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)])
-        -> [URLQueryItem]? {
+        -> [URLQueryItem]?
+    {
         let destination = source.filter { $0.value.wrappedValue != nil }
             .reduce(into: [URLQueryItem]()) { result, item in
                 if let collection = item.value.wrappedValue as? [Any?] {

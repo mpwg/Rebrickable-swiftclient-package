@@ -12,7 +12,8 @@ open class JSONEncodingHelper {
         forEncodableObject encodableObj: (some Encodable)?,
         codableHelper: CodableHelper,
     )
-        -> [String: any Sendable]? {
+        -> [String: any Sendable]?
+    {
         var params: [String: any Sendable]?
 
         // Encode the Encodable object

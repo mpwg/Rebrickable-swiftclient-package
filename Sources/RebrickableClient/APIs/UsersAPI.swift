@@ -49,7 +49,8 @@ open class UsersAPI {
         partCatId: Double? = nil, colorId: Double? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/allparts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -81,7 +82,7 @@ open class UsersAPI {
             "color_id": (
                 wrappedValue: colorId?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -131,7 +132,8 @@ open class UsersAPI {
         page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/users/badges/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -149,7 +151,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -198,7 +200,8 @@ open class UsersAPI {
         id: Int, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/badges/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape =
@@ -214,7 +217,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -263,7 +266,8 @@ open class UsersAPI {
         userToken: String, setNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/build/{set_num}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -331,7 +335,8 @@ open class UsersAPI {
         userToken: String, invPartId: Int, lostQuantity: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/lost_parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -344,7 +349,7 @@ open class UsersAPI {
             "lost_quantity": lostQuantity?.asParameter(
                 codableHelper: apiConfiguration.codableHelper,
             ),
-            "inv_part_id": invPartId.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "inv_part_id": invPartId.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -353,7 +358,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -402,7 +407,8 @@ open class UsersAPI {
         id: String, userToken: String, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/lost_parts/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape =
@@ -424,7 +430,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -478,7 +484,8 @@ open class UsersAPI {
         userToken: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/lost_parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -502,7 +509,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -562,7 +569,8 @@ open class UsersAPI {
         ordering: String? = nil, search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/minifigs/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -594,7 +602,7 @@ open class UsersAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -648,7 +656,8 @@ open class UsersAPI {
         userToken: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -660,7 +669,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -669,7 +678,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -716,7 +725,8 @@ open class UsersAPI {
         userToken: String, listId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -783,7 +793,8 @@ open class UsersAPI {
         userToken: String, page: Int? = nil, pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -803,7 +814,7 @@ open class UsersAPI {
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -861,7 +872,8 @@ open class UsersAPI {
         numParts: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -879,7 +891,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -888,7 +900,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -942,7 +954,8 @@ open class UsersAPI {
         userToken: String, listId: String, partNum: String, quantity: Int, colorId: Int,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -960,7 +973,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "part_num": partNum.asParameter(codableHelper: apiConfiguration.codableHelper),
             "quantity": quantity.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "color_id": colorId.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "color_id": colorId.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -969,7 +982,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1025,7 +1038,8 @@ open class UsersAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath =
             "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
@@ -1060,7 +1074,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1118,7 +1132,8 @@ open class UsersAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1148,7 +1163,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1206,7 +1221,8 @@ open class UsersAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath =
             "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
@@ -1241,7 +1257,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1301,7 +1317,8 @@ open class UsersAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath =
             "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
@@ -1330,7 +1347,7 @@ open class UsersAPI {
         )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
-            "quantity": quantity.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "quantity": quantity.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1341,11 +1358,11 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1392,7 +1409,8 @@ open class UsersAPI {
         userToken: String, listId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1466,7 +1484,8 @@ open class UsersAPI {
         numParts: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1484,7 +1503,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1493,7 +1512,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1558,7 +1577,8 @@ open class UsersAPI {
         search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1598,7 +1618,7 @@ open class UsersAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1645,7 +1665,8 @@ open class UsersAPI {
         userToken: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/profile/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1709,7 +1730,8 @@ open class UsersAPI {
         userToken: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1721,7 +1743,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1730,7 +1752,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1777,7 +1799,8 @@ open class UsersAPI {
         userToken: String, listId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1844,7 +1867,8 @@ open class UsersAPI {
         userToken: String, page: Int? = nil, pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1864,7 +1888,7 @@ open class UsersAPI {
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1922,7 +1946,8 @@ open class UsersAPI {
         numSets: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1940,7 +1965,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1949,7 +1974,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1996,7 +2021,8 @@ open class UsersAPI {
         userToken: String, listId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2070,7 +2096,8 @@ open class UsersAPI {
         includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2090,7 +2117,7 @@ open class UsersAPI {
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "include_spares": includeSpares?.asParameter(
                 codableHelper: apiConfiguration.codableHelper,
-            )
+            ),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2099,7 +2126,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -2151,7 +2178,8 @@ open class UsersAPI {
         setNum: String, userToken: String, listId: String, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -2179,7 +2207,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -2237,7 +2265,8 @@ open class UsersAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2267,7 +2296,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -2327,7 +2356,8 @@ open class UsersAPI {
         quantity: Int? = nil, includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -2352,7 +2382,7 @@ open class UsersAPI {
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "include_spares": includeSpares?.asParameter(
                 codableHelper: apiConfiguration.codableHelper,
-            )
+            ),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2363,11 +2393,11 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -2419,7 +2449,8 @@ open class UsersAPI {
         setNum: String, userToken: String, listId: String, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -2447,7 +2478,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -2507,7 +2538,8 @@ open class UsersAPI {
         quantity: Int? = nil, includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -2532,7 +2564,7 @@ open class UsersAPI {
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "include_spares": includeSpares?.asParameter(
                 codableHelper: apiConfiguration.codableHelper,
-            )
+            ),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2543,11 +2575,11 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -2603,7 +2635,8 @@ open class UsersAPI {
         numSets: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2621,7 +2654,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2630,7 +2663,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -2682,7 +2715,8 @@ open class UsersAPI {
         userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/sets/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2696,7 +2730,7 @@ open class UsersAPI {
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "include_spares": includeSpares?.asParameter(
                 codableHelper: apiConfiguration.codableHelper,
-            )
+            ),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2705,7 +2739,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -2774,7 +2808,8 @@ open class UsersAPI {
         maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/sets/{set_num}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2824,7 +2859,7 @@ open class UsersAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -2899,7 +2934,8 @@ open class UsersAPI {
         search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/sets/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2951,7 +2987,7 @@ open class UsersAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -3022,7 +3058,8 @@ open class UsersAPI {
         maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/sets/{set_num}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -3072,7 +3109,7 @@ open class UsersAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -3126,7 +3163,8 @@ open class UsersAPI {
         userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/sets/sync/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -3140,7 +3178,7 @@ open class UsersAPI {
             "include_spares": includeSpares?.asParameter(
                 codableHelper: apiConfiguration.codableHelper,
             ),
-            "set_num": setNum.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "set_num": setNum.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -3149,7 +3187,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -3223,7 +3261,8 @@ open class UsersAPI {
         quantity: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/sets/{set_num}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -3239,7 +3278,7 @@ open class UsersAPI {
         )
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
-            "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -3278,11 +3317,11 @@ open class UsersAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -3329,12 +3368,13 @@ open class UsersAPI {
         username: String, password: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/users/_token/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "username": username.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "password": password.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "password": password.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -3343,7 +3383,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
