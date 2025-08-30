@@ -18,7 +18,6 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func legoColorsList(page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoColorsListWithRequestBuilder(page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
@@ -64,7 +63,6 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func legoColorsRead(id: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoColorsReadWithRequestBuilder(id: id, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
@@ -109,7 +107,6 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func legoElementsRead(elementId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoElementsReadWithRequestBuilder(elementId: elementId, apiConfiguration: apiConfiguration).execute().body
     }
@@ -157,7 +154,6 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func legoMinifigsList(page: Int? = nil, pageSize: Int? = nil, minParts: Double? = nil, maxParts: Double? = nil, inSetNum: String? = nil, inThemeId: String? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoMinifigsListWithRequestBuilder(page: page, pageSize: pageSize, minParts: minParts, maxParts: maxParts, inSetNum: inSetNum, inThemeId: inThemeId, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
     }
@@ -214,7 +210,6 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func legoMinifigsPartsList(setNum: String, page: Int? = nil, pageSize: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoMinifigsPartsListWithRequestBuilder(setNum: setNum, page: page, pageSize: pageSize, apiConfiguration: apiConfiguration).execute().body
     }
@@ -261,7 +256,6 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func legoMinifigsRead(setNum: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoMinifigsReadWithRequestBuilder(setNum: setNum, apiConfiguration: apiConfiguration).execute().body
     }
@@ -305,7 +299,6 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func legoMinifigsSetsList(setNum: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoMinifigsSetsListWithRequestBuilder(setNum: setNum, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
@@ -356,7 +349,6 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func legoPartCategoriesList(page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoPartCategoriesListWithRequestBuilder(page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
@@ -402,7 +394,6 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func legoPartCategoriesRead(id: Int, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoPartCategoriesReadWithRequestBuilder(id: id, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
@@ -450,7 +441,6 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func legoPartsColorsList(partNum: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoPartsColorsListWithRequestBuilder(partNum: partNum, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
@@ -500,7 +490,6 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func legoPartsColorsRead(colorId: String, partNum: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoPartsColorsReadWithRequestBuilder(colorId: colorId, partNum: partNum, apiConfiguration: apiConfiguration).execute().body
     }
@@ -549,7 +538,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    
     open class func legoPartsColorsSetsList(colorId: String, partNum: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoPartsColorsSetsListWithRequestBuilder(colorId: colorId, partNum: partNum, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
@@ -613,7 +602,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    
     open class func legoPartsList(page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil, partNums: String? = nil, partCatId: String? = nil, colorId: String? = nil, bricklinkId: String? = nil, brickowlId: String? = nil, legoId: String? = nil, ldrawId: String? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoPartsListWithRequestBuilder(page: page, pageSize: pageSize, partNum: partNum, partNums: partNums, partCatId: partCatId, colorId: colorId, bricklinkId: bricklinkId, brickowlId: brickowlId, legoId: legoId, ldrawId: ldrawId, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
     }
@@ -676,7 +665,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    
     open class func legoPartsRead(partNum: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoPartsReadWithRequestBuilder(partNum: partNum, apiConfiguration: apiConfiguration).execute().body
     }
@@ -720,7 +709,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    
     open class func legoSetsAlternatesList(setNum: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoSetsAlternatesListWithRequestBuilder(setNum: setNum, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
@@ -777,7 +766,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    
     open class func legoSetsList(page: Int? = nil, pageSize: Int? = nil, themeId: String? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoSetsListWithRequestBuilder(page: page, pageSize: pageSize, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
     }
@@ -836,7 +825,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    
     open class func legoSetsMinifigsList(setNum: String, page: Int? = nil, pageSize: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoSetsMinifigsListWithRequestBuilder(setNum: setNum, page: page, pageSize: pageSize, apiConfiguration: apiConfiguration).execute().body
     }
@@ -885,7 +874,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    
     open class func legoSetsPartsList(setNum: String, page: Int? = nil, pageSize: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoSetsPartsListWithRequestBuilder(setNum: setNum, page: page, pageSize: pageSize, apiConfiguration: apiConfiguration).execute().body
     }
@@ -932,7 +921,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    
     open class func legoSetsRead(setNum: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoSetsReadWithRequestBuilder(setNum: setNum, apiConfiguration: apiConfiguration).execute().body
     }
@@ -975,7 +964,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    
     open class func legoSetsSetsList(setNum: String, page: Int? = nil, pageSize: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoSetsSetsListWithRequestBuilder(setNum: setNum, page: page, pageSize: pageSize, apiConfiguration: apiConfiguration).execute().body
     }
@@ -1024,7 +1013,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    
     open class func legoThemesList(page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoThemesListWithRequestBuilder(page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
@@ -1070,7 +1059,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    
     open class func legoThemesRead(id: Int, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await legoThemesReadWithRequestBuilder(id: id, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
