@@ -6,6 +6,8 @@
 
 import Foundation
 
+// MARK: - Validation Utilities
+
 public struct StringRule: Sendable {
     public var minLength: Int?
     public var maxLength: Int?
@@ -49,8 +51,13 @@ public enum Validator {
     /// - Parameter string: The String you wish to validate.
     /// - Parameter rule: The StringRule you wish to use for validation.
     /// - Returns: A validated string.
-    /// - Throws: `ValidationError<StringValidationErrorKind>` if the string is invalid against the rule or if the rule.pattern is invalid.
-    public static func validate(_ string: String, against rule: StringRule) throws(ValidationError<StringValidationErrorKind>) -> String {
+    /// - Throws: `ValidationError<StringValidationErrorKind>` if the string is invalid against the rule or if the
+    /// rule.pattern is invalid.
+    public static func validate(
+        _ string: String,
+        against rule: StringRule,
+    ) throws(ValidationError<StringValidationErrorKind>)
+        -> String {
         var error = ValidationError<StringValidationErrorKind>(kinds: [])
         if let minLength = rule.minLength, !(minLength <= string.count) {
             error.kinds.insert(.minLength)
@@ -76,7 +83,11 @@ public enum Validator {
     /// - Parameter rule: The NumericRule you wish to use for validation.
     /// - Returns: A validated integer.
     /// - Throws: `ValidationError<NumericValidationErrorKind>` if the numeric is invalid against the rule.
-    public static func validate<T: Comparable & BinaryInteger>(_ numeric: T, against rule: NumericRule<T>) throws(ValidationError<NumericValidationErrorKind>) -> T {
+    public static func validate<T: Comparable & BinaryInteger>(
+        _ numeric: T,
+        against rule: NumericRule<T>,
+    ) throws(ValidationError<NumericValidationErrorKind>)
+        -> T {
         var error = ValidationError<NumericValidationErrorKind>(kinds: [])
         if let minimum = rule.minimum {
             if !rule.exclusiveMinimum, minimum > numeric {
@@ -108,7 +119,11 @@ public enum Validator {
     /// - Parameter rule: The NumericRule you wish to use for validation.
     /// - Returns: A validated fractional number.
     /// - Throws: `ValidationError<NumericValidationErrorKind>` if the numeric is invalid against the rule.
-    public static func validate<T: Comparable & FloatingPoint>(_ numeric: T, against rule: NumericRule<T>) throws(ValidationError<NumericValidationErrorKind>) -> T {
+    public static func validate<T: Comparable & FloatingPoint>(
+        _ numeric: T,
+        against rule: NumericRule<T>,
+    ) throws(ValidationError<NumericValidationErrorKind>)
+        -> T {
         var error = ValidationError<NumericValidationErrorKind>(kinds: [])
         if let minimum = rule.minimum {
             if !rule.exclusiveMinimum, minimum > numeric {
@@ -140,7 +155,11 @@ public enum Validator {
     /// - Parameter rule: The ArrayRule you wish to use for validation.
     /// - Returns: A validated array.
     /// - Throws: `ValidationError<ArrayValidationErrorKind>` if the string is invalid against the rule.
-    public static func validate(_ array: [AnyHashable], against rule: ArrayRule) throws(ValidationError<ArrayValidationErrorKind>) -> [AnyHashable] {
+    public static func validate(
+        _ array: [AnyHashable],
+        against rule: ArrayRule,
+    ) throws(ValidationError<ArrayValidationErrorKind>)
+        -> [AnyHashable] {
         var error = ValidationError<ArrayValidationErrorKind>(kinds: [])
         if let minItems = rule.minItems, !(minItems <= array.count) {
             error.kinds.insert(.minItems)

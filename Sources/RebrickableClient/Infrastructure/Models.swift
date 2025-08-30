@@ -5,35 +5,14 @@
 //
 
 import Foundation
+
 #if canImport(FoundationNetworking)
-    import FoundationNetworking
+import FoundationNetworking
 #endif
 
-protocol ParameterConvertible {
-    func asParameter(codableHelper: CodableHelper) -> any Sendable
-}
+// Protocols moved to `Infrastructure/Protocols`
 
-/// An enum where the last case value can be used as a default catch-all.
-protocol CaseIterableDefaultsLast: Decodable & CaseIterable & RawRepresentable
-    where RawValue: Decodable, AllCases: BidirectionalCollection {}
-
-extension CaseIterableDefaultsLast {
-    /// Initializes an enum such that if a known raw value is found, then it is decoded.
-    /// Otherwise the last case is used.
-    /// - Parameter decoder: A decoder.
-    public init(from decoder: Decoder) throws {
-        if let value = try Self(rawValue: decoder.singleValueContainer().decode(RawValue.self)) {
-            self = value
-        } else if let lastValue = Self.allCases.last {
-            self = lastValue
-        } else {
-            throw DecodingError.valueNotFound(
-                Self.Type.self,
-                .init(codingPath: decoder.codingPath, debugDescription: "CaseIterableDefaultsLast")
-            )
-        }
-    }
-}
+// MARK: - Models
 
 /// A flexible type that can be encoded (`.encodeNull` or `.encodeValue`)
 /// or not encoded (`.encodeNothing`). Intended for request payloads.
@@ -64,7 +43,7 @@ extension NullEncodable: Codable where Wrapped: Codable {
         switch self {
         case .encodeNothing: return
         case .encodeNull: try container.encodeNil()
-        case let .encodeValue(wrapped): try container.encode(wrapped)
+        case .encodeValue(let wrapped): try container.encode(wrapped)
         }
     }
 }
@@ -72,6 +51,8 @@ extension NullEncodable: Codable where Wrapped: Codable {
 public enum ErrorResponse: Error {
     case error(Int, Data?, URLResponse?, Error)
 }
+
+// MARK: - Errors & Response
 
 public enum DownloadException: Error {
     case responseDataMissing
@@ -110,32 +91,10 @@ public struct Response<T> {
                 responseHeader[key] = value
             }
         }
-        self.init(statusCode: response.statusCode, header: responseHeader, body: body, bodyData: bodyData)
+        self.init(
+            statusCode: response.statusCode, header: responseHeader, body: body, bodyData: bodyData,
+        )
     }
 }
 
 extension Response: Sendable where T: Sendable {}
-
-public final class RequestTask: @unchecked Sendable {
-    private let lock = NSRecursiveLock()
-    private var task: URLSessionDataTaskProtocol?
-
-    func set(task: URLSessionDataTaskProtocol) {
-        lock.withLock {
-            self.task = task
-        }
-    }
-
-    func get() -> URLSessionDataTaskProtocol? {
-        lock.withLock {
-            task
-        }
-    }
-
-    public func cancel() {
-        lock.withLock {
-            task?.cancel()
-            task = nil
-        }
-    }
-}

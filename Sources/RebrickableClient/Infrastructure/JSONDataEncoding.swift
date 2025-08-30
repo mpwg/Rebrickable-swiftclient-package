@@ -6,16 +6,17 @@
 //
 
 import Foundation
+
 #if canImport(FoundationNetworking)
-    import FoundationNetworking
+import FoundationNetworking
 #endif
 
 public struct JSONDataEncoding: Sendable {
-    // MARK: Properties
+    // MARK: - Properties
 
     private static let jsonDataKey = "jsonData"
 
-    // MARK: Encoding
+    // MARK: - Encoding
 
     /// Creates a URL request by encoding parameters and applying them onto an existing request.
     ///
@@ -44,7 +45,7 @@ public struct JSONDataEncoding: Sendable {
 
     public static func encodingParameters(jsonData: Data?) -> [String: any Sendable]? {
         var returnedParams: [String: any Sendable]?
-        if let jsonData = jsonData, !jsonData.isEmpty {
+        if let jsonData, !jsonData.isEmpty {
             var params: [String: any Sendable] = [:]
             params[jsonDataKey] = jsonData
             returnedParams = params
