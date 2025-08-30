@@ -8,7 +8,6 @@
 import Foundation
 
 open class SwaggerAPI {
-
     /**
 
      - parameter apiConfiguration: The configuration for the http request.
@@ -16,13 +15,13 @@ open class SwaggerAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func swaggerList(apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await swaggerListWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+        try await swaggerListWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      - GET /api/v3/swagger/
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func swaggerListWithRequestBuilder(apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v3/swagger/"
@@ -31,9 +30,7 @@ open class SwaggerAPI {
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 

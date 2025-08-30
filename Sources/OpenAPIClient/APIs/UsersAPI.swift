@@ -8,11 +8,10 @@
 import Foundation
 
 open class UsersAPI {
-
     /**
      Get a list of all the Parts in all the user's Part Lists as well as the Parts inside Sets in the user's Set Lists.
-     
-     - parameter userToken: (path)  
+
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter partNum: (query)  (optional)
@@ -23,21 +22,21 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersAllpartsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil, partCatId: Double? = nil, colorId: Double? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersAllpartsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, partNum: partNum, partCatId: partCatId, colorId: colorId, apiConfiguration: apiConfiguration).execute().body
+        try await usersAllpartsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, partNum: partNum, partCatId: partCatId, colorId: colorId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get a list of all the Parts in all the user's Part Lists as well as the Parts inside Sets in the user's Set Lists.
      - GET /api/v3/users/{user_token}/allparts/
      - Get a list of all the Parts in all the user's Part Lists as well as the Parts inside Sets in the user's Set Lists.  ###WARNING this call is very resource intensive, do not overuse it!  Optionally, filter by one or more of the below query parameters.
-     - parameter userToken: (path)  
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter partNum: (query)  (optional)
      - parameter partCatId: (query)  (optional)
      - parameter colorId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersAllpartsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil, partCatId: Double? = nil, colorId: Double? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/allparts/"
@@ -53,12 +52,10 @@ open class UsersAPI {
             "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "part_num": (wrappedValue: partNum?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "part_cat_id": (wrappedValue: partCatId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "color_id": (wrappedValue: colorId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "color_id": (wrappedValue: colorId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -69,7 +66,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the available Badges
-     
+
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
@@ -78,7 +75,7 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersBadgesList(page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersBadgesListWithRequestBuilder(page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+        try await usersBadgesListWithRequestBuilder(page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -89,7 +86,7 @@ open class UsersAPI {
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersBadgesListWithRequestBuilder(page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v3/users/badges/"
@@ -100,12 +97,10 @@ open class UsersAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -116,25 +111,25 @@ open class UsersAPI {
 
     /**
      Get details about a specific Badge
-     
-     - parameter id: (path) A unique integer value identifying this badge. 
+
+     - parameter id: (path) A unique integer value identifying this badge.
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersBadgesRead(id: Int, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersBadgesReadWithRequestBuilder(id: id, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+        try await usersBadgesReadWithRequestBuilder(id: id, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get details about a specific Badge
      - GET /api/v3/users/badges/{id}/
      - Get details about a specific Badge
-     - parameter id: (path) A unique integer value identifying this badge. 
+     - parameter id: (path) A unique integer value identifying this badge.
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersBadgesReadWithRequestBuilder(id: Int, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/badges/{id}/"
@@ -146,12 +141,10 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -162,25 +155,25 @@ open class UsersAPI {
 
     /**
      Find out how many parts the user needs to build the specified Set.
-     
-     - parameter userToken: (path)  
-     - parameter setNum: (path)  
+
+     - parameter userToken: (path)
+     - parameter setNum: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersBuildRead(userToken: String, setNum: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersBuildReadWithRequestBuilder(userToken: userToken, setNum: setNum, apiConfiguration: apiConfiguration).execute().body
+        try await usersBuildReadWithRequestBuilder(userToken: userToken, setNum: setNum, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Find out how many parts the user needs to build the specified Set.
      - GET /api/v3/users/{user_token}/build/{set_num}/
      - Find out how many parts the user needs to build the specified Set.  The user's default Build Settings will be used to calculate a Build Match % using their LEGO Collection of Sets and Parts.
-     - parameter userToken: (path)  
-     - parameter setNum: (path)  
+     - parameter userToken: (path)
+     - parameter setNum: (path)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersBuildReadWithRequestBuilder(userToken: String, setNum: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/build/{set_num}/"
@@ -195,9 +188,7 @@ open class UsersAPI {
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -208,27 +199,27 @@ open class UsersAPI {
 
     /**
      Add one or more Lost Parts to the user.
-     
-     - parameter userToken: (path)  
-     - parameter invPartId: (form)  
+
+     - parameter userToken: (path)
+     - parameter invPartId: (form)
      - parameter lostQuantity: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersLostPartsCreate(userToken: String, invPartId: Int, lostQuantity: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersLostPartsCreateWithRequestBuilder(userToken: userToken, invPartId: invPartId, lostQuantity: lostQuantity, apiConfiguration: apiConfiguration).execute().body
+        try await usersLostPartsCreateWithRequestBuilder(userToken: userToken, invPartId: invPartId, lostQuantity: lostQuantity, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Add one or more Lost Parts to the user.
      - POST /api/v3/users/{user_token}/lost_parts/
      - Add one or more Lost Parts to the user.  ### Single Part When adding a single Part, returns the successfully created Part (status 201) or details for why the Part could not be added. ### Multiple Parts To add multiple Parts, POST a JSON list of them (using a Content-Type header of 'application/json'). The inv_part_id field can be retrieved from the Set's inventory. e.g: `[{\"inv_part_id\": 806698, \"lost_quantity\": 3},   {\"inv_part_id\": 256007, \"lost_quantity\": 2}]` Returns a list of successfully added Parts. If the Part already exists or is unrecognised, it will be skipped.
-     - parameter userToken: (path)  
-     - parameter invPartId: (form)  
+     - parameter userToken: (path)
+     - parameter invPartId: (form)
      - parameter lostQuantity: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersLostPartsCreateWithRequestBuilder(userToken: String, invPartId: Int, lostQuantity: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/lost_parts/"
@@ -238,7 +229,7 @@ open class UsersAPI {
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "lost_quantity": lostQuantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "inv_part_id": invPartId.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "inv_part_id": invPartId.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -247,7 +238,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -259,27 +250,27 @@ open class UsersAPI {
 
     /**
      Remove the Lost Part from the user.
-     
-     - parameter id: (path)  
-     - parameter userToken: (path)  
+
+     - parameter id: (path)
+     - parameter userToken: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersLostPartsDelete(id: String, userToken: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersLostPartsDeleteWithRequestBuilder(id: id, userToken: userToken, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+        try await usersLostPartsDeleteWithRequestBuilder(id: id, userToken: userToken, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Remove the Lost Part from the user.
      - DELETE /api/v3/users/{user_token}/lost_parts/{id}/
      - Remove the Lost Part from the user.
-     - parameter id: (path)  
-     - parameter userToken: (path)  
+     - parameter id: (path)
+     - parameter userToken: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersLostPartsDeleteWithRequestBuilder(id: String, userToken: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/lost_parts/{id}/"
@@ -294,12 +285,10 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -310,8 +299,8 @@ open class UsersAPI {
 
     /**
      Get a list of all the Lost Parts from the user's LEGO collection.
-     
-     - parameter userToken: (path)  
+
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
@@ -320,19 +309,19 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersLostPartsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersLostPartsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+        try await usersLostPartsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get a list of all the Lost Parts from the user's LEGO collection.
      - GET /api/v3/users/{user_token}/lost_parts/
      - Get a list of all the Lost Parts from the user's LEGO collection.  Optionally, filter by one or more of the below query parameters.
-     - parameter userToken: (path)  
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersLostPartsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/lost_parts/"
@@ -346,12 +335,10 @@ open class UsersAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -362,8 +349,8 @@ open class UsersAPI {
 
     /**
      Get a list of all the Minifigs in all the user's Sets. Note that this is a read-only list as Minifigs are
-     
-     - parameter userToken: (path)  
+
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter figSetNum: (query)  (optional)
@@ -374,21 +361,21 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersMinifigsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, figSetNum: String? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersMinifigsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, figSetNum: figSetNum, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
+        try await usersMinifigsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, figSetNum: figSetNum, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get a list of all the Minifigs in all the user's Sets. Note that this is a read-only list as Minifigs are
      - GET /api/v3/users/{user_token}/minifigs/
      - Get a list of all the Minifigs in all the user's Sets. Note that this is a read-only list as Minifigs are automatically determined by the Sets in the user's Set Lists.  Minifigs that were manually added to Set Lists can be retrieved via the GET /api/v3/users/{user_token}/sets/ endpoint.  Optionally, filter by one or more of the below query parameters.
-     - parameter userToken: (path)  
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter figSetNum: (query)  (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter search: (query) A search term. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersMinifigsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, figSetNum: String? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/minifigs/"
@@ -404,12 +391,10 @@ open class UsersAPI {
             "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "fig_set_num": (wrappedValue: figSetNum?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -420,9 +405,9 @@ open class UsersAPI {
 
     /**
      Add a new Part List.
-     
-     - parameter userToken: (path)  
-     - parameter name: (form)  
+
+     - parameter userToken: (path)
+     - parameter name: (form)
      - parameter isBuildable: (form)  (optional)
      - parameter numParts: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -430,19 +415,19 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersPartlistsCreate(userToken: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersPartlistsCreateWithRequestBuilder(userToken: userToken, name: name, isBuildable: isBuildable, numParts: numParts, apiConfiguration: apiConfiguration).execute().body
+        try await usersPartlistsCreateWithRequestBuilder(userToken: userToken, name: name, isBuildable: isBuildable, numParts: numParts, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Add a new Part List.
      - POST /api/v3/users/{user_token}/partlists/
      - Add a new Part List.
-     - parameter userToken: (path)  
-     - parameter name: (form)  
+     - parameter userToken: (path)
+     - parameter name: (form)
      - parameter isBuildable: (form)  (optional)
      - parameter numParts: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersPartlistsCreateWithRequestBuilder(userToken: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/"
@@ -453,7 +438,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -462,7 +447,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -474,25 +459,25 @@ open class UsersAPI {
 
     /**
      Delete a Part List and all it's Parts.
-     
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersPartlistsDelete(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersPartlistsDeleteWithRequestBuilder(userToken: userToken, listId: listId, apiConfiguration: apiConfiguration).execute().body
+        try await usersPartlistsDeleteWithRequestBuilder(userToken: userToken, listId: listId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Delete a Part List and all it's Parts.
      - DELETE /api/v3/users/{user_token}/partlists/{list_id}/
      - Delete a Part List and all it's Parts.
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersPartlistsDeleteWithRequestBuilder(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
@@ -507,9 +492,7 @@ open class UsersAPI {
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -520,8 +503,8 @@ open class UsersAPI {
 
     /**
      Get a list of all the user's Part Lists.
-     
-     - parameter userToken: (path)  
+
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -529,18 +512,18 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersPartlistsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersPartlistsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, apiConfiguration: apiConfiguration).execute().body
+        try await usersPartlistsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get a list of all the user's Part Lists.
      - GET /api/v3/users/{user_token}/partlists/
      - Get a list of all the user's Part Lists.
-     - parameter userToken: (path)  
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersPartlistsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/"
@@ -553,12 +536,10 @@ open class UsersAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -569,9 +550,9 @@ open class UsersAPI {
 
     /**
      Update an existing Part List's details.
-     
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter isBuildable: (form)  (optional)
      - parameter name: (form)  (optional)
      - parameter numParts: (form)  (optional)
@@ -580,20 +561,20 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersPartlistsPartialUpdate(userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil, numParts: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersPartlistsPartialUpdateWithRequestBuilder(userToken: userToken, listId: listId, isBuildable: isBuildable, name: name, numParts: numParts, apiConfiguration: apiConfiguration).execute().body
+        try await usersPartlistsPartialUpdateWithRequestBuilder(userToken: userToken, listId: listId, isBuildable: isBuildable, name: name, numParts: numParts, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Update an existing Part List's details.
      - PATCH /api/v3/users/{user_token}/partlists/{list_id}/
      - Update an existing Part List's details.
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter isBuildable: (form)  (optional)
      - parameter name: (form)  (optional)
      - parameter numParts: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersPartlistsPartialUpdateWithRequestBuilder(userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil, numParts: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
@@ -607,7 +588,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -616,7 +597,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -628,31 +609,31 @@ open class UsersAPI {
 
     /**
      Add one or more Parts to the Part List.
-     
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
-     - parameter partNum: (form)  
-     - parameter quantity: (form)  
-     - parameter colorId: (form)  
+
+     - parameter userToken: (path)
+     - parameter listId: (path)
+     - parameter partNum: (form)
+     - parameter quantity: (form)
+     - parameter colorId: (form)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersPartlistsPartsCreate(userToken: String, listId: String, partNum: String, quantity: Int, colorId: Int, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersPartlistsPartsCreateWithRequestBuilder(userToken: userToken, listId: listId, partNum: partNum, quantity: quantity, colorId: colorId, apiConfiguration: apiConfiguration).execute().body
+        try await usersPartlistsPartsCreateWithRequestBuilder(userToken: userToken, listId: listId, partNum: partNum, quantity: quantity, colorId: colorId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Add one or more Parts to the Part List.
      - POST /api/v3/users/{user_token}/partlists/{list_id}/parts/
      - Add one or more Parts to the Part List.  ### Single Part When adding a single Part, returns the successfully created Part (status 201) or details for why the Part could not be added. ### Multiple Parts To add multiple Parts, POST a JSON list of them (using a Content-Type header of 'application/json'). e.g: `[{\"part_num\":\"3001\", \"color_id\": 1, \"quantity\": 10},  {\"part_num\":\"3001\", \"color_id\": 2, \"quantity\": 20},  {\"part_num\":\"3002\", \"color_id\": 14, \"quantity\": 30}]` Returns a list of successfully added Parts. If the Part already exists or is unrecognised, it will be skipped.
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
-     - parameter partNum: (form)  
-     - parameter quantity: (form)  
-     - parameter colorId: (form)  
+     - parameter userToken: (path)
+     - parameter listId: (path)
+     - parameter partNum: (form)
+     - parameter quantity: (form)
+     - parameter colorId: (form)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersPartlistsPartsCreateWithRequestBuilder(userToken: String, listId: String, partNum: String, quantity: Int, colorId: Int, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/"
@@ -666,7 +647,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "part_num": partNum.asParameter(codableHelper: apiConfiguration.codableHelper),
             "quantity": quantity.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "color_id": colorId.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "color_id": colorId.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -675,7 +656,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -687,31 +668,31 @@ open class UsersAPI {
 
     /**
      Delete a Part from the Part List.
-     
-     - parameter colorId: (path)  
-     - parameter partNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter colorId: (path)
+     - parameter partNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersPartlistsPartsDelete(colorId: String, partNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersPartlistsPartsDeleteWithRequestBuilder(colorId: colorId, partNum: partNum, userToken: userToken, listId: listId, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+        try await usersPartlistsPartsDeleteWithRequestBuilder(colorId: colorId, partNum: partNum, userToken: userToken, listId: listId, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Delete a Part from the Part List.
      - DELETE /api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/
      - Delete a Part from the Part List.
-     - parameter colorId: (path)  
-     - parameter partNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter colorId: (path)
+     - parameter partNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersPartlistsPartsDeleteWithRequestBuilder(colorId: String, partNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
@@ -732,12 +713,10 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -748,9 +727,9 @@ open class UsersAPI {
 
     /**
      Get a list of all the Parts in a specific Part List.
-     
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
@@ -759,20 +738,20 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersPartlistsPartsList(userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersPartlistsPartsListWithRequestBuilder(userToken: userToken, listId: listId, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+        try await usersPartlistsPartsListWithRequestBuilder(userToken: userToken, listId: listId, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get a list of all the Parts in a specific Part List.
      - GET /api/v3/users/{user_token}/partlists/{list_id}/parts/
      - Get a list of all the Parts in a specific Part List.  Optional parameter inc_part_details=1 can be used to return additional part fields, the same as for a single part lookup. Optional parameter inc_color_details=0 can be used to prevent color field expansion and reduce response sizes.
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersPartlistsPartsListWithRequestBuilder(userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/"
@@ -789,12 +768,10 @@ open class UsersAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -805,31 +782,31 @@ open class UsersAPI {
 
     /**
      Get details about a specific Part in the Part List.
-     
-     - parameter colorId: (path)  
-     - parameter partNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter colorId: (path)
+     - parameter partNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersPartlistsPartsRead(colorId: String, partNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersPartlistsPartsReadWithRequestBuilder(colorId: colorId, partNum: partNum, userToken: userToken, listId: listId, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+        try await usersPartlistsPartsReadWithRequestBuilder(colorId: colorId, partNum: partNum, userToken: userToken, listId: listId, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get details about a specific Part in the Part List.
      - GET /api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/
      - Get details about a specific Part in the Part List.
-     - parameter colorId: (path)  
-     - parameter partNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter colorId: (path)
+     - parameter partNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersPartlistsPartsReadWithRequestBuilder(colorId: String, partNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
@@ -850,12 +827,10 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -866,33 +841,33 @@ open class UsersAPI {
 
     /**
      Replace an existing Part's details in the Part List.
-     
-     - parameter colorId: (path)  
-     - parameter partNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
-     - parameter quantity: (form)  
+
+     - parameter colorId: (path)
+     - parameter partNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
+     - parameter quantity: (form)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersPartlistsPartsUpdate(colorId: String, partNum: String, userToken: String, listId: String, quantity: Int, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersPartlistsPartsUpdateWithRequestBuilder(colorId: colorId, partNum: partNum, userToken: userToken, listId: listId, quantity: quantity, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+        try await usersPartlistsPartsUpdateWithRequestBuilder(colorId: colorId, partNum: partNum, userToken: userToken, listId: listId, quantity: quantity, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Replace an existing Part's details in the Part List.
      - PUT /api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/
      - Replace an existing Part's details in the Part List.
-     - parameter colorId: (path)  
-     - parameter partNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
-     - parameter quantity: (form)  
+     - parameter colorId: (path)
+     - parameter partNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
+     - parameter quantity: (form)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersPartlistsPartsUpdateWithRequestBuilder(colorId: String, partNum: String, userToken: String, listId: String, quantity: Int, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
@@ -910,7 +885,7 @@ open class UsersAPI {
         localVariablePath = localVariablePath.replacingOccurrences(of: "{list_id}", with: listIdPostEscape, options: .literal, range: nil)
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
-            "quantity": quantity.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "quantity": quantity.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -918,11 +893,11 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -934,25 +909,25 @@ open class UsersAPI {
 
     /**
      Get details about a specific Part List.
-     
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersPartlistsRead(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersPartlistsReadWithRequestBuilder(userToken: userToken, listId: listId, apiConfiguration: apiConfiguration).execute().body
+        try await usersPartlistsReadWithRequestBuilder(userToken: userToken, listId: listId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get details about a specific Part List.
      - GET /api/v3/users/{user_token}/partlists/{list_id}/
      - Get details about a specific Part List.
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersPartlistsReadWithRequestBuilder(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
@@ -967,9 +942,7 @@ open class UsersAPI {
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -980,10 +953,10 @@ open class UsersAPI {
 
     /**
      Replace an existing Part List's details.
-     
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
-     - parameter name: (form)  
+
+     - parameter userToken: (path)
+     - parameter listId: (path)
+     - parameter name: (form)
      - parameter isBuildable: (form)  (optional)
      - parameter numParts: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -991,20 +964,20 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersPartlistsUpdate(userToken: String, listId: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersPartlistsUpdateWithRequestBuilder(userToken: userToken, listId: listId, name: name, isBuildable: isBuildable, numParts: numParts, apiConfiguration: apiConfiguration).execute().body
+        try await usersPartlistsUpdateWithRequestBuilder(userToken: userToken, listId: listId, name: name, isBuildable: isBuildable, numParts: numParts, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Replace an existing Part List's details.
      - PUT /api/v3/users/{user_token}/partlists/{list_id}/
      - Replace an existing Part List's details.
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
-     - parameter name: (form)  
+     - parameter userToken: (path)
+     - parameter listId: (path)
+     - parameter name: (form)
      - parameter isBuildable: (form)  (optional)
      - parameter numParts: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersPartlistsUpdateWithRequestBuilder(userToken: String, listId: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
@@ -1018,7 +991,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1027,7 +1000,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1039,8 +1012,8 @@ open class UsersAPI {
 
     /**
      Get a list of all the Parts in all the user's Part Lists.
-     
-     - parameter userToken: (path)  
+
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter partNum: (query)  (optional)
@@ -1053,14 +1026,14 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersPartsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil, partCatId: Double? = nil, colorId: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersPartsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, partNum: partNum, partCatId: partCatId, colorId: colorId, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
+        try await usersPartsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, partNum: partNum, partCatId: partCatId, colorId: colorId, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get a list of all the Parts in all the user's Part Lists.
      - GET /api/v3/users/{user_token}/parts/
      - Get a list of all the Parts in all the user's Part Lists.  Optional parameter inc_part_details=1 can be used to return additional part fields, the same as for a single part lookup.  ###Set List logic Parts appearing in multiple Part Lists will be listed multiple times.  Optionally, filter by one or more of the below query parameters.
-     - parameter userToken: (path)  
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter partNum: (query)  (optional)
@@ -1069,7 +1042,7 @@ open class UsersAPI {
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter search: (query) A search term. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersPartsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil, partCatId: Double? = nil, colorId: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/parts/"
@@ -1087,12 +1060,10 @@ open class UsersAPI {
             "part_cat_id": (wrappedValue: partCatId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "color_id": (wrappedValue: colorId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -1103,23 +1074,23 @@ open class UsersAPI {
 
     /**
      Get details about a specific user.
-     
-     - parameter userToken: (path)  
+
+     - parameter userToken: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersProfileRead(userToken: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersProfileReadWithRequestBuilder(userToken: userToken, apiConfiguration: apiConfiguration).execute().body
+        try await usersProfileReadWithRequestBuilder(userToken: userToken, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get details about a specific user.
      - GET /api/v3/users/{user_token}/profile/
      - Get details about a specific user.
-     - parameter userToken: (path)  
+     - parameter userToken: (path)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersProfileReadWithRequestBuilder(userToken: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/profile/"
@@ -1131,9 +1102,7 @@ open class UsersAPI {
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -1144,9 +1113,9 @@ open class UsersAPI {
 
     /**
      Add a new Set List.
-     
-     - parameter userToken: (path)  
-     - parameter name: (form)  
+
+     - parameter userToken: (path)
+     - parameter name: (form)
      - parameter isBuildable: (form)  (optional)
      - parameter numSets: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -1154,19 +1123,19 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetlistsCreate(userToken: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetlistsCreateWithRequestBuilder(userToken: userToken, name: name, isBuildable: isBuildable, numSets: numSets, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetlistsCreateWithRequestBuilder(userToken: userToken, name: name, isBuildable: isBuildable, numSets: numSets, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Add a new Set List.
      - POST /api/v3/users/{user_token}/setlists/
      - Add a new Set List.
-     - parameter userToken: (path)  
-     - parameter name: (form)  
+     - parameter userToken: (path)
+     - parameter name: (form)
      - parameter isBuildable: (form)  (optional)
      - parameter numSets: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetlistsCreateWithRequestBuilder(userToken: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/"
@@ -1177,7 +1146,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1186,7 +1155,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1198,25 +1167,25 @@ open class UsersAPI {
 
     /**
      Delete a Set List and all it's Sets.
-     
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetlistsDelete(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetlistsDeleteWithRequestBuilder(userToken: userToken, listId: listId, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetlistsDeleteWithRequestBuilder(userToken: userToken, listId: listId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Delete a Set List and all it's Sets.
      - DELETE /api/v3/users/{user_token}/setlists/{list_id}/
      - Delete a Set List and all it's Sets.
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetlistsDeleteWithRequestBuilder(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
@@ -1231,9 +1200,7 @@ open class UsersAPI {
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -1244,8 +1211,8 @@ open class UsersAPI {
 
     /**
      Get a list of all the user's Set Lists.
-     
-     - parameter userToken: (path)  
+
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -1253,18 +1220,18 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetlistsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetlistsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetlistsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get a list of all the user's Set Lists.
      - GET /api/v3/users/{user_token}/setlists/
      - Get a list of all the user's Set Lists.
-     - parameter userToken: (path)  
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetlistsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/"
@@ -1277,12 +1244,10 @@ open class UsersAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -1293,9 +1258,9 @@ open class UsersAPI {
 
     /**
      Update an existing Set List's details.
-     
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter isBuildable: (form)  (optional)
      - parameter name: (form)  (optional)
      - parameter numSets: (form)  (optional)
@@ -1304,20 +1269,20 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetlistsPartialUpdate(userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil, numSets: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetlistsPartialUpdateWithRequestBuilder(userToken: userToken, listId: listId, isBuildable: isBuildable, name: name, numSets: numSets, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetlistsPartialUpdateWithRequestBuilder(userToken: userToken, listId: listId, isBuildable: isBuildable, name: name, numSets: numSets, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Update an existing Set List's details.
      - PATCH /api/v3/users/{user_token}/setlists/{list_id}/
      - Update an existing Set List's details.
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter isBuildable: (form)  (optional)
      - parameter name: (form)  (optional)
      - parameter numSets: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetlistsPartialUpdateWithRequestBuilder(userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil, numSets: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
@@ -1331,7 +1296,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1340,7 +1305,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1352,25 +1317,25 @@ open class UsersAPI {
 
     /**
      Get details about a specific Set List.
-     
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetlistsRead(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetlistsReadWithRequestBuilder(userToken: userToken, listId: listId, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetlistsReadWithRequestBuilder(userToken: userToken, listId: listId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get details about a specific Set List.
      - GET /api/v3/users/{user_token}/setlists/{list_id}/
      - Get details about a specific Set List.
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetlistsReadWithRequestBuilder(userToken: String, listId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
@@ -1385,9 +1350,7 @@ open class UsersAPI {
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -1398,10 +1361,10 @@ open class UsersAPI {
 
     /**
      Add one or more Sets to the Set List. Existing Sets are unaffected.
-     
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
-     - parameter setNum: (form)  
+
+     - parameter userToken: (path)
+     - parameter listId: (path)
+     - parameter setNum: (form)
      - parameter quantity: (form)  (optional)
      - parameter includeSpares: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -1409,20 +1372,20 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetlistsSetsCreate(userToken: String, listId: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetlistsSetsCreateWithRequestBuilder(userToken: userToken, listId: listId, setNum: setNum, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetlistsSetsCreateWithRequestBuilder(userToken: userToken, listId: listId, setNum: setNum, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Add one or more Sets to the Set List. Existing Sets are unaffected.
      - POST /api/v3/users/{user_token}/setlists/{list_id}/sets/
      - Add one or more Sets to the Set List. Existing Sets are unaffected.  ### Single Set When adding a single Set, returns the successfully created Set (status 201) or details for why the Set could not be added. ### Multiple Sets To add multiple Sets, POST a JSON list of them (using a Content-Type header of 'application/json'). e.g: `[{\"set_num\":\"8043-1\", \"quantity\": 1},  {\"set_num\":\"8110-1\", \"quantity\": 2, \"include_spares\": \"False\"}]` Returns a list of successfully added Sets. If the Set already exists or is unrecognised, it will be skipped.
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
-     - parameter setNum: (form)  
+     - parameter userToken: (path)
+     - parameter listId: (path)
+     - parameter setNum: (form)
      - parameter quantity: (form)  (optional)
      - parameter includeSpares: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetlistsSetsCreateWithRequestBuilder(userToken: String, listId: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/"
@@ -1436,7 +1399,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "set_num": setNum.asParameter(codableHelper: apiConfiguration.codableHelper),
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1445,7 +1408,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1457,29 +1420,29 @@ open class UsersAPI {
 
     /**
      Delete a Set from the Set List.
-     
-     - parameter setNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter setNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetlistsSetsDelete(setNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetlistsSetsDeleteWithRequestBuilder(setNum: setNum, userToken: userToken, listId: listId, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetlistsSetsDeleteWithRequestBuilder(setNum: setNum, userToken: userToken, listId: listId, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Delete a Set from the Set List.
      - DELETE /api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/
      - Delete a Set from the Set List.
-     - parameter setNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter setNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetlistsSetsDeleteWithRequestBuilder(setNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
@@ -1497,12 +1460,10 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -1513,9 +1474,9 @@ open class UsersAPI {
 
     /**
      Get a list of all the Sets in a specific Set List.
-     
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
@@ -1524,20 +1485,20 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetlistsSetsList(userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetlistsSetsListWithRequestBuilder(userToken: userToken, listId: listId, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetlistsSetsListWithRequestBuilder(userToken: userToken, listId: listId, page: page, pageSize: pageSize, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get a list of all the Sets in a specific Set List.
      - GET /api/v3/users/{user_token}/setlists/{list_id}/sets/
      - Get a list of all the Sets in a specific Set List.
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetlistsSetsListWithRequestBuilder(userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/"
@@ -1554,12 +1515,10 @@ open class UsersAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "page_size": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -1570,10 +1529,10 @@ open class UsersAPI {
 
     /**
      Update an existing Set's details in the Set List.
-     
-     - parameter setNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter setNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter quantity: (form)  (optional)
      - parameter includeSpares: (form)  (optional)
@@ -1582,21 +1541,21 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetlistsSetsPartialUpdate(setNum: String, userToken: String, listId: String, ordering: String? = nil, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetlistsSetsPartialUpdateWithRequestBuilder(setNum: setNum, userToken: userToken, listId: listId, ordering: ordering, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetlistsSetsPartialUpdateWithRequestBuilder(setNum: setNum, userToken: userToken, listId: listId, ordering: ordering, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Update an existing Set's details in the Set List.
      - PATCH /api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/
      - Update an existing Set's details in the Set List.
-     - parameter setNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter setNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter quantity: (form)  (optional)
      - parameter includeSpares: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetlistsSetsPartialUpdateWithRequestBuilder(setNum: String, userToken: String, listId: String, ordering: String? = nil, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
@@ -1612,7 +1571,7 @@ open class UsersAPI {
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1620,11 +1579,11 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1636,29 +1595,29 @@ open class UsersAPI {
 
     /**
      Get details about a specific Set in the Set List.
-     
-     - parameter setNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter setNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetlistsSetsRead(setNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetlistsSetsReadWithRequestBuilder(setNum: setNum, userToken: userToken, listId: listId, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetlistsSetsReadWithRequestBuilder(setNum: setNum, userToken: userToken, listId: listId, ordering: ordering, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get details about a specific Set in the Set List.
      - GET /api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/
      - Get details about a specific Set in the Set List.
-     - parameter setNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter setNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetlistsSetsReadWithRequestBuilder(setNum: String, userToken: String, listId: String, ordering: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
@@ -1676,12 +1635,10 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -1692,10 +1649,10 @@ open class UsersAPI {
 
     /**
      Replace an existing Set's details in the Set List.
-     
-     - parameter setNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+
+     - parameter setNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter quantity: (form)  (optional)
      - parameter includeSpares: (form)  (optional)
@@ -1704,21 +1661,21 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetlistsSetsUpdate(setNum: String, userToken: String, listId: String, ordering: String? = nil, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetlistsSetsUpdateWithRequestBuilder(setNum: setNum, userToken: userToken, listId: listId, ordering: ordering, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetlistsSetsUpdateWithRequestBuilder(setNum: setNum, userToken: userToken, listId: listId, ordering: ordering, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Replace an existing Set's details in the Set List.
      - PUT /api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/
      - Replace an existing Set's details in the Set List.
-     - parameter setNum: (path)  
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
+     - parameter setNum: (path)
+     - parameter userToken: (path)
+     - parameter listId: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter quantity: (form)  (optional)
      - parameter includeSpares: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetlistsSetsUpdateWithRequestBuilder(setNum: String, userToken: String, listId: String, ordering: String? = nil, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
@@ -1734,7 +1691,7 @@ open class UsersAPI {
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1742,11 +1699,11 @@ open class UsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1758,10 +1715,10 @@ open class UsersAPI {
 
     /**
      Replace an existing Set List's details.
-     
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
-     - parameter name: (form)  
+
+     - parameter userToken: (path)
+     - parameter listId: (path)
+     - parameter name: (form)
      - parameter isBuildable: (form)  (optional)
      - parameter numSets: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -1769,20 +1726,20 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetlistsUpdate(userToken: String, listId: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetlistsUpdateWithRequestBuilder(userToken: userToken, listId: listId, name: name, isBuildable: isBuildable, numSets: numSets, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetlistsUpdateWithRequestBuilder(userToken: userToken, listId: listId, name: name, isBuildable: isBuildable, numSets: numSets, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Replace an existing Set List's details.
      - PUT /api/v3/users/{user_token}/setlists/{list_id}/
      - Replace an existing Set List's details.
-     - parameter userToken: (path)  
-     - parameter listId: (path)  
-     - parameter name: (form)  
+     - parameter userToken: (path)
+     - parameter listId: (path)
+     - parameter name: (form)
      - parameter isBuildable: (form)  (optional)
      - parameter numSets: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetlistsUpdateWithRequestBuilder(userToken: String, listId: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
@@ -1796,7 +1753,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1805,7 +1762,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1817,9 +1774,9 @@ open class UsersAPI {
 
     /**
      Add one or more Sets to the user's LEGO collection. Existing Sets are unaffected.
-     
-     - parameter userToken: (path)  
-     - parameter setNum: (form)  
+
+     - parameter userToken: (path)
+     - parameter setNum: (form)
      - parameter quantity: (form)  (optional)
      - parameter includeSpares: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -1827,19 +1784,19 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetsCreate(userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetsCreateWithRequestBuilder(userToken: userToken, setNum: setNum, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetsCreateWithRequestBuilder(userToken: userToken, setNum: setNum, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Add one or more Sets to the user's LEGO collection. Existing Sets are unaffected.
      - POST /api/v3/users/{user_token}/sets/
      - Add one or more Sets to the user's LEGO collection. Existing Sets are unaffected.  ### Set List logic The Set List used when adding sets is chosen in the following order: 1. If no Set Lists exist, one will be created and used 2. User's configured default Set List for Imports 3. The first Set List alphabetically  ### Single Set When adding a single Set, returns the successfully created Set (status 201) or details for why the Set could not be added. ### Multiple Sets To add multiple Sets, POST a JSON list of them (using a Content-Type header of 'application/json'). e.g: `[{\"set_num\":\"8043-1\", \"quantity\": 1},  {\"set_num\":\"8110-1\", \"quantity\": 2, \"include_spares\": \"False\"}]` Returns a list of successfully added Sets. If the Set already exists or is unrecognised, it will be skipped.
-     - parameter userToken: (path)  
-     - parameter setNum: (form)  
+     - parameter userToken: (path)
+     - parameter setNum: (form)
      - parameter quantity: (form)  (optional)
      - parameter includeSpares: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetsCreateWithRequestBuilder(userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/sets/"
@@ -1850,7 +1807,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "set_num": setNum.asParameter(codableHelper: apiConfiguration.codableHelper),
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1859,7 +1816,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -1871,9 +1828,9 @@ open class UsersAPI {
 
     /**
      Delete the Set from all the user's Set Lists.
-     
-     - parameter userToken: (path)  
-     - parameter setNum: (path)  
+
+     - parameter userToken: (path)
+     - parameter setNum: (path)
      - parameter setNum2: (query)  (optional)
      - parameter themeId: (query)  (optional)
      - parameter minYear: (query)  (optional)
@@ -1887,15 +1844,15 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetsDelete(userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetsDeleteWithRequestBuilder(userToken: userToken, setNum: setNum, setNum2: setNum2, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetsDeleteWithRequestBuilder(userToken: userToken, setNum: setNum, setNum2: setNum2, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Delete the Set from all the user's Set Lists.
      - DELETE /api/v3/users/{user_token}/sets/{set_num}/
      - Delete the Set from all the user's Set Lists.
-     - parameter userToken: (path)  
-     - parameter setNum: (path)  
+     - parameter userToken: (path)
+     - parameter setNum: (path)
      - parameter setNum2: (query)  (optional)
      - parameter themeId: (query)  (optional)
      - parameter minYear: (query)  (optional)
@@ -1905,7 +1862,7 @@ open class UsersAPI {
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter search: (query) A search term. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetsDeleteWithRequestBuilder(userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/sets/{set_num}/"
@@ -1927,12 +1884,10 @@ open class UsersAPI {
             "min_parts": (wrappedValue: minParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "max_parts": (wrappedValue: maxParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -1943,8 +1898,8 @@ open class UsersAPI {
 
     /**
      Get a list of all the Sets in the user's LEGO collection.
-     
-     - parameter userToken: (path)  
+
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter setNum: (query)  (optional)
@@ -1960,14 +1915,14 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetsList(userToken: String, page: Int? = nil, pageSize: Int? = nil, setNum: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, setNum: setNum, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetsListWithRequestBuilder(userToken: userToken, page: page, pageSize: pageSize, setNum: setNum, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get a list of all the Sets in the user's LEGO collection.
      - GET /api/v3/users/{user_token}/sets/
      - Get a list of all the Sets in the user's LEGO collection.  ### Set List logic Sets appearing in multiple Set Lists will be listed multiple times.  Optionally, filter by one or more of the below query parameters.
-     - parameter userToken: (path)  
+     - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter setNum: (query)  (optional)
@@ -1979,7 +1934,7 @@ open class UsersAPI {
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter search: (query) A search term. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetsListWithRequestBuilder(userToken: String, page: Int? = nil, pageSize: Int? = nil, setNum: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/sets/"
@@ -2000,12 +1955,10 @@ open class UsersAPI {
             "min_parts": (wrappedValue: minParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "max_parts": (wrappedValue: maxParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -2016,9 +1969,9 @@ open class UsersAPI {
 
     /**
      Get details about a specific Set in the user's LEGO collection.
-     
-     - parameter userToken: (path)  
-     - parameter setNum: (path)  
+
+     - parameter userToken: (path)
+     - parameter setNum: (path)
      - parameter setNum2: (query)  (optional)
      - parameter themeId: (query)  (optional)
      - parameter minYear: (query)  (optional)
@@ -2032,15 +1985,15 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetsRead(userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetsReadWithRequestBuilder(userToken: userToken, setNum: setNum, setNum2: setNum2, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetsReadWithRequestBuilder(userToken: userToken, setNum: setNum, setNum2: setNum2, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get details about a specific Set in the user's LEGO collection.
      - GET /api/v3/users/{user_token}/sets/{set_num}/
      - Get details about a specific Set in the user's LEGO collection.  ### Set List logic Because this merges sets found across all Set Lists the fields list_id and include_spares may not be accurate unless the Set actually only exists in a single Set List.
-     - parameter userToken: (path)  
-     - parameter setNum: (path)  
+     - parameter userToken: (path)
+     - parameter setNum: (path)
      - parameter setNum2: (query)  (optional)
      - parameter themeId: (query)  (optional)
      - parameter minYear: (query)  (optional)
@@ -2050,7 +2003,7 @@ open class UsersAPI {
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter search: (query) A search term. (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetsReadWithRequestBuilder(userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/sets/{set_num}/"
@@ -2072,12 +2025,10 @@ open class UsersAPI {
             "min_parts": (wrappedValue: minParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "max_parts": (wrappedValue: maxParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
@@ -2088,9 +2039,9 @@ open class UsersAPI {
 
     /**
      Synchronise a user's Sets to the POSTed list.
-     
-     - parameter userToken: (path)  
-     - parameter setNum: (form)  
+
+     - parameter userToken: (path)
+     - parameter setNum: (form)
      - parameter quantity: (form)  (optional)
      - parameter includeSpares: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -2098,19 +2049,19 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetsSyncCreate(userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetsSyncCreateWithRequestBuilder(userToken: userToken, setNum: setNum, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetsSyncCreateWithRequestBuilder(userToken: userToken, setNum: setNum, quantity: quantity, includeSpares: includeSpares, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Synchronise a user's Sets to the POSTed list.
      - POST /api/v3/users/{user_token}/sets/sync/
      - Synchronise a user's Sets to the POSTed list.  ### Set List logic This is used to completely replace the user's Sets with those in the supplied list. It will remove any Sets in Rebrickable that are not found in the supplied list. It will attempt to keep any current Rebrickable Sets in their existing Set Lists, and will add any new Sets found into the Default Set List for Imports in the user's settings. ### Single Set When adding a single Set, returns the successfully created Set (status 201) or details for why the Set could not be added. ### Multiple Sets To add multiple Sets, POST a JSON list of them (using a Content-Type header of 'application/json'). e.g: `[{\"set_num\":\"8043-1\", \"quantity\": 1},  {\"set_num\":\"8110-1\", \"quantity\": 2, \"include_spares\": \"False\"}]` Returns a list of successfully added Sets. If the Set is unrecognised, it will be skipped.
-     - parameter userToken: (path)  
-     - parameter setNum: (form)  
+     - parameter userToken: (path)
+     - parameter setNum: (form)
      - parameter quantity: (form)  (optional)
      - parameter includeSpares: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetsSyncCreateWithRequestBuilder(userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/sets/sync/"
@@ -2121,7 +2072,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "include_spares": includeSpares?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "set_num": setNum.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "set_num": setNum.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2130,7 +2081,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -2142,9 +2093,9 @@ open class UsersAPI {
 
     /**
      Update an existing Set's quantity in all Set Lists. This PUT call is different to others in that it will create
-     
-     - parameter userToken: (path)  
-     - parameter setNum: (path)  
+
+     - parameter userToken: (path)
+     - parameter setNum: (path)
      - parameter setNum2: (query)  (optional)
      - parameter themeId: (query)  (optional)
      - parameter minYear: (query)  (optional)
@@ -2159,15 +2110,15 @@ open class UsersAPI {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersSetsUpdate(userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, quantity: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersSetsUpdateWithRequestBuilder(userToken: userToken, setNum: setNum, setNum2: setNum2, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, quantity: quantity, apiConfiguration: apiConfiguration).execute().body
+        try await usersSetsUpdateWithRequestBuilder(userToken: userToken, setNum: setNum, setNum2: setNum2, themeId: themeId, minYear: minYear, maxYear: maxYear, minParts: minParts, maxParts: maxParts, ordering: ordering, search: search, quantity: quantity, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Update an existing Set's quantity in all Set Lists. This PUT call is different to others in that it will create
      - PUT /api/v3/users/{user_token}/sets/{set_num}/
      - Update an existing Set's quantity in all Set Lists. This PUT call is different to others in that it will create the Set if it doesn't already exist, and it will delete the Set if you pass a quantity of 0.  ### Set List logic * Default Set List = user's configured default import list or the first alphabetically if none exist. * Increasing quantity = add to Set in default Set List if it exists, else add it there * Decreasing quantity = remove from Set in default Set List first, then from remaining lists until done
-     - parameter userToken: (path)  
-     - parameter setNum: (path)  
+     - parameter userToken: (path)
+     - parameter setNum: (path)
      - parameter setNum2: (query)  (optional)
      - parameter themeId: (query)  (optional)
      - parameter minYear: (query)  (optional)
@@ -2178,7 +2129,7 @@ open class UsersAPI {
      - parameter search: (query) A search term. (optional)
      - parameter quantity: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersSetsUpdateWithRequestBuilder(userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil, search: String? = nil, quantity: Int? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v3/users/{user_token}/sets/{set_num}/"
@@ -2190,7 +2141,7 @@ open class UsersAPI {
         localVariablePath = localVariablePath.replacingOccurrences(of: "{set_num}", with: setNumPostEscape, options: .literal, range: nil)
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
-            "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2205,11 +2156,11 @@ open class UsersAPI {
             "min_parts": (wrappedValue: minParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "max_parts": (wrappedValue: maxParts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
             "ordering": (wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
-            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false),
+            "search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: false)
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -2221,32 +2172,32 @@ open class UsersAPI {
 
     /**
      Generate a User Token to be used for authorising user account actions in subsequent calls. Username can be either
-     
-     - parameter username: (form) Username (or email) of user 
-     - parameter password: (form) Password of user 
+
+     - parameter username: (form) Username (or email) of user
+     - parameter password: (form) Password of user
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func usersTokenCreate(username: String, password: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await usersTokenCreateWithRequestBuilder(username: username, password: password, apiConfiguration: apiConfiguration).execute().body
+        try await usersTokenCreateWithRequestBuilder(username: username, password: password, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Generate a User Token to be used for authorising user account actions in subsequent calls. Username can be either
      - POST /api/v3/users/_token/
      - Generate a User Token to be used for authorising user account actions in subsequent calls. Username can be either  the actual username or the user's email address.
-     - parameter username: (form) Username (or email) of user 
-     - parameter password: (form) Password of user 
+     - parameter username: (form) Username (or email) of user
+     - parameter password: (form) Password of user
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<Void>
      */
     open class func usersTokenCreateWithRequestBuilder(username: String, password: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v3/users/_token/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "username": username.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "password": password.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "password": password.asParameter(codableHelper: apiConfiguration.codableHelper)
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2255,7 +2206,7 @@ open class UsersAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
