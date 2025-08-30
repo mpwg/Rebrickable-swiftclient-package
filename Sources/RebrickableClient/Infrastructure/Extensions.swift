@@ -7,7 +7,7 @@
 import Foundation
 
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+    import FoundationNetworking
 #endif
 
 // MARK: - ParameterConvertible Conformances
@@ -58,7 +58,8 @@ extension RawRepresentable where RawValue: ParameterConvertible, RawValue: Senda
 
 // MARK: - Helpers
 
-private func encodeIfPossible(_ object: some Sendable, codableHelper: CodableHelper) -> any Sendable {
+private func encodeIfPossible(_ object: some Sendable, codableHelper: CodableHelper) -> any Sendable
+{
     if let encodableObject = object as? ParameterConvertible {
         encodableObject.asParameter(codableHelper: codableHelper)
     } else {
@@ -129,14 +130,15 @@ extension String: @retroactive CodingKey {
     }
 }
 
-public extension KeyedEncodingContainerProtocol {
+extension KeyedEncodingContainerProtocol {
     mutating func encodeArray(_ values: [some Encodable], forKey key: Self.Key) throws {
         var arrayContainer = nestedUnkeyedContainer(forKey: key)
         try arrayContainer.encode(contentsOf: values)
     }
 
     mutating func encodeArrayIfPresent(_ values: [some Encodable]?, forKey key: Self.Key)
-        throws {
+        throws
+    {
         if let values {
             try encodeArray(values, forKey: key)
         }
@@ -172,7 +174,7 @@ public extension KeyedEncodingContainerProtocol {
 
 // MARK: - Keyed Encoding helpers
 
-public extension KeyedDecodingContainerProtocol {
+extension KeyedDecodingContainerProtocol {
     func decodeArray<T>(_: T.Type, forKey key: Self.Key) throws -> [T] where T: Decodable {
         var tmpArray = [T]()
 
@@ -186,7 +188,7 @@ public extension KeyedDecodingContainerProtocol {
     }
 
     func decodeArrayIfPresent<T>(_: T.Type, forKey key: Self.Key) throws -> [T]?
-        where T: Decodable {
+    where T: Decodable {
         var tmpArray: [T]?
 
         if contains(key) {
@@ -197,7 +199,7 @@ public extension KeyedDecodingContainerProtocol {
     }
 
     func decodeMap<T>(_: T.Type, excludedKeys: Set<Self.Key>) throws -> [Self.Key: T]
-        where T: Decodable {
+    where T: Decodable {
         var map: [Self.Key: T] = [:]
 
         for key in allKeys {

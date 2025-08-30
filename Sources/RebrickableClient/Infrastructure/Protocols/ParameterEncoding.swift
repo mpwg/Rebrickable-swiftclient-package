@@ -1,5 +1,5 @@
 import Foundation
 
-public protocol ParameterEncoding {
+internal protocol ParameterEncoding {
     func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
 }

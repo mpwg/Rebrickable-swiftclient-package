@@ -1,31 +1,31 @@
 import Foundation
 
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+    import FoundationNetworking
 #endif
 
-open class OpenAPIClientAPIConfiguration: @unchecked Sendable {
+internal class OpenAPIClientAPIConfiguration: @unchecked Sendable {
     // MARK: - OpenAPI Client Configuration
 
-    public var basePath: String
-    public var customHeaders: [String: String]
-    public var credential: URLCredential?
-    public var requestBuilderFactory: RequestBuilderFactory
-    public var apiResponseQueue: DispatchQueue
-    public var codableHelper: CodableHelper
+    internal var basePath: String
+    internal var customHeaders: [String: String]
+    internal var credential: URLCredential?
+    internal var requestBuilderFactory: RequestBuilderFactory
+    internal var apiResponseQueue: DispatchQueue
+    internal var codableHelper: CodableHelper
 
-    public var successfulStatusCodeRange: Range<Int>
+    internal var successfulStatusCodeRange: Range<Int>
 
-    public var interceptor: OpenAPIInterceptor
+    internal var interceptor: OpenAPIInterceptor
 
-    public init(
+    internal init(
         basePath: String = "https://rebrickable.com",
         customHeaders: [String: String] = [:],
         credential: URLCredential? = nil,
         requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory(),
         apiResponseQueue: DispatchQueue = .main,
         codableHelper: CodableHelper = CodableHelper(),
-        successfulStatusCodeRange: Range<Int> = 200 ..< 300,
+        successfulStatusCodeRange: Range<Int> = 200..<300,
         interceptor: OpenAPIInterceptor = DefaultOpenAPIInterceptor(),
     ) {
         self.basePath = basePath
@@ -38,5 +38,5 @@ open class OpenAPIClientAPIConfiguration: @unchecked Sendable {
         self.interceptor = interceptor
     }
 
-    public static let shared = OpenAPIClientAPIConfiguration()
+    internal static let shared = OpenAPIClientAPIConfiguration()
 }

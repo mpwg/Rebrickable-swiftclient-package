@@ -7,7 +7,7 @@
 import Foundation
 
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+    import FoundationNetworking
 #endif
 
 // Protocols moved to `Infrastructure/Protocols`
@@ -16,7 +16,7 @@ import FoundationNetworking
 
 /// A flexible type that can be encoded (`.encodeNull` or `.encodeValue`)
 /// or not encoded (`.encodeNothing`). Intended for request payloads.
-public enum NullEncodable<Wrapped> {
+internal enum NullEncodable<Wrapped> {
     case encodeNothing
     case encodeNull
     case encodeValue(Wrapped)
@@ -27,7 +27,7 @@ extension NullEncodable: Hashable where Wrapped: Hashable {}
 extension NullEncodable: Sendable where Wrapped: Sendable {}
 
 extension NullEncodable: Codable where Wrapped: Codable {
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let value = try? container.decode(Wrapped.self) {
             self = .encodeValue(value)
@@ -38,7 +38,7 @@ extension NullEncodable: Codable where Wrapped: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
         case .encodeNothing: return
@@ -48,13 +48,13 @@ extension NullEncodable: Codable where Wrapped: Codable {
     }
 }
 
-public enum ErrorResponse: Error {
+internal enum ErrorResponse: Error {
     case error(Int, Data?, URLResponse?, Error)
 }
 
 // MARK: - Errors & Response
 
-public enum DownloadException: Error {
+internal enum DownloadException: Error {
     case responseDataMissing
     case responseFailed
     case requestMissing
@@ -62,7 +62,7 @@ public enum DownloadException: Error {
     case requestMissingURL
 }
 
-public enum DecodableRequestBuilderError: Error {
+internal enum DecodableRequestBuilderError: Error {
     case emptyDataResponse
     case nilHTTPResponse
     case unsuccessfulHTTPStatusCode
@@ -70,20 +70,20 @@ public enum DecodableRequestBuilderError: Error {
     case generalError(Error)
 }
 
-public struct Response<T> {
-    public let statusCode: Int
-    public let header: [String: String]
-    public let body: T
-    public let bodyData: Data?
+internal struct Response<T> {
+    internal let statusCode: Int
+    internal let header: [String: String]
+    internal let body: T
+    internal let bodyData: Data?
 
-    public init(statusCode: Int, header: [String: String], body: T, bodyData: Data?) {
+    internal init(statusCode: Int, header: [String: String], body: T, bodyData: Data?) {
         self.statusCode = statusCode
         self.header = header
         self.body = body
         self.bodyData = bodyData
     }
 
-    public init(response: HTTPURLResponse, body: T, bodyData: Data?) {
+    internal init(response: HTTPURLResponse, body: T, bodyData: Data?) {
         let rawHeader = response.allHeaderFields
         var responseHeader = [String: String]()
         for (key, value) in rawHeader {

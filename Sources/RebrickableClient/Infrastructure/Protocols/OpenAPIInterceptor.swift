@@ -2,12 +2,12 @@ import Foundation
 
 // MARK: - OpenAPI Interceptor Protocol
 
-public enum OpenAPIInterceptorRetry {
+internal enum OpenAPIInterceptorRetry {
     case retry
     case dontRetry
 }
 
-public protocol OpenAPIInterceptor {
+internal protocol OpenAPIInterceptor {
     func intercept(
         urlRequest: URLRequest,
         urlSession: URLSessionProtocol,

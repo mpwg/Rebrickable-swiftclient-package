@@ -9,17 +9,17 @@ import Foundation
 
 // MARK: - Lego API
 
-open class LegoAPI {
+internal class LegoAPI {
     /**
      Get a list of all Colors.
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func legoColorsList(
+    internal class func legoColorsList(
         page: Int? = nil,
         pageSize: Int? = nil,
         ordering: String? = nil,
@@ -43,13 +43,14 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoColorsListWithRequestBuilder(
+    internal class func legoColorsListWithRequestBuilder(
         page: Int? = nil,
         pageSize: Int? = nil,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/lego/colors/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -67,7 +68,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -90,13 +91,13 @@ open class LegoAPI {
 
     /**
      Get details about a specific Color.
-
+    
      - parameter id: (path) A unique value identifying this color.
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func legoColorsRead(
+    internal class func legoColorsRead(
         id: String,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -116,12 +117,13 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoColorsReadWithRequestBuilder(
+    internal class func legoColorsReadWithRequestBuilder(
         id: String,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/colors/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape =
@@ -163,12 +165,12 @@ open class LegoAPI {
 
     /**
      Get details about a specific Element ID.
-
+    
      - parameter elementId: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func legoElementsRead(
+    internal class func legoElementsRead(
         elementId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -186,11 +188,12 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoElementsReadWithRequestBuilder(
+    internal class func legoElementsReadWithRequestBuilder(
         elementId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/elements/{element_id}/"
         let elementIdPreEscape = "\(APIHelper.mapValueToPathItem(elementId))"
         let elementIdPostEscape =
@@ -226,7 +229,7 @@ open class LegoAPI {
 
     /**
      Get a list of Minifigs.
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter minParts: (query)  (optional)
@@ -238,7 +241,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func legoMinifigsList(
+    internal class func legoMinifigsList(
         page: Int? = nil,
         pageSize: Int? = nil,
         minParts: Double? = nil,
@@ -277,7 +280,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoMinifigsListWithRequestBuilder(
+    internal class func legoMinifigsListWithRequestBuilder(
         page: Int? = nil,
         pageSize: Int? = nil,
         minParts: Double? = nil,
@@ -288,7 +291,8 @@ open class LegoAPI {
         search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/lego/minifigs/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -326,7 +330,7 @@ open class LegoAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -349,14 +353,14 @@ open class LegoAPI {
 
     /**
      Get a list of all Inventory Parts in this Minifig.
-
+    
      - parameter setNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func legoMinifigsPartsList(
+    internal class func legoMinifigsPartsList(
         setNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
@@ -380,13 +384,14 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoMinifigsPartsListWithRequestBuilder(
+    internal class func legoMinifigsPartsListWithRequestBuilder(
         setNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/minifigs/{set_num}/parts/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -409,7 +414,7 @@ open class LegoAPI {
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -432,12 +437,12 @@ open class LegoAPI {
 
     /**
      Get details for a specific Minifig.
-
+    
      - parameter setNum: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func legoMinifigsRead(
+    internal class func legoMinifigsRead(
         setNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -454,11 +459,12 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoMinifigsReadWithRequestBuilder(
+    internal class func legoMinifigsReadWithRequestBuilder(
         setNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/minifigs/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -494,7 +500,7 @@ open class LegoAPI {
 
     /**
      Get a list of Sets a Minifig has appeared in.
-
+    
      - parameter setNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -502,7 +508,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func legoMinifigsSetsList(
+    internal class func legoMinifigsSetsList(
         setNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
@@ -529,14 +535,15 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoMinifigsSetsListWithRequestBuilder(
+    internal class func legoMinifigsSetsListWithRequestBuilder(
         setNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/minifigs/{set_num}/sets/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -563,7 +570,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -586,14 +593,14 @@ open class LegoAPI {
 
     /**
      Get a list of all Part Categories.
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func legoPartCategoriesList(
+    internal class func legoPartCategoriesList(
         page: Int? = nil,
         pageSize: Int? = nil,
         ordering: String? = nil,
@@ -617,13 +624,14 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoPartCategoriesListWithRequestBuilder(
+    internal class func legoPartCategoriesListWithRequestBuilder(
         page: Int? = nil,
         pageSize: Int? = nil,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/lego/part_categories/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -641,7 +649,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -664,13 +672,13 @@ open class LegoAPI {
 
     /**
      Get details about a specific Part Category.
-
+    
      - parameter id: (path) A unique integer value identifying this part category.
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func legoPartCategoriesRead(
+    internal class func legoPartCategoriesRead(
         id: Int,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -691,12 +699,13 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoPartCategoriesReadWithRequestBuilder(
+    internal class func legoPartCategoriesReadWithRequestBuilder(
         id: Int,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/part_categories/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape =
@@ -738,7 +747,7 @@ open class LegoAPI {
 
     /**
      Get a list of all Colors a Part has appeared in.
-
+    
      - parameter partNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -746,7 +755,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func legoPartsColorsList(
+    internal class func legoPartsColorsList(
         partNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
@@ -773,14 +782,15 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoPartsColorsListWithRequestBuilder(
+    internal class func legoPartsColorsListWithRequestBuilder(
         partNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/parts/{part_num}/colors/"
         let partNumPreEscape = "\(APIHelper.mapValueToPathItem(partNum))"
         let partNumPostEscape =
@@ -807,7 +817,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -830,13 +840,13 @@ open class LegoAPI {
 
     /**
      Get details about a specific Part/Color combination.
-
+    
      - parameter colorId: (path)
      - parameter partNum: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func legoPartsColorsRead(
+    internal class func legoPartsColorsRead(
         colorId: String,
         partNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -857,12 +867,13 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoPartsColorsReadWithRequestBuilder(
+    internal class func legoPartsColorsReadWithRequestBuilder(
         colorId: String,
         partNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/parts/{part_num}/colors/{color_id}/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
         let colorIdPostEscape =
@@ -907,7 +918,7 @@ open class LegoAPI {
 
     /**
      Get a list of all Sets the Part/Color combination has appeard in.
-
+    
      - parameter colorId: (path)
      - parameter partNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
@@ -917,7 +928,7 @@ open class LegoAPI {
      - returns: Void
      */
 
-    open class func legoPartsColorsSetsList(
+    internal class func legoPartsColorsSetsList(
         colorId: String,
         partNum: String,
         page: Int? = nil,
@@ -947,7 +958,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoPartsColorsSetsListWithRequestBuilder(
+    internal class func legoPartsColorsSetsListWithRequestBuilder(
         colorId: String,
         partNum: String,
         page: Int? = nil,
@@ -955,7 +966,8 @@ open class LegoAPI {
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/parts/{part_num}/colors/{color_id}/sets/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
         let colorIdPostEscape =
@@ -991,7 +1003,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1014,7 +1026,7 @@ open class LegoAPI {
 
     /**
      Get a list of Parts.
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter partNum: (query)  (optional)
@@ -1031,7 +1043,7 @@ open class LegoAPI {
      - returns: Void
      */
 
-    open class func legoPartsList(
+    internal class func legoPartsList(
         page: Int? = nil,
         pageSize: Int? = nil,
         partNum: String? = nil,
@@ -1082,7 +1094,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoPartsListWithRequestBuilder(
+    internal class func legoPartsListWithRequestBuilder(
         page: Int? = nil,
         pageSize: Int? = nil,
         partNum: String? = nil,
@@ -1097,7 +1109,8 @@ open class LegoAPI {
         search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/lego/parts/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -1155,7 +1168,7 @@ open class LegoAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1178,13 +1191,13 @@ open class LegoAPI {
 
     /**
      Get details about a specific Part.
-
+    
      - parameter partNum: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
 
-    open class func legoPartsRead(
+    internal class func legoPartsRead(
         partNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -1201,11 +1214,12 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoPartsReadWithRequestBuilder(
+    internal class func legoPartsReadWithRequestBuilder(
         partNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/parts/{part_num}/"
         let partNumPreEscape = "\(APIHelper.mapValueToPathItem(partNum))"
         let partNumPostEscape =
@@ -1241,7 +1255,7 @@ open class LegoAPI {
 
     /**
      Get a list of MOCs which are Alternate Builds of a specific Set - i.e. all parts in the MOC can
-
+    
      - parameter setNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -1250,7 +1264,7 @@ open class LegoAPI {
      - returns: Void
      */
 
-    open class func legoSetsAlternatesList(
+    internal class func legoSetsAlternatesList(
         setNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
@@ -1277,14 +1291,15 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoSetsAlternatesListWithRequestBuilder(
+    internal class func legoSetsAlternatesListWithRequestBuilder(
         setNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/alternates/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -1311,7 +1326,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1334,7 +1349,7 @@ open class LegoAPI {
 
     /**
      Get a list of Sets, optionally filtered by any of the below parameters.
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter themeId: (query)  (optional)
@@ -1348,7 +1363,7 @@ open class LegoAPI {
      - returns: Void
      */
 
-    open class func legoSetsList(
+    internal class func legoSetsList(
         page: Int? = nil,
         pageSize: Int? = nil,
         themeId: String? = nil,
@@ -1390,7 +1405,7 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoSetsListWithRequestBuilder(
+    internal class func legoSetsListWithRequestBuilder(
         page: Int? = nil,
         pageSize: Int? = nil,
         themeId: String? = nil,
@@ -1402,7 +1417,8 @@ open class LegoAPI {
         search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/lego/sets/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -1444,7 +1460,7 @@ open class LegoAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1467,7 +1483,7 @@ open class LegoAPI {
 
     /**
      Get a list of all Inventory Minifigs in this Set.
-
+    
      - parameter setNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -1475,7 +1491,7 @@ open class LegoAPI {
      - returns: Void
      */
 
-    open class func legoSetsMinifigsList(
+    internal class func legoSetsMinifigsList(
         setNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
@@ -1499,13 +1515,14 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoSetsMinifigsListWithRequestBuilder(
+    internal class func legoSetsMinifigsListWithRequestBuilder(
         setNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/minifigs/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -1528,7 +1545,7 @@ open class LegoAPI {
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1551,7 +1568,7 @@ open class LegoAPI {
 
     /**
      Get a list of all Inventory Parts in this Set.
-
+    
      - parameter setNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -1559,7 +1576,7 @@ open class LegoAPI {
      - returns: Void
      */
 
-    open class func legoSetsPartsList(
+    internal class func legoSetsPartsList(
         setNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
@@ -1583,13 +1600,14 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoSetsPartsListWithRequestBuilder(
+    internal class func legoSetsPartsListWithRequestBuilder(
         setNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/parts/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -1612,7 +1630,7 @@ open class LegoAPI {
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1635,13 +1653,13 @@ open class LegoAPI {
 
     /**
      Get details for a specific Set.
-
+    
      - parameter setNum: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
 
-    open class func legoSetsRead(
+    internal class func legoSetsRead(
         setNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -1657,11 +1675,12 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoSetsReadWithRequestBuilder(
+    internal class func legoSetsReadWithRequestBuilder(
         setNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -1697,7 +1716,7 @@ open class LegoAPI {
 
     /**
      Get a list of all Inventory Sets in this Set.
-
+    
      - parameter setNum: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -1705,7 +1724,7 @@ open class LegoAPI {
      - returns: Void
      */
 
-    open class func legoSetsSetsList(
+    internal class func legoSetsSetsList(
         setNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
@@ -1729,13 +1748,14 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoSetsSetsListWithRequestBuilder(
+    internal class func legoSetsSetsListWithRequestBuilder(
         setNum: String,
         page: Int? = nil,
         pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/sets/{set_num}/sets/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -1758,7 +1778,7 @@ open class LegoAPI {
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1781,7 +1801,7 @@ open class LegoAPI {
 
     /**
      Return all Themes
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
@@ -1789,7 +1809,7 @@ open class LegoAPI {
      - returns: Void
      */
 
-    open class func legoThemesList(
+    internal class func legoThemesList(
         page: Int? = nil,
         pageSize: Int? = nil,
         ordering: String? = nil,
@@ -1813,13 +1833,14 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoThemesListWithRequestBuilder(
+    internal class func legoThemesListWithRequestBuilder(
         page: Int? = nil,
         pageSize: Int? = nil,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/lego/themes/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -1837,7 +1858,7 @@ open class LegoAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1860,14 +1881,14 @@ open class LegoAPI {
 
     /**
      Return details for a specific Theme
-
+    
      - parameter id: (path) A unique integer value identifying this theme.
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
 
-    open class func legoThemesRead(
+    internal class func legoThemesRead(
         id: Int,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -1887,12 +1908,13 @@ open class LegoAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func legoThemesReadWithRequestBuilder(
+    internal class func legoThemesReadWithRequestBuilder(
         id: Int,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/lego/themes/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape =

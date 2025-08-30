@@ -2,10 +2,10 @@ import Foundation
 
 // MARK: - Default OpenAPI Interceptor
 
-public class DefaultOpenAPIInterceptor: OpenAPIInterceptor {
-    public init() {}
+internal class DefaultOpenAPIInterceptor: OpenAPIInterceptor {
+    internal init() {}
 
-    public func intercept(
+    internal func intercept(
         urlRequest: URLRequest,
         urlSession _: URLSessionProtocol,
         requestBuilder _: RequestBuilder<some Any>,
@@ -14,7 +14,7 @@ public class DefaultOpenAPIInterceptor: OpenAPIInterceptor {
         completion(.success(urlRequest))
     }
 
-    public func retry(
+    internal func retry(
         urlRequest _: URLRequest,
         urlSession _: URLSessionProtocol,
         requestBuilder _: RequestBuilder<some Any>,

@@ -9,10 +9,10 @@ import Foundation
 
 // MARK: - Users API
 
-open class UsersAPI {
+internal class UsersAPI {
     /**
      Get a list of all the Parts in all the user's Part Lists as well as the Parts inside Sets in the user's Set Lists.
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -22,7 +22,7 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func usersAllpartsList(
+    internal class func usersAllpartsList(
         userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil,
         partCatId: Double? = nil, colorId: Double? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -46,12 +46,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersAllpartsListWithRequestBuilder(
+    internal class func usersAllpartsListWithRequestBuilder(
         userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil,
         partCatId: Double? = nil, colorId: Double? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/allparts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -83,7 +84,7 @@ open class UsersAPI {
             "color_id": (
                 wrappedValue: colorId?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -103,14 +104,14 @@ open class UsersAPI {
 
     /**
      Get a list of all the available Badges
-
+    
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func usersBadgesList(
+    internal class func usersBadgesList(
         page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -129,11 +130,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersBadgesListWithRequestBuilder(
+    internal class func usersBadgesListWithRequestBuilder(
         page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/users/badges/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -151,7 +153,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -171,14 +173,14 @@ open class UsersAPI {
 
     /**
      Get details about a specific Badge
-
+    
      - parameter id: (path) A unique integer value identifying this badge.
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
 
-    open class func usersBadgesRead(
+    internal class func usersBadgesRead(
         id: Int, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -196,11 +198,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersBadgesReadWithRequestBuilder(
+    internal class func usersBadgesReadWithRequestBuilder(
         id: Int, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/badges/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape =
@@ -236,14 +239,14 @@ open class UsersAPI {
 
     /**
      Find out how many parts the user needs to build the specified Set.
-
+    
      - parameter userToken: (path)
      - parameter setNum: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
 
-    open class func usersBuildRead(
+    internal class func usersBuildRead(
         userToken: String, setNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -261,11 +264,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersBuildReadWithRequestBuilder(
+    internal class func usersBuildReadWithRequestBuilder(
         userToken: String, setNum: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/build/{set_num}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -301,7 +305,7 @@ open class UsersAPI {
 
     /**
      Add one or more Lost Parts to the user.
-
+    
      - parameter userToken: (path)
      - parameter invPartId: (form)
      - parameter lostQuantity: (form)  (optional)
@@ -309,7 +313,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersLostPartsCreate(
+    internal class func usersLostPartsCreate(
         userToken: String, invPartId: Int, lostQuantity: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -329,11 +333,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersLostPartsCreateWithRequestBuilder(
+    internal class func usersLostPartsCreateWithRequestBuilder(
         userToken: String, invPartId: Int, lostQuantity: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/lost_parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -346,7 +351,7 @@ open class UsersAPI {
             "lost_quantity": lostQuantity?.asParameter(
                 codableHelper: apiConfiguration.codableHelper,
             ),
-            "inv_part_id": invPartId.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "inv_part_id": invPartId.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -373,7 +378,7 @@ open class UsersAPI {
 
     /**
      Remove the Lost Part from the user.
-
+    
      - parameter id: (path)
      - parameter userToken: (path)
      - parameter ordering: (query) Which field to use when ordering the results. (optional)
@@ -381,7 +386,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersLostPartsDelete(
+    internal class func usersLostPartsDelete(
         id: String, userToken: String, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -400,11 +405,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersLostPartsDeleteWithRequestBuilder(
+    internal class func usersLostPartsDeleteWithRequestBuilder(
         id: String, userToken: String, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/lost_parts/{id}/"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape =
@@ -446,7 +452,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the Lost Parts from the user's LEGO collection.
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -455,7 +461,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersLostPartsList(
+    internal class func usersLostPartsList(
         userToken: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -476,11 +482,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersLostPartsListWithRequestBuilder(
+    internal class func usersLostPartsListWithRequestBuilder(
         userToken: String, page: Int? = nil, pageSize: Int? = nil, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/lost_parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -504,7 +511,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -524,7 +531,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the Minifigs in all the user's Sets. Note that this is a read-only list as Minifigs are
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -535,7 +542,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersMinifigsList(
+    internal class func usersMinifigsList(
         userToken: String, page: Int? = nil, pageSize: Int? = nil, figSetNum: String? = nil,
         ordering: String? = nil, search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -559,12 +566,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersMinifigsListWithRequestBuilder(
+    internal class func usersMinifigsListWithRequestBuilder(
         userToken: String, page: Int? = nil, pageSize: Int? = nil, figSetNum: String? = nil,
         ordering: String? = nil, search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/minifigs/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -596,7 +604,7 @@ open class UsersAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -616,7 +624,7 @@ open class UsersAPI {
 
     /**
      Add a new Part List.
-
+    
      - parameter userToken: (path)
      - parameter name: (form)
      - parameter isBuildable: (form)  (optional)
@@ -625,7 +633,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersPartlistsCreate(
+    internal class func usersPartlistsCreate(
         userToken: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -646,11 +654,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsCreateWithRequestBuilder(
+    internal class func usersPartlistsCreateWithRequestBuilder(
         userToken: String, name: String, isBuildable: Bool? = nil, numParts: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -662,7 +671,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -689,14 +698,14 @@ open class UsersAPI {
 
     /**
      Delete a Part List and all it's Parts.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
 
-    open class func usersPartlistsDelete(
+    internal class func usersPartlistsDelete(
         userToken: String, listId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -714,11 +723,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsDeleteWithRequestBuilder(
+    internal class func usersPartlistsDeleteWithRequestBuilder(
         userToken: String, listId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -754,7 +764,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the user's Part Lists.
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -762,7 +772,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersPartlistsList(
+    internal class func usersPartlistsList(
         userToken: String, page: Int? = nil, pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -782,11 +792,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsListWithRequestBuilder(
+    internal class func usersPartlistsListWithRequestBuilder(
         userToken: String, page: Int? = nil, pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -806,7 +817,7 @@ open class UsersAPI {
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -826,7 +837,7 @@ open class UsersAPI {
 
     /**
      Update an existing Part List's details.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter isBuildable: (form)  (optional)
@@ -836,7 +847,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersPartlistsPartialUpdate(
+    internal class func usersPartlistsPartialUpdate(
         userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil,
         numParts: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -859,12 +870,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsPartialUpdateWithRequestBuilder(
+    internal class func usersPartlistsPartialUpdateWithRequestBuilder(
         userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil,
         numParts: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -882,7 +894,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -909,7 +921,7 @@ open class UsersAPI {
 
     /**
      Add one or more Parts to the Part List.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter partNum: (form)
@@ -919,7 +931,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersPartlistsPartsCreate(
+    internal class func usersPartlistsPartsCreate(
         userToken: String, listId: String, partNum: String, quantity: Int, colorId: Int,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -941,11 +953,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsPartsCreateWithRequestBuilder(
+    internal class func usersPartlistsPartsCreateWithRequestBuilder(
         userToken: String, listId: String, partNum: String, quantity: Int, colorId: Int,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -963,7 +976,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "part_num": partNum.asParameter(codableHelper: apiConfiguration.codableHelper),
             "quantity": quantity.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "color_id": colorId.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "color_id": colorId.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -990,7 +1003,7 @@ open class UsersAPI {
 
     /**
      Delete a Part from the Part List.
-
+    
      - parameter colorId: (path)
      - parameter partNum: (path)
      - parameter userToken: (path)
@@ -1000,7 +1013,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersPartlistsPartsDelete(
+    internal class func usersPartlistsPartsDelete(
         colorId: String, partNum: String, userToken: String, listId: String,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -1023,12 +1036,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsPartsDeleteWithRequestBuilder(
+    internal class func usersPartlistsPartsDeleteWithRequestBuilder(
         colorId: String, partNum: String, userToken: String, listId: String,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath =
             "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
@@ -1083,7 +1097,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the Parts in a specific Part List.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
@@ -1093,7 +1107,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersPartlistsPartsList(
+    internal class func usersPartlistsPartsList(
         userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -1116,12 +1130,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsPartsListWithRequestBuilder(
+    internal class func usersPartlistsPartsListWithRequestBuilder(
         userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1151,7 +1166,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1171,7 +1186,7 @@ open class UsersAPI {
 
     /**
      Get details about a specific Part in the Part List.
-
+    
      - parameter colorId: (path)
      - parameter partNum: (path)
      - parameter userToken: (path)
@@ -1181,7 +1196,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersPartlistsPartsRead(
+    internal class func usersPartlistsPartsRead(
         colorId: String, partNum: String, userToken: String, listId: String,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -1204,12 +1219,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsPartsReadWithRequestBuilder(
+    internal class func usersPartlistsPartsReadWithRequestBuilder(
         colorId: String, partNum: String, userToken: String, listId: String,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath =
             "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
@@ -1264,7 +1280,7 @@ open class UsersAPI {
 
     /**
      Replace an existing Part's details in the Part List.
-
+    
      - parameter colorId: (path)
      - parameter partNum: (path)
      - parameter userToken: (path)
@@ -1275,7 +1291,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersPartlistsPartsUpdate(
+    internal class func usersPartlistsPartsUpdate(
         colorId: String, partNum: String, userToken: String, listId: String, quantity: Int,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -1299,12 +1315,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsPartsUpdateWithRequestBuilder(
+    internal class func usersPartlistsPartsUpdateWithRequestBuilder(
         colorId: String, partNum: String, userToken: String, listId: String, quantity: Int,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath =
             "/api/v3/users/{user_token}/partlists/{list_id}/parts/{part_num}/{color_id}/"
         let colorIdPreEscape = "\(APIHelper.mapValueToPathItem(colorId))"
@@ -1366,14 +1383,14 @@ open class UsersAPI {
 
     /**
      Get details about a specific Part List.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
 
-    open class func usersPartlistsRead(
+    internal class func usersPartlistsRead(
         userToken: String, listId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -1391,11 +1408,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsReadWithRequestBuilder(
+    internal class func usersPartlistsReadWithRequestBuilder(
         userToken: String, listId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1431,7 +1449,7 @@ open class UsersAPI {
 
     /**
      Replace an existing Part List's details.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter name: (form)
@@ -1441,7 +1459,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersPartlistsUpdate(
+    internal class func usersPartlistsUpdate(
         userToken: String, listId: String, name: String, isBuildable: Bool? = nil,
         numParts: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -1464,12 +1482,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartlistsUpdateWithRequestBuilder(
+    internal class func usersPartlistsUpdateWithRequestBuilder(
         userToken: String, listId: String, name: String, isBuildable: Bool? = nil,
         numParts: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/partlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1487,7 +1506,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "num_parts": numParts?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1514,7 +1533,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the Parts in all the user's Part Lists.
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -1527,7 +1546,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersPartsList(
+    internal class func usersPartsList(
         userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil,
         partCatId: Double? = nil, colorId: Double? = nil, ordering: String? = nil,
         search: String? = nil,
@@ -1555,13 +1574,14 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersPartsListWithRequestBuilder(
+    internal class func usersPartsListWithRequestBuilder(
         userToken: String, page: Int? = nil, pageSize: Int? = nil, partNum: String? = nil,
         partCatId: Double? = nil, colorId: Double? = nil, ordering: String? = nil,
         search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/parts/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1601,7 +1621,7 @@ open class UsersAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1621,13 +1641,13 @@ open class UsersAPI {
 
     /**
      Get details about a specific user.
-
+    
      - parameter userToken: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
 
-    open class func usersProfileRead(
+    internal class func usersProfileRead(
         userToken: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -1644,11 +1664,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersProfileReadWithRequestBuilder(
+    internal class func usersProfileReadWithRequestBuilder(
         userToken: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/profile/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1678,7 +1699,7 @@ open class UsersAPI {
 
     /**
      Add a new Set List.
-
+    
      - parameter userToken: (path)
      - parameter name: (form)
      - parameter isBuildable: (form)  (optional)
@@ -1687,7 +1708,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetlistsCreate(
+    internal class func usersSetlistsCreate(
         userToken: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -1708,11 +1729,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsCreateWithRequestBuilder(
+    internal class func usersSetlistsCreateWithRequestBuilder(
         userToken: String, name: String, isBuildable: Bool? = nil, numSets: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1724,7 +1746,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1751,14 +1773,14 @@ open class UsersAPI {
 
     /**
      Delete a Set List and all it's Sets.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
 
-    open class func usersSetlistsDelete(
+    internal class func usersSetlistsDelete(
         userToken: String, listId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -1776,11 +1798,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsDeleteWithRequestBuilder(
+    internal class func usersSetlistsDeleteWithRequestBuilder(
         userToken: String, listId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1816,7 +1839,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the user's Set Lists.
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -1824,7 +1847,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetlistsList(
+    internal class func usersSetlistsList(
         userToken: String, page: Int? = nil, pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -1844,11 +1867,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsListWithRequestBuilder(
+    internal class func usersSetlistsListWithRequestBuilder(
         userToken: String, page: Int? = nil, pageSize: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1868,7 +1892,7 @@ open class UsersAPI {
             "page_size": (
                 wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -1888,7 +1912,7 @@ open class UsersAPI {
 
     /**
      Update an existing Set List's details.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter isBuildable: (form)  (optional)
@@ -1898,7 +1922,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetlistsPartialUpdate(
+    internal class func usersSetlistsPartialUpdate(
         userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil,
         numSets: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -1921,12 +1945,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsPartialUpdateWithRequestBuilder(
+    internal class func usersSetlistsPartialUpdateWithRequestBuilder(
         userToken: String, listId: String, isBuildable: Bool? = nil, name: String? = nil,
         numSets: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -1944,7 +1969,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name?.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -1971,14 +1996,14 @@ open class UsersAPI {
 
     /**
      Get details about a specific Set List.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
 
-    open class func usersSetlistsRead(
+    internal class func usersSetlistsRead(
         userToken: String, listId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -1996,11 +2021,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsReadWithRequestBuilder(
+    internal class func usersSetlistsReadWithRequestBuilder(
         userToken: String, listId: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2036,7 +2062,7 @@ open class UsersAPI {
 
     /**
      Add one or more Sets to the Set List. Existing Sets are unaffected.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter setNum: (form)
@@ -2046,7 +2072,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetlistsSetsCreate(
+    internal class func usersSetlistsSetsCreate(
         userToken: String, listId: String, setNum: String, quantity: Int? = nil,
         includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -2069,12 +2095,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsSetsCreateWithRequestBuilder(
+    internal class func usersSetlistsSetsCreateWithRequestBuilder(
         userToken: String, listId: String, setNum: String, quantity: Int? = nil,
         includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2094,7 +2121,7 @@ open class UsersAPI {
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "include_spares": includeSpares?.asParameter(
                 codableHelper: apiConfiguration.codableHelper,
-            )
+            ),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2121,7 +2148,7 @@ open class UsersAPI {
 
     /**
      Delete a Set from the Set List.
-
+    
      - parameter setNum: (path)
      - parameter userToken: (path)
      - parameter listId: (path)
@@ -2130,7 +2157,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetlistsSetsDelete(
+    internal class func usersSetlistsSetsDelete(
         setNum: String, userToken: String, listId: String, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -2151,11 +2178,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsSetsDeleteWithRequestBuilder(
+    internal class func usersSetlistsSetsDeleteWithRequestBuilder(
         setNum: String, userToken: String, listId: String, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -2203,7 +2231,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the Sets in a specific Set List.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
@@ -2213,7 +2241,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetlistsSetsList(
+    internal class func usersSetlistsSetsList(
         userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -2236,12 +2264,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsSetsListWithRequestBuilder(
+    internal class func usersSetlistsSetsListWithRequestBuilder(
         userToken: String, listId: String, page: Int? = nil, pageSize: Int? = nil,
         ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2271,7 +2300,7 @@ open class UsersAPI {
             "ordering": (
                 wrappedValue: ordering?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -2291,7 +2320,7 @@ open class UsersAPI {
 
     /**
      Update an existing Set's details in the Set List.
-
+    
      - parameter setNum: (path)
      - parameter userToken: (path)
      - parameter listId: (path)
@@ -2302,7 +2331,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetlistsSetsPartialUpdate(
+    internal class func usersSetlistsSetsPartialUpdate(
         setNum: String, userToken: String, listId: String, ordering: String? = nil,
         quantity: Int? = nil, includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -2326,12 +2355,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsSetsPartialUpdateWithRequestBuilder(
+    internal class func usersSetlistsSetsPartialUpdateWithRequestBuilder(
         setNum: String, userToken: String, listId: String, ordering: String? = nil,
         quantity: Int? = nil, includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -2356,7 +2386,7 @@ open class UsersAPI {
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "include_spares": includeSpares?.asParameter(
                 codableHelper: apiConfiguration.codableHelper,
-            )
+            ),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2389,7 +2419,7 @@ open class UsersAPI {
 
     /**
      Get details about a specific Set in the Set List.
-
+    
      - parameter setNum: (path)
      - parameter userToken: (path)
      - parameter listId: (path)
@@ -2398,7 +2428,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetlistsSetsRead(
+    internal class func usersSetlistsSetsRead(
         setNum: String, userToken: String, listId: String, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -2419,11 +2449,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsSetsReadWithRequestBuilder(
+    internal class func usersSetlistsSetsReadWithRequestBuilder(
         setNum: String, userToken: String, listId: String, ordering: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -2471,7 +2502,7 @@ open class UsersAPI {
 
     /**
      Replace an existing Set's details in the Set List.
-
+    
      - parameter setNum: (path)
      - parameter userToken: (path)
      - parameter listId: (path)
@@ -2482,7 +2513,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetlistsSetsUpdate(
+    internal class func usersSetlistsSetsUpdate(
         setNum: String, userToken: String, listId: String, ordering: String? = nil,
         quantity: Int? = nil, includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -2506,12 +2537,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsSetsUpdateWithRequestBuilder(
+    internal class func usersSetlistsSetsUpdateWithRequestBuilder(
         setNum: String, userToken: String, listId: String, ordering: String? = nil,
         quantity: Int? = nil, includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/sets/{set_num}/"
         let setNumPreEscape = "\(APIHelper.mapValueToPathItem(setNum))"
         let setNumPostEscape =
@@ -2536,7 +2568,7 @@ open class UsersAPI {
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "include_spares": includeSpares?.asParameter(
                 codableHelper: apiConfiguration.codableHelper,
-            )
+            ),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2569,7 +2601,7 @@ open class UsersAPI {
 
     /**
      Replace an existing Set List's details.
-
+    
      - parameter userToken: (path)
      - parameter listId: (path)
      - parameter name: (form)
@@ -2579,7 +2611,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetlistsUpdate(
+    internal class func usersSetlistsUpdate(
         userToken: String, listId: String, name: String, isBuildable: Bool? = nil,
         numSets: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
@@ -2602,12 +2634,13 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetlistsUpdateWithRequestBuilder(
+    internal class func usersSetlistsUpdateWithRequestBuilder(
         userToken: String, listId: String, name: String, isBuildable: Bool? = nil,
         numSets: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/setlists/{list_id}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2625,7 +2658,7 @@ open class UsersAPI {
         let localVariableFormParams: [String: (any Sendable)?] = [
             "is_buildable": isBuildable?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "name": name.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "num_sets": numSets?.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2652,7 +2685,7 @@ open class UsersAPI {
 
     /**
      Add one or more Sets to the user's LEGO collection. Existing Sets are unaffected.
-
+    
      - parameter userToken: (path)
      - parameter setNum: (form)
      - parameter quantity: (form)  (optional)
@@ -2661,7 +2694,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetsCreate(
+    internal class func usersSetsCreate(
         userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -2682,11 +2715,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetsCreateWithRequestBuilder(
+    internal class func usersSetsCreateWithRequestBuilder(
         userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/sets/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2700,7 +2734,7 @@ open class UsersAPI {
             "quantity": quantity?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "include_spares": includeSpares?.asParameter(
                 codableHelper: apiConfiguration.codableHelper,
-            )
+            ),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -2727,7 +2761,7 @@ open class UsersAPI {
 
     /**
      Delete the Set from all the user's Set Lists.
-
+    
      - parameter userToken: (path)
      - parameter setNum: (path)
      - parameter setNum2: (query)  (optional)
@@ -2742,7 +2776,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetsDelete(
+    internal class func usersSetsDelete(
         userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil,
         minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil,
         maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
@@ -2772,13 +2806,14 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetsDeleteWithRequestBuilder(
+    internal class func usersSetsDeleteWithRequestBuilder(
         userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil,
         minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil,
         maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/sets/{set_num}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2828,7 +2863,7 @@ open class UsersAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -2848,7 +2883,7 @@ open class UsersAPI {
 
     /**
      Get a list of all the Sets in the user's LEGO collection.
-
+    
      - parameter userToken: (path)
      - parameter page: (query) A page number within the paginated result set. (optional)
      - parameter pageSize: (query) Number of results to return per page. (optional)
@@ -2864,7 +2899,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetsList(
+    internal class func usersSetsList(
         userToken: String, page: Int? = nil, pageSize: Int? = nil, setNum: String? = nil,
         themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil,
         minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil,
@@ -2896,14 +2931,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetsListWithRequestBuilder(
+    internal class func usersSetsListWithRequestBuilder(
         userToken: String, page: Int? = nil, pageSize: Int? = nil, setNum: String? = nil,
         themeId: Double? = nil, minYear: Double? = nil, maxYear: Double? = nil,
         minParts: Double? = nil, maxParts: Double? = nil, ordering: String? = nil,
         search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/sets/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -2955,7 +2991,7 @@ open class UsersAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -2975,7 +3011,7 @@ open class UsersAPI {
 
     /**
      Get details about a specific Set in the user's LEGO collection.
-
+    
      - parameter userToken: (path)
      - parameter setNum: (path)
      - parameter setNum2: (query)  (optional)
@@ -2990,7 +3026,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetsRead(
+    internal class func usersSetsRead(
         userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil,
         minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil,
         maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
@@ -3020,13 +3056,14 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetsReadWithRequestBuilder(
+    internal class func usersSetsReadWithRequestBuilder(
         userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil,
         minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil,
         maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/sets/{set_num}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -3076,7 +3113,7 @@ open class UsersAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [:]
@@ -3096,7 +3133,7 @@ open class UsersAPI {
 
     /**
      Synchronise a user's Sets to the POSTed list.
-
+    
      - parameter userToken: (path)
      - parameter setNum: (form)
      - parameter quantity: (form)  (optional)
@@ -3105,7 +3142,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetsSyncCreate(
+    internal class func usersSetsSyncCreate(
         userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -3126,11 +3163,12 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetsSyncCreateWithRequestBuilder(
+    internal class func usersSetsSyncCreateWithRequestBuilder(
         userToken: String, setNum: String, quantity: Int? = nil, includeSpares: Bool? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/sets/sync/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -3144,7 +3182,7 @@ open class UsersAPI {
             "include_spares": includeSpares?.asParameter(
                 codableHelper: apiConfiguration.codableHelper,
             ),
-            "set_num": setNum.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "set_num": setNum.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
@@ -3171,7 +3209,7 @@ open class UsersAPI {
 
     /**
      Update an existing Set's quantity in all Set Lists. This PUT call is different to others in that it will create
-
+    
      - parameter userToken: (path)
      - parameter setNum: (path)
      - parameter setNum2: (query)  (optional)
@@ -3187,7 +3225,7 @@ open class UsersAPI {
      - returns: Void
      */
 
-    open class func usersSetsUpdate(
+    internal class func usersSetsUpdate(
         userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil,
         minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil,
         maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
@@ -3220,14 +3258,15 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersSetsUpdateWithRequestBuilder(
+    internal class func usersSetsUpdateWithRequestBuilder(
         userToken: String, setNum: String, setNum2: String? = nil, themeId: Double? = nil,
         minYear: Double? = nil, maxYear: Double? = nil, minParts: Double? = nil,
         maxParts: Double? = nil, ordering: String? = nil, search: String? = nil,
         quantity: Int? = nil,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         var localVariablePath = "/api/v3/users/{user_token}/sets/{set_num}/"
         let userTokenPreEscape = "\(APIHelper.mapValueToPathItem(userToken))"
         let userTokenPostEscape =
@@ -3282,7 +3321,7 @@ open class UsersAPI {
             "search": (
                 wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper),
                 isExplode: false
-            )
+            ),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -3304,14 +3343,14 @@ open class UsersAPI {
 
     /**
      Generate a User Token to be used for authorising user account actions in subsequent calls. Username can be either
-
+    
      - parameter username: (form) Username (or email) of user
      - parameter password: (form) Password of user
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
 
-    open class func usersTokenCreate(
+    internal class func usersTokenCreate(
         username: String, password: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     ) async throws(ErrorResponse) {
@@ -3329,16 +3368,17 @@ open class UsersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void>
      */
-    open class func usersTokenCreateWithRequestBuilder(
+    internal class func usersTokenCreateWithRequestBuilder(
         username: String, password: String,
         apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared,
     )
-        -> RequestBuilder<Void> {
+        -> RequestBuilder<Void>
+    {
         let localVariablePath = "/api/v3/users/_token/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "username": username.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "password": password.asParameter(codableHelper: apiConfiguration.codableHelper)
+            "password": password.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)

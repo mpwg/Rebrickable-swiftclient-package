@@ -1,10 +1,10 @@
 import Foundation
 
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+    import FoundationNetworking
 #endif
 
-public final class RequestTask: @unchecked Sendable {
+internal final class RequestTask: @unchecked Sendable {
     // MARK: - Request Task
 
     private let lock = NSRecursiveLock()
@@ -22,7 +22,7 @@ public final class RequestTask: @unchecked Sendable {
         }
     }
 
-    public func cancel() {
+    internal func cancel() {
         lock.withLock {
             task?.cancel()
             task = nil

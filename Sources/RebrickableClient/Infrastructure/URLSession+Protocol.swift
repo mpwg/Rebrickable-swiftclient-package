@@ -1,17 +1,18 @@
 import Foundation
 
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+    import FoundationNetworking
 #endif
 
 // MARK: - URLSession Protocol conformances
 
 extension URLSession: URLSessionProtocol {
-    public func dataTaskFromProtocol(
+    internal func dataTaskFromProtocol(
         with request: URLRequest,
         completionHandler: @escaping @Sendable (Data?, URLResponse?, (any Error)?) -> Void,
     )
-        -> URLSessionDataTaskProtocol {
+        -> URLSessionDataTaskProtocol
+    {
         dataTask(with: request, completionHandler: completionHandler)
     }
 }

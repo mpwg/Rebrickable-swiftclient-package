@@ -1,23 +1,23 @@
 import Foundation
 
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+    import FoundationNetworking
 #endif
 
-open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
-    public var credential: URLCredential?
-    public var headers: [String: String]
-    public let parameters: [String: any Sendable]?
-    public let method: String
-    public let URLString: String
-    public let requestTask: RequestTask = .init()
-    public let requiresAuthentication: Bool
-    public let apiConfiguration: OpenAPIClientAPIConfiguration
+internal class RequestBuilder<T>: @unchecked Sendable, Identifiable {
+    internal var credential: URLCredential?
+    internal var headers: [String: String]
+    internal let parameters: [String: any Sendable]?
+    internal let method: String
+    internal let URLString: String
+    internal let requestTask: RequestTask = .init()
+    internal let requiresAuthentication: Bool
+    internal let apiConfiguration: OpenAPIClientAPIConfiguration
 
     /// Optional block to obtain a reference to the request's progress instance when available.
-    public var onProgressReady: ((Progress) -> Void)?
+    internal var onProgressReady: ((Progress) -> Void)?
 
-    public required init(
+    internal required init(
         method: String,
         URLString: String,
         parameters: [String: any Sendable]?,
@@ -38,18 +38,19 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
 
     // MARK: - Initialization
 
-    open func addHeaders(_ aHeaders: [String: String]) {
+    internal func addHeaders(_ aHeaders: [String: String]) {
         for (header, value) in aHeaders {
             headers[header] = value
         }
     }
 
     @discardableResult
-    open func execute(
+    internal func execute(
         completion _:
-        @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
+            @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
     )
-        -> RequestTask {
+        -> RequestTask
+    {
         requestTask
     }
 
@@ -57,7 +58,7 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
 
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     @discardableResult
-    open func execute() async throws(ErrorResponse) -> Response<T> {
+    internal func execute() async throws(ErrorResponse) -> Response<T> {
         do {
             let requestTask = requestTask
             return try await withTaskCancellationHandler {
@@ -90,7 +91,7 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
         }
     }
 
-    public func addHeader(name: String, value: String) -> Self {
+    internal func addHeader(name: String, value: String) -> Self {
         if !value.isEmpty {
             headers[name] = value
         }
@@ -99,7 +100,7 @@ open class RequestBuilder<T>: @unchecked Sendable, Identifiable {
 
     // MARK: - Mutators
 
-    open func addCredential() {
+    internal func addCredential() {
         credential = apiConfiguration.credential
     }
 }

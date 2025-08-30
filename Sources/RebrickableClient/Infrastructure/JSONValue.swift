@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum JSONValue: Sendable, Codable, Hashable {
+internal enum JSONValue: Sendable, Codable, Hashable {
     case string(String)
     case int(Int)
     case double(Double)
@@ -18,7 +18,7 @@ public enum JSONValue: Sendable, Codable, Hashable {
 
     // MARK: - Decoding Logic
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
 
         if let stringValue = try? container.decode(String.self) {
@@ -36,13 +36,14 @@ public enum JSONValue: Sendable, Codable, Hashable {
         } else if container.decodeNil() {
             self = .null
         } else {
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown JSON value")
+            throw DecodingError.dataCorruptedError(
+                in: container, debugDescription: "Unknown JSON value")
         }
     }
 
     // MARK: - Encoding Logic
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
 
         switch self {
@@ -64,7 +65,7 @@ public enum JSONValue: Sendable, Codable, Hashable {
     }
 }
 
-public extension JSONValue {
+extension JSONValue {
     init(_ value: String) {
         self = .string(value)
     }
@@ -99,7 +100,7 @@ public extension JSONValue {
     }
 }
 
-public extension JSONValue {
+extension JSONValue {
     var isString: Bool {
         if case .string = self { return true }
         return false
@@ -135,7 +136,7 @@ public extension JSONValue {
     }
 }
 
-public extension JSONValue {
+extension JSONValue {
     var stringValue: String? {
         switch self {
         case .string(let value):
@@ -187,7 +188,7 @@ public extension JSONValue {
     }
 }
 
-public extension JSONValue {
+extension JSONValue {
     subscript(key: String) -> JSONValue? {
         dictionaryValue?[key]
     }
@@ -201,37 +202,37 @@ public extension JSONValue {
 }
 
 extension JSONValue: ExpressibleByStringLiteral, ExpressibleByStringInterpolation {
-    public init(stringLiteral value: StringLiteralType) {
+    internal init(stringLiteral value: StringLiteralType) {
         self = .string(value)
     }
 }
 
 extension JSONValue: ExpressibleByIntegerLiteral {
-    public init(integerLiteral value: IntegerLiteralType) {
+    internal init(integerLiteral value: IntegerLiteralType) {
         self = .int(value)
     }
 }
 
 extension JSONValue: ExpressibleByFloatLiteral {
-    public init(floatLiteral value: FloatLiteralType) {
+    internal init(floatLiteral value: FloatLiteralType) {
         self = .double(value)
     }
 }
 
 extension JSONValue: ExpressibleByBooleanLiteral {
-    public init(booleanLiteral value: BooleanLiteralType) {
+    internal init(booleanLiteral value: BooleanLiteralType) {
         self = .bool(value)
     }
 }
 
 extension JSONValue: ExpressibleByArrayLiteral {
-    public init(arrayLiteral elements: JSONValue...) {
+    internal init(arrayLiteral elements: JSONValue...) {
         self = .array(elements)
     }
 }
 
 extension JSONValue: ExpressibleByDictionaryLiteral {
-    public init(dictionaryLiteral elements: (String, JSONValue)...) {
+    internal init(dictionaryLiteral elements: (String, JSONValue)...) {
         var dict: [String: JSONValue] = [:]
         for (key, value) in elements {
             dict[key] = value
@@ -241,7 +242,7 @@ extension JSONValue: ExpressibleByDictionaryLiteral {
 }
 
 extension JSONValue: ExpressibleByNilLiteral {
-    public init(nilLiteral _: ()) {
+    internal init(nilLiteral _: ()) {
         self = .null
     }
 }

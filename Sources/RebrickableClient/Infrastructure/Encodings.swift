@@ -1,13 +1,13 @@
 import Foundation
 
 #if !os(macOS)
-import MobileCoreServices
+    import MobileCoreServices
 #endif
 #if canImport(UniformTypeIdentifiers)
-import UniformTypeIdentifiers
+    import UniformTypeIdentifiers
 #endif
 
-public enum HTTPMethod: String {
+internal enum HTTPMethod: String {
     case options = "OPTIONS"
     case get = "GET"
     case head = "HEAD"
@@ -24,16 +24,17 @@ public enum HTTPMethod: String {
 // ParameterEncoding protocol moved to `Infrastructure/Protocols/ParameterEncoding.swift`
 
 class URLEncoding: ParameterEncoding {
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest {
+    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
+    {
         var urlRequest = request
 
         guard let parameters else { return urlRequest }
 
         guard let url = urlRequest.url else { throw DownloadException.requestMissingURL }
 
-        if
-            var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
-            !parameters.isEmpty {
+        if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
+            !parameters.isEmpty
+        {
             urlComponents.queryItems = APIHelper.mapValuesToQueryItems(parameters)
             urlRequest.url = urlComponents.url
         }
@@ -49,7 +50,8 @@ class FormDataEncoding: ParameterEncoding {
         self.contentTypeForFormPart = contentTypeForFormPart
     }
 
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest {
+    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
+    {
         var urlRequest = request
 
         guard let parameters, !parameters.isEmpty else { return urlRequest }
@@ -107,7 +109,8 @@ class FormDataEncoding: ParameterEncoding {
     private func configureFileUploadRequest(
         urlRequest: URLRequest, boundary: String, name: String, fileURL: URL,
     ) throws
-        -> URLRequest {
+        -> URLRequest
+    {
         var urlRequest = urlRequest
 
         var body = urlRequest.httpBody.orEmpty
@@ -136,7 +139,8 @@ class FormDataEncoding: ParameterEncoding {
     private func configureDataUploadRequest(
         urlRequest: URLRequest, boundary: String, name: String, data: Data,
     )
-        -> URLRequest {
+        -> URLRequest
+    {
         var urlRequest = urlRequest
 
         var body = urlRequest.httpBody.orEmpty
@@ -158,19 +162,19 @@ class FormDataEncoding: ParameterEncoding {
 
         if #available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *) {
             #if canImport(UniformTypeIdentifiers)
-            if let utType = UTType(filenameExtension: pathExtension) {
-                return utType.preferredMIMEType ?? "application/octet-stream"
-            }
+                if let utType = UTType(filenameExtension: pathExtension) {
+                    return utType.preferredMIMEType ?? "application/octet-stream"
+                }
             #else
-            return "application/octet-stream"
+                return "application/octet-stream"
             #endif
         } else {
-            if
-                let uti = UTTypeCreatePreferredIdentifierForTag(
-                    kUTTagClassFilenameExtension, pathExtension as NSString, nil,
-                )?.takeRetainedValue(),
+            if let uti = UTTypeCreatePreferredIdentifierForTag(
+                kUTTagClassFilenameExtension, pathExtension as NSString, nil,
+            )?.takeRetainedValue(),
                 let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?
-                    .takeRetainedValue() {
+                    .takeRetainedValue()
+            {
                 return mimetype as String
             }
             return "application/octet-stream"
@@ -180,7 +184,8 @@ class FormDataEncoding: ParameterEncoding {
 }
 
 class FormURLEncoding: ParameterEncoding {
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest {
+    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
+    {
         var urlRequest = request
 
         var requestBodyComponents = URLComponents()
@@ -209,7 +214,8 @@ class FormURLEncoding: ParameterEncoding {
 }
 
 class OctetStreamEncoding: ParameterEncoding {
-    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest {
+    func encode(request: URLRequest, with parameters: [String: any Sendable]?) throws -> URLRequest
+    {
         var urlRequest = request
 
         guard let body = parameters?["body"] else { return urlRequest }
@@ -231,14 +237,14 @@ class OctetStreamEncoding: ParameterEncoding {
     }
 }
 
-private extension Data {
-    mutating func append(_ string: String) {
+extension Data {
+    fileprivate mutating func append(_ string: String) {
         if let data = string.data(using: .utf8) { append(data) }
     }
 }
 
-private extension Data? {
-    var orEmpty: Data { self ?? Data() }
+extension Data? {
+    fileprivate var orEmpty: Data { self ?? Data() }
 }
 
 extension JSONDataEncoding: ParameterEncoding {}

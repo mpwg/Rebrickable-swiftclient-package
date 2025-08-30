@@ -2,8 +2,8 @@ import Foundation
 
 // MARK: - URLSession Request Builders
 
-open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
-    public required init(
+internal class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
+    internal required init(
         method: String,
         URLString: String,
         parameters: [String: any Sendable]?,
@@ -21,19 +21,20 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
         )
     }
 
-    open func createURLSession() -> URLSessionProtocol {
+    internal func createURLSession() -> URLSessionProtocol {
         URLSessionRequestBuilderConfiguration.shared.defaultURLSession
     }
 
-    open func contentTypeForFormPart(fileURL _: URL) -> String? { nil }
+    internal func contentTypeForFormPart(fileURL _: URL) -> String? { nil }
 
-    open func createURLRequest(
+    internal func createURLRequest(
         urlSession _: URLSessionProtocol,
         method: HTTPMethod,
         encoding: ParameterEncoding,
         headers _: [String: String],
     ) throws
-        -> URLRequest {
+        -> URLRequest
+    {
         guard let url = URL(string: URLString) else {
             throw DownloadException.requestMissingURL
         }
@@ -51,11 +52,12 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
     }
 
     @discardableResult
-    override open func execute(
+    override internal func execute(
         completion:
-        @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
+            @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
     )
-        -> RequestTask {
+        -> RequestTask
+    {
         let urlSession = createURLSession()
 
         guard let xMethod = HTTPMethod(rawValue: method) else {
@@ -79,9 +81,9 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
                 )
             } else if contentType.hasPrefix("application/x-www-form-urlencoded") {
                 encoding = FormURLEncoding()
-            } else if
-                contentType.hasPrefix("application/octet-stream")
-                || contentType.hasPrefix("image/") {
+            } else if contentType.hasPrefix("application/octet-stream")
+                || contentType.hasPrefix("image/")
+            {
                 encoding = OctetStreamEncoding()
             } else {
                 fatalError("Unsupported Media Type - \(contentType)")
@@ -105,7 +107,8 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
                         if let error {
                             self.retryRequest(
                                 urlRequest: modifiedRequest, urlSession: urlSession, statusCode: -1,
-                                data: data, response: response, error: error, completion: completion,
+                                data: data, response: response, error: error,
+                                completion: completion,
                             )
                             return
                         }
@@ -123,7 +126,8 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
                         guard
                             self.apiConfiguration.successfulStatusCodeRange.contains(
                                 httpResponse.statusCode,
-                            ) else {
+                            )
+                        else {
                             self.retryRequest(
                                 urlRequest: modifiedRequest, urlSession: urlSession,
                                 statusCode: httpResponse.statusCode, data: data,
@@ -179,7 +183,7 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
         response: URLResponse?,
         error: Error,
         completion:
-        @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
+            @Sendable @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void,
     ) {
         apiConfiguration.interceptor.retry(
             urlRequest: urlRequest, urlSession: urlSession, requestBuilder: self, data: data,
@@ -208,7 +212,7 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
         }
     }
 
-    open func buildHeaders() -> [String: String] {
+    internal func buildHeaders() -> [String: String] {
         var httpHeaders: [String: String] = [:]
         for (key, value) in apiConfiguration.customHeaders {
             httpHeaders[key] = value
@@ -257,8 +261,9 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T>, @unchecked Sendable {
 
 // MARK: - URLSession Decodable Request Builder
 
-open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBuilder<T>,
-    @unchecked Sendable {
+internal class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBuilder<T>,
+    @unchecked Sendable
+{
     override fileprivate func processRequestResponse(
         urlRequest: URLRequest,
         data: Data?,
@@ -286,11 +291,10 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
 
                 var requestPath = try getPath(from: requestURL)
 
-                if
-                    let headerFileName = getFileName(
-                        fromContentDisposition: httpResponse.allHeaderFields["Content-Disposition"]
-                            as? String,
-                    ) {
+                if let headerFileName = getFileName(
+                    fromContentDisposition: httpResponse.allHeaderFields["Content-Disposition"]
+                        as? String,
+                ) {
                     requestPath = requestPath.appending("/\(headerFileName)")
                 } else {
                     requestPath = requestPath.appending("/tmp.OpenAPIClient.\(UUID().uuidString)")
@@ -305,7 +309,8 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
                 try data.write(to: filePath, options: .atomic)
 
                 completion(
-                    .success(Response(response: httpResponse, body: filePath as! T, bodyData: data)),
+                    .success(
+                        Response(response: httpResponse, body: filePath as! T, bodyData: data)),
                 )
             } catch let requestParserError as DownloadException {
                 completion(
